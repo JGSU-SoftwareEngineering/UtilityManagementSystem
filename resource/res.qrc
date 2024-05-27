@@ -1,0 +1,114 @@
+<RCC>
+    <!-- 主界面 -->
+
+    <qresource prefix="/img/main">
+        <file alias="logo">img/main/logo.png</file>
+    </qresource>
+
+    <qresource prefix="/img/main">
+        <file alias="student_management">img/main/student_management.png</file>
+    </qresource>
+    <qresource prefix="/img/main">
+        <file alias="dormitory_management">img/main/dormitory_management.png</file>
+    </qresource>
+    <qresource prefix="/img/main">
+        <file alias="warranty_management">img/main/warranty_management.png</file>
+    </qresource>
+    <qresource prefix="/img/main">
+        <file alias="announcement_management">img/main/announcement_management.png</file>
+    </qresource>
+    <qresource prefix="/img/main">
+        <file alias="right_management">img/main/right_management.png</file>
+    </qresource>
+
+    <!-- 背景资源 -->
+
+    <qresource prefix="/img/background">
+        <file alias="background">img/background/background.png</file>
+    </qresource>
+    <qresource prefix="/img/background">
+        <file alias="white-background">img/background/white-background.jpg</file>
+    </qresource>
+    <qresource prefix="/img/background">
+        <file alias="mild-background">img/background/mild-background.jpeg</file>
+    </qresource>
+    <qresource prefix="/img/background">
+        <file alias="snow-background">img/background/snow-background.jpg</file>
+    </qresource>
+
+    <!-- 通用资源 -->
+
+    <qresource prefix="/img/common">
+        <file alias="back.png">img/common/back.png</file>
+    </qresource>
+    <qresource prefix="/img/common">
+        <file alias="front.png">img/common/front.png</file>
+    </qresource>
+    <qresource prefix="/img/common">
+        <file alias="back2.png">img/common/back2.png</file>
+    </qresource>
+    
+    <qresource prefix="/img/common">
+        <file alias="question.png">img/common/question.png</file>
+    </qresource>
+    <qresource prefix="/img/common">
+        <file alias="error.png">img/common/error.png</file>
+    </qresource>
+    
+    <!-- 学生管理 -->
+
+    <qresource prefix="/img/student">
+        <file alias="add">img/student/add.png</file>
+    </qresource>
+    <qresource prefix="/img/student">
+        <file alias="delete">img/student/delete.png</file>
+    </qresource>
+    <qresource prefix="/img/student">
+        <file alias="edit">img/student/edit.png</file>
+    </qresource>
+    <qresource prefix="/img/student">
+        <file alias="search">img/student/search.png</file>
+    </qresource>
+
+    <!-- 宿舍管理 -->
+
+    <qresource prefix="/img/dormitory">
+        <file alias="allocate">img/dormitory/allocate.png</file>
+    </qresource>
+    <qresource prefix="/img/dormitory">
+        <file alias="adjust">img/dormitory/adjust.png</file>
+    </qresource>
+    <qresource prefix="/img/dormitory">
+        <file alias="search">img/dormitory/search.png</file>
+    </qresource>
+
+    <!-- 报修管理 -->
+
+    <qresource prefix="/img/repair">
+        <file alias="raise">img/repair/raise.png</file>
+    </qresource>
+    <qresource prefix="/img/repair">
+        <file alias="handle">img/repair/handle.png</file>
+    </qresource>
+    <qresource prefix="/img/repair">
+        <file alias="search">img/repair/search.png</file>
+    </qresource>
+
+    <!-- 公告管理 -->
+
+    <qresource prefix="/img/announcement">
+        <file alias="publish">img/announcement/publish.png</file>
+    </qresource>
+    <qresource prefix="/img/announcement">
+        <file alias="search">img/announcement/search.png</file>
+    </qresource>
+
+    <!-- sql 文件 -->
+
+    <qresource prefix="/sql">
+        <file alias="create_tables">sql/create_tables.sql</file>
+    </qresource>
+    <qresource prefix="/sql">
+        <file alias="drop_tables">sql/drop_tables.sql</file>
+    </qresource>
+</RCC>
