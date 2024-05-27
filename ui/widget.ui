@@ -54,7 +54,22 @@
     border-image: url(:/img/background/background);
 }</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,20,1">
+      <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,10,1">
+       <property name="spacing">
+        <number>15</number>
+       </property>
+       <property name="leftMargin">
+        <number>15</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>15</number>
+       </property>
+       <property name="bottomMargin">
+        <number>20</number>
+       </property>
        <item>
         <layout class="QHBoxLayout" name="layoutOfBackBtn">
          <item>
@@ -109,6 +124,9 @@
        </item>
        <item>
         <widget class="QStackedWidget" name="widgetsOfCenter">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="currentIndex">
           <number>0</number>
          </property>
@@ -162,24 +180,30 @@
           </layout>
          </widget>
          <widget class="QWidget" name="pageOfOther1">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <layout class="QVBoxLayout" name="verticalLayout_10">
            <property name="spacing">
             <number>11</number>
            </property>
            <property name="leftMargin">
-            <number>40</number>
+            <number>0</number>
            </property>
            <property name="topMargin">
-            <number>40</number>
+            <number>0</number>
            </property>
            <property name="rightMargin">
-            <number>40</number>
+            <number>0</number>
            </property>
            <property name="bottomMargin">
-            <number>40</number>
+            <number>0</number>
            </property>
            <item>
             <widget class="QScrollArea" name="scrollArea">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
              <property name="widgetResizable">
               <bool>true</bool>
              </property>
@@ -188,80 +212,20 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>536</width>
-                <height>237</height>
+                <width>610</width>
+                <height>305</height>
                </rect>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_11"/>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
              </widget>
             </widget>
            </item>
           </layout>
          </widget>
          <widget class="QWidget" name="pageOfOther2">
-          <layout class="QVBoxLayout" name="verticalLayout_3">
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="4,2">
-             <property name="spacing">
-              <number>20</number>
-             </property>
-             <property name="leftMargin">
-              <number>40</number>
-             </property>
-             <property name="topMargin">
-              <number>40</number>
-             </property>
-             <property name="rightMargin">
-              <number>40</number>
-             </property>
-             <property name="bottomMargin">
-              <number>20</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="labelOfSelect">
-               <property name="font">
-                <font>
-                 <family>Arial</family>
-                 <pointsize>22</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>选择</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="inputOfSelect">
-               <property name="font">
-                <font>
-                 <family>Arial</family>
-                 <pointsize>22</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QLabel" name="labelOfInfo">
-             <property name="font">
-              <font>
-               <family>Arial</family>
-               <pointsize>22</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>未选择端口</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <layout class="QVBoxLayout" name="verticalLayout_3"/>
          </widget>
         </widget>
        </item>
@@ -1039,15 +1003,15 @@ border-radius:20px;</string>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>clickLabel</class>
-   <extends>QLabel</extends>
-   <header>clicklabel.h</header>
-  </customwidget>
-  <customwidget>
    <class>studentManagement</class>
    <extends>QWidget</extends>
    <header>studentManagement.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>clickLabel</class>
+   <extends>QLabel</extends>
+   <header>clicklabel.h</header>
   </customwidget>
  </customwidgets>
  <resources>

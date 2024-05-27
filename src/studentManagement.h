@@ -30,6 +30,7 @@ class studentManagement : public QWidget
 
     private:
         void initalWidget();
+        void setEdit(bool isEdit);
 };
 
 #endif /* STUDENT_MANAGEMENT_H */

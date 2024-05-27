@@ -50,7 +50,13 @@ QString toString(const QList<QList<QVariant>>& list,const QString& sep1=" ",cons
 
     for(int i=0;i<list.size();i++)
     {
-        str+=toString(list[i],sep1);
+        for(int j=0;j<list[i].size();j++)
+        {
+            str+=list[i][j].toString();
+            
+            if(j!=list[i].size()-1)
+                str+=sep1;
+        }
         if(i!=list.size()-1)
             str+=sep2;
     }
