@@ -174,6 +174,30 @@ class _DataBase
 
             return result;
         }
+
+        bool update(const QString& table_name,const QString& content,const QString& condition)
+        {
+            QList<QList<QVariant>> result;
+
+            QString query_str="UPDATE "+table_name+" SET "+content+" WHERE "+condition;
+            QSqlQuery query;
+
+            qDebug()<<query_str;
+
+            query.exec(query_str);
+            query.exec("SELECT changes();");
+
+            if(!query.next())
+                return false;
+
+            if(query.value(0).toInt()==0)
+            {
+                m_LastError="update student table Failed! "+query.lastError().text();
+                return false;
+            }
+
+            return true;
+        }
 };
 
 class DataBase

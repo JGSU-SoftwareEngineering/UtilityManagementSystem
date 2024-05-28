@@ -33,9 +33,14 @@ class widget : public QWidget
 
     public slots:
         void funcOfStudentManagement(const clickLabel* label);
+        void funcOfDormitoryManagement(const clickLabel* label);
+        void funcOfRepairManagement(const clickLabel* label);
+        void funcOfAnnouncementManagement(const clickLabel *label);
         void reset();
 
     private:
         void initalWidget();
+        void initalLoginBox();
+        void initalAnnouncement();
         void moveToCenter(QWidget& widget);
 };

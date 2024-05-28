@@ -179,7 +179,7 @@
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="pageOfOther1">
+         <widget class="QWidget" name="pageOfStudent">
           <property name="styleSheet">
            <string notr="true"/>
           </property>
@@ -224,8 +224,102 @@
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="pageOfOther2">
-          <layout class="QVBoxLayout" name="verticalLayout_3"/>
+         <widget class="dormitoryManagement" name="pageOfDormitory"/>
+         <widget class="QWidget" name="pageOfRepair"/>
+         <widget class="QWidget" name="pageOfAnnouncement">
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QStackedWidget" name="announcement">
+             <widget class="QWidget" name="page">
+              <layout class="QVBoxLayout" name="verticalLayout_11">
+               <item>
+                <widget class="QLabel" name="label_2">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>发布公告</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QTextEdit" name="editOfAnnouncement">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnOfSubmitAnnouncement">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>提交</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="pageOfAnnouncement2">
+              <property name="styleSheet">
+               <string notr="true">QWidget#pageOfAnnouncement2
+{
+	background-color: rgba(140, 140, 140, 50%);
+	border-radius:20px;
+}</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,10">
+               <item>
+                <widget class="QLabel" name="label">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>公告</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="labelOfAnnouncement">
+                 <property name="font">
+                  <font>
+                   <pointsize>15</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>这是一段空的公告</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </widget>
        </item>
@@ -1012,6 +1106,12 @@ border-radius:20px;</string>
    <class>clickLabel</class>
    <extends>QLabel</extends>
    <header>clicklabel.h</header>
+  </customwidget>
+  <customwidget>
+   <class>dormitoryManagement</class>
+   <extends>QWidget</extends>
+   <header>dormitoryManagement.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

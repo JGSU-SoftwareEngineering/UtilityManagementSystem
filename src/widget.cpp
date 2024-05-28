@@ -93,6 +93,66 @@ void widget::funcOfStudentManagement(const clickLabel *label)
     ui->student->setCurrentIndex(i);
 }
 
+void widget::funcOfDormitoryManagement(const clickLabel *label)
+{
+    int i=0;
+
+    if(label==m_Icons[8])
+    {
+        i=0;
+        ui->pageOfDormitory->updateAllocation();
+    }
+    else if(label==m_Icons[9])
+    {
+        i=1;
+    }
+    else if(label==m_Icons[10])
+    {
+        i=2;
+    }
+
+    ui->widgetsOfCenter->setCurrentIndex(2);
+    ui->pageOfDormitory->setCurrentIndex(i);
+}
+
+void widget::funcOfRepairManagement(const clickLabel *label)
+{
+    int i=0;
+
+    if(label==m_Icons[11])
+    {
+        i=0;
+    }
+    else if(label==m_Icons[12])
+    {
+        i=1;
+    }
+    else if(label==m_Icons[13])
+    {
+        i=1;
+    }
+
+    ui->widgetsOfCenter->setCurrentIndex(3);
+    
+}
+
+void widget::funcOfAnnouncementManagement(const clickLabel *label)
+{
+    int i=0;
+
+    if(label==m_Icons[14])
+    {
+        i=0;
+    }
+    else if(label==m_Icons[15])
+    {
+        i=1;
+    }
+
+    ui->widgetsOfCenter->setCurrentIndex(4);
+    ui->announcement->setCurrentIndex(i);
+}
+
 void widget::reset()
 {
     if(m_UserType==loginType::Student)
@@ -187,9 +247,9 @@ void widget::initalWidget()
     {
         nullptr,nullptr,nullptr,nullptr,
         &widget::funcOfStudentManagement,&widget::funcOfStudentManagement,&widget::funcOfStudentManagement,&widget::funcOfStudentManagement,
-        nullptr,nullptr,nullptr,
-        nullptr,nullptr,nullptr,
-        nullptr,nullptr
+        &widget::funcOfDormitoryManagement,&widget::funcOfDormitoryManagement,&widget::funcOfDormitoryManagement,
+        &widget::funcOfRepairManagement,&widget::funcOfRepairManagement,&widget::funcOfRepairManagement,
+        &widget::funcOfAnnouncementManagement,&widget::funcOfAnnouncementManagement
     };
 
     QSizePolicy sp = ui->iconOfFront->sizePolicy();
@@ -236,6 +296,12 @@ void widget::initalWidget()
         }
     }
 
+    initalLoginBox();
+    initalAnnouncement();
+}
+
+void widget::initalLoginBox()
+{
     connect(m_Login,&loginBox::closed,this,[=]()
     {
         if(!m_Login->isLogged())
@@ -250,6 +316,23 @@ void widget::initalWidget()
         reset();
 
         ui->student->setId(id);
+        ui->pageOfDormitory->setId(id);
+    });
+}
+
+void widget::initalAnnouncement()
+{
+    connect(ui->btnOfSubmitAnnouncement,&QPushButton::clicked,this,[=]()
+    {
+        if(ui->editOfAnnouncement->toPlainText()=="")
+        {
+            QMessageBox::warning(this,"公告管理","发布内容为空，请重新输入");
+        }
+        else
+        {
+            ui->labelOfAnnouncement->setText(ui->editOfAnnouncement->toPlainText());
+            QMessageBox::about(this,"公告管理","发布成功");
+        }
     });
 }
 
