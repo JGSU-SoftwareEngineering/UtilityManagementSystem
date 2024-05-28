@@ -14,6 +14,7 @@ class studentManagement : public QWidget
 
     private:
         Ui::studentManagement* ui;
+        bool isStudent;
 
     public:
         explicit studentManagement(QWidget* parent = nullptr);
@@ -24,13 +25,13 @@ class studentManagement : public QWidget
         bool eventFilter(QObject* obj,QEvent* e) override;
 
     public slots:
-        ;
+        void setEdit(bool isEdit);
+        void setId(const QString& str);
 
     signals:
 
     private:
         void initalWidget();
-        void setEdit(bool isEdit);
 };
 
 #endif /* STUDENT_MANAGEMENT_H */

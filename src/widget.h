@@ -4,7 +4,9 @@
 #include <QPixmap>
 #include <QList>
 #include <QLabel>
+
 #include "clicklabel.h"
+#include "loginBox.h"
 
 namespace Ui
 {
@@ -19,7 +21,8 @@ class widget : public QWidget
         Ui::widget* ui;
         QList<QPixmap*> m_Pic;
         QList<clickLabel*> m_Icons;
-        std::function<void(void)> funcOfExecute;
+        loginBox* m_Login;
+        loginType m_UserType;
 
     public:
         explicit widget(QWidget* parent = nullptr);
@@ -30,6 +33,7 @@ class widget : public QWidget
 
     public slots:
         void funcOfStudentManagement(const clickLabel* label);
+        void reset();
 
     private:
         void initalWidget();

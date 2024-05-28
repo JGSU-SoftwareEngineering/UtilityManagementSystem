@@ -8,6 +8,7 @@
 studentManagement::studentManagement(QWidget * parent)
     : QWidget(parent)
     , ui(new Ui::studentManagement)
+    , isStudent(false)
 {
     initalWidget();
 }
@@ -27,6 +28,20 @@ bool studentManagement::eventFilter(QObject *obj, QEvent *e)
     return false;
 }
 
+void studentManagement::setId(const QString &str)
+{
+    if(str!="")
+        isStudent=true;
+    else
+        isStudent=false;
+    
+    ui->editOfId->setText(str);
+    ui->idOfNeedToSearch->setText(str);
+
+    ui->editOfId->setEnabled(!isStudent);
+    ui->idOfNeedToSearch->setEnabled(!isStudent);
+}
+
 void studentManagement::setEdit(bool isEdit)
 {
     ui->editOfName->setEnabled(isEdit);
@@ -39,10 +54,21 @@ void studentManagement::initalWidget()
 {
     ui->setupUi(this);
 
+    /* 设置账号输入框只能为数字，且最长只能为 10 位 */
+    QRegularExpressionValidator* reg = new QRegularExpressionValidator(this);
+    reg->setRegularExpression(QRegularExpression(QString("\\d{1,10}")));
+
+    ui->inputOfId->setValidator(reg);
     ui->gender->addItems(QStringList()<<"男"<<"女");
     ui->editOfGender->addItems(QStringList()<<"男"<<"女");
 
-    setEdit(false);    
+    ui->idOfNeedToDelete->setValidator(reg);
+
+    ui->editOfId->setValidator(reg);
+    ui->editOfId->setPlaceholderText("请输入所需编辑学生的学号，再点击确认按钮即可编辑");
+    setEdit(false);
+
+    ui->idOfNeedToSearch->setValidator(reg);
 
     connect(ui->btnOfAdd,&QPushButton::clicked,this,[=]()
     {
@@ -66,6 +92,11 @@ void studentManagement::initalWidget()
             QMessageBox::about(this,"添加学生","添加成功");
         else
             QMessageBox::warning(this,"添加学生","添加失败，该学号可能已存在");
+
+        db->insert("student_account",QList<QVariant>()<<
+            ui->inputOfId->text()<<
+            ui->inputOfId->text()
+        );
     });
 
     connect(ui->btnOfDelete,&QPushButton::clicked,this,[=]()
@@ -92,6 +123,7 @@ void studentManagement::initalWidget()
     connect(ui->btnOfEdit,&QPushButton::clicked,this,[=]()
     {
         static bool isEdit=false;
+
         QString str=ui->editOfId->text();
 
         if(str.isEmpty())
@@ -123,6 +155,7 @@ void studentManagement::initalWidget()
             ui->editOfTelephone->setText(list[0][4].toString());
 
             ui->editOfId->setEnabled(isEdit);
+            
             setEdit(!isEdit);
             isEdit=true;
         }
@@ -144,7 +177,8 @@ void studentManagement::initalWidget()
             );
 
             QMessageBox::about(this,"编辑学生","编辑成功");
-            ui->editOfId->setEnabled(isEdit);
+            if(!isStudent)
+                ui->editOfId->setEnabled(isEdit);
             setEdit(!isEdit);
             isEdit=false;
         }

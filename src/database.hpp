@@ -48,13 +48,16 @@ class _DataBase
             QString str=readFile(filePath);
             QSqlQuery query;
 
-            if(query.exec(str))
+            for(const auto& i : str.split(";"))
             {
-                qDebug()<<"create student table Successful!";
-            }
-            else
-            {
-                m_LastError="create student table Failed!";
+                if(query.exec(i))
+                {
+                    qDebug()<<"create table Successful!";
+                }
+                else
+                {
+                    m_LastError="create table Failed!";
+                }
             }
         }
 

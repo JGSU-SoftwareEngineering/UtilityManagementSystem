@@ -212,8 +212,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>610</width>
-                <height>305</height>
+                <width>98</width>
+                <height>28</height>
                </rect>
               </property>
               <property name="styleSheet">
@@ -323,7 +323,7 @@ border-radius:20px;</string>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_8">
              <item>
-              <widget class="QLabel" name="label1">
+              <widget class="QLabel" name="labelOfStudentManagement">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -346,7 +346,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label2">
+              <widget class="QLabel" name="labelOfDormitoryManagement">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -369,7 +369,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label3">
+              <widget class="QLabel" name="labelOfRepairManagement">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -392,7 +392,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label4">
+              <widget class="QLabel" name="labelOfAnnouncementManagement">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -506,7 +506,7 @@ border-radius:20px;</string>
               <enum>QLayout::SetNoConstraint</enum>
              </property>
              <item>
-              <widget class="QLabel" name="label_3">
+              <widget class="QLabel" name="labelOfAddStudent">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -529,7 +529,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_4">
+              <widget class="QLabel" name="labelOfDeleteStudent">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -552,7 +552,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_2">
+              <widget class="QLabel" name="labelOfEditStudent">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -578,7 +578,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label">
+              <widget class="QLabel" name="labelOfSearchStudent">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -674,7 +674,7 @@ border-radius:20px;</string>
               <enum>QLayout::SetNoConstraint</enum>
              </property>
              <item>
-              <widget class="QLabel" name="label_5">
+              <widget class="QLabel" name="labelOfDormitoryAllocation">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -697,7 +697,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_6">
+              <widget class="QLabel" name="labelOfDormitoryAdjustment">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -720,7 +720,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_7">
+              <widget class="QLabel" name="labelDormitorySearch">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -818,7 +818,7 @@ border-radius:20px;</string>
               <enum>QLayout::SetNoConstraint</enum>
              </property>
              <item>
-              <widget class="QLabel" name="label_10">
+              <widget class="QLabel" name="labelOfRaiseRepair">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -841,7 +841,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_9">
+              <widget class="QLabel" name="labelOfHandleRepair">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -864,7 +864,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_8">
+              <widget class="QLabel" name="label_OfSearchRepair">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -918,7 +918,7 @@ border-radius:20px;</string>
               </layout>
              </item>
              <item>
-              <widget class="QLabel" name="labelOf2">
+              <widget class="QLabel" name="labelOfPublicAnnouncement">
                <property name="font">
                 <font>
                  <pointsize>15</pointsize>
@@ -962,7 +962,7 @@ border-radius:20px;</string>
               </layout>
              </item>
              <item>
-              <widget class="QLabel" name="labelOf3">
+              <widget class="QLabel" name="labelOfSearchAnnouncement">
                <property name="font">
                 <font>
                  <pointsize>15</pointsize>

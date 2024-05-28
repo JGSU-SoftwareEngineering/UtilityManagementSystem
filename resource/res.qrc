@@ -35,6 +35,9 @@
     <qresource prefix="/img/background">
         <file alias="snow-background">img/background/snow-background.jpg</file>
     </qresource>
+    <qresource prefix="/img/background">
+        <file alias="login">img/background/login.jpg</file>
+    </qresource>
 
     <!-- 通用资源 -->
 

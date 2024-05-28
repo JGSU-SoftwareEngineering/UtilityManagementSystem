@@ -20,6 +20,7 @@
 widget::widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::widget)
+    , m_Login(new loginBox)
 {
     /* 初始化界面 */
     initalWidget();
@@ -32,6 +33,7 @@ widget::~widget()
         for(auto i : m_Pic)
             delete i;
     delete ui;
+    delete m_Login;
 }
 
 bool widget::eventFilter(QObject *obj, QEvent *e)
@@ -40,13 +42,30 @@ bool widget::eventFilter(QObject *obj, QEvent *e)
     {
         if(ui->allWidgets->currentIndex()!=0)
         {
-            e->ignore();
             ui->allWidgets->setCurrentIndex(0);
             ui->widgetsOfCenter->setCurrentIndex(0);
+        }
+
+        if(m_Login->isLogged())
+        {
+            e->ignore();
+            m_Login->reset();
+            m_Login->show();
 
             return true;
         }
     }
+    else if(obj==this&&e->type()==QEvent::Resize)
+    {
+        static bool isInital=false;
+        /* 只执行一次 */
+        if(!isInital)
+        {
+            m_Login->show();
+            isInital=true;
+        }
+    }
+
     return false;
 }
 
@@ -72,6 +91,51 @@ void widget::funcOfStudentManagement(const clickLabel *label)
 
     ui->widgetsOfCenter->setCurrentIndex(1);
     ui->student->setCurrentIndex(i);
+}
+
+void widget::reset()
+{
+    if(m_UserType==loginType::Student)
+    {
+        ui->iconOfAddStudent->hide();
+        ui->labelOfAddStudent->hide();
+        ui->iconOfDeleteStudent->hide();
+        ui->labelOfDeleteStudent->hide();
+
+        ui->iconOfDormitoryAllocation->hide();
+        ui->labelOfDormitoryAllocation->hide();
+
+        ui->iconOfHandleRepair->hide();
+        ui->labelOfHandleRepair->hide();
+        ui->iconOfRaiseRepair->show();
+        ui->labelOfRaiseRepair->show();
+
+        ui->iconOfPublicAnnouncement->hide();
+        ui->labelOfPublicAnnouncement->hide();
+    }
+    else
+    {
+        ui->iconOfAddStudent->show();
+        ui->labelOfAddStudent->show();
+        ui->iconOfDeleteStudent->show();
+        ui->labelOfDeleteStudent->show();
+
+        ui->iconOfDormitoryAllocation->show();
+        ui->labelOfDormitoryAllocation->show();
+
+        ui->iconOfHandleRepair->show();
+        ui->labelOfHandleRepair->show();
+        ui->iconOfRaiseRepair->hide();
+        ui->labelOfRaiseRepair->hide();
+
+        ui->iconOfPublicAnnouncement->show();
+        ui->labelOfPublicAnnouncement->show();
+    }
+
+    ui->widgetsOfSubModule->setCurrentIndex(0);
+        
+    if(ui->widgetsOfCenter->currentIndex()!=0)
+        ui->widgetsOfCenter->setCurrentIndex(0);
 }
 
 void widget::initalWidget()
@@ -133,6 +197,9 @@ void widget::initalWidget()
     ui->iconOfFront->setSizePolicy(sp);
     ui->iconOfFront->hide();
 
+    ui->iconOfDormitoryAdjustment->hide();
+    ui->labelOfDormitoryAdjustment->hide();
+
     connect(stackWidget,&QStackedWidget::currentChanged,this,[=](int i)
     {
         if(i==0)
@@ -168,6 +235,22 @@ void widget::initalWidget()
             });
         }
     }
+
+    connect(m_Login,&loginBox::closed,this,[=]()
+    {
+        if(!m_Login->isLogged())
+        {
+            close();
+        }
+    });
+
+    connect(m_Login,&loginBox::logged,this,[=](const loginType& type,const QString& id)
+    {
+        this->m_UserType=type;
+        reset();
+
+        ui->student->setId(id);
+    });
 }
 
 void widget::moveToCenter(QWidget& widget)

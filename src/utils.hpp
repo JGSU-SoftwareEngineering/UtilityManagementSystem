@@ -4,7 +4,7 @@
 #include <QFile>
 
 /* 读取指定路径下的文件，并将其中内容返回 */
-QString readFile(const QString &filePath)
+inline QString readFile(const QString &filePath)
 {
     QString str;
     if(filePath.isEmpty())
@@ -19,7 +19,7 @@ QString readFile(const QString &filePath)
     return str;
 }
 
-QString toString(const QList<QVariant>& fields,const QString& sep=" ")
+inline QString toString(const QList<QVariant>& fields,const QString& sep=" ")
 {
     QString str;
 
@@ -44,7 +44,7 @@ QString toString(const QList<QVariant>& fields,const QString& sep=" ")
     return str;
 }
 
-QString toString(const QList<QList<QVariant>>& list,const QString& sep1=" ",const QString& sep2="\n")
+inline QString toString(const QList<QList<QVariant>>& list,const QString& sep1=" ",const QString& sep2="\n")
 {
     QString str;
 
