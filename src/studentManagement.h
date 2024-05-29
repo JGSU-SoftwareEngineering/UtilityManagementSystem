@@ -8,6 +8,8 @@ namespace Ui
     class studentManagement;
 }
 
+class excelReader;
+
 class studentManagement : public QWidget
 {
     Q_OBJECT
@@ -15,6 +17,7 @@ class studentManagement : public QWidget
     private:
         Ui::studentManagement* ui;
         bool isStudent;
+        excelReader* reader;
 
     public:
         explicit studentManagement(QWidget* parent = nullptr);

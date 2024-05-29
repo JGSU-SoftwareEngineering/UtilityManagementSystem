@@ -2,13 +2,16 @@
 #include "ui_studentManagement.h"
 
 #include "database.hpp"
+#include "excelReader.h"
 
 #include <QMessageBox>
+#include <QFileDialog>
 
 studentManagement::studentManagement(QWidget * parent)
     : QWidget(parent)
     , ui(new Ui::studentManagement)
     , isStudent(false)
+    , reader(nullptr)
 {
     initalWidget();
 }
@@ -16,6 +19,9 @@ studentManagement::studentManagement(QWidget * parent)
 studentManagement::~studentManagement()
 {
     delete ui;
+
+    if(reader!=nullptr)
+        delete reader;
 }
 
 void studentManagement::setCurrentIndex(int i)
@@ -105,7 +111,83 @@ void studentManagement::initalWidget()
 
     connect(ui->btnOfBulkAdd,&QPushButton::clicked,this,[=]()
     {
-        
+        /* 获取用户选择 excel 文件的路径 */
+        const QString& filepath=QFileDialog::getOpenFileName(this, QStringLiteral("select excel file"), "",QStringLiteral("Excel file(*.xls *.xlsx)"));
+
+        if(filepath.isEmpty())
+        {
+            QMessageBox::warning(this,"批量添加","未选择任何 excel 文件进行批量添加");
+            return;
+        }
+
+        if(reader==nullptr)
+            reader=new excelReader;
+
+        reader->readExcel(filepath);
+
+        auto data=reader->getData();
+
+        if(data.isEmpty())
+        {
+            QMessageBox::warning(this,"批量添加","导入数据为空");
+            return;
+        }
+
+        data.removeFirst();
+        qDebug()<<data;
+
+        if(data[0].size()<Student_Fields.size())
+        {
+            QMessageBox::warning(this,"批量添加","导入数据的格式有误");
+            return;
+        }
+
+        DataBase database;
+        auto db=database.getInstance();
+
+        int countOfAdd=0;
+        int countOfAlter=0;
+
+        for(const auto& i : data)
+        {
+            bool isSuccess=false;
+            const auto& studentInfo=db->select("student","id='"+i[0]+"'");
+            if(!studentInfo.isEmpty())
+            {
+                // 进行修改数据
+                db->remove("student","id="+i[0]);
+                isSuccess=db->insert("student",QList<QVariant>()<<
+                    i[0]<<
+                    i[1]<<
+                    i[2]<<
+                    i[3].toInt()<<
+                    i[4]
+                );
+
+                if(isSuccess)
+                    countOfAlter++;
+            }
+            else
+            {
+                isSuccess=db->insert("student",QList<QVariant>()<<
+                    i[0]<<
+                    i[1]<<
+                    i[2]<<
+                    i[3].toInt()<<
+                    i[4]
+                );
+
+                if(isSuccess)
+                    countOfAdd++;
+
+                db->insert("student_account",QList<QVariant>()<<
+                    i[0]<<
+                    i[0]
+                );
+            }
+        }
+
+        QMessageBox::about(this,"批量添加","成功添加"+QString::number(countOfAdd)+"个学生,"+"同时修改了"+QString::number(countOfAlter)+"个学生");
     });
 
     connect(ui->btnOfDelete,&QPushButton::clicked,this,[=]()
