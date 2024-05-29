@@ -15,8 +15,6 @@
 
 #include "constans.h"
 
-#include "subwidget.h"
-
 widget::widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::widget)
@@ -129,11 +127,11 @@ void widget::funcOfRepairManagement(const clickLabel *label)
     }
     else if(label==m_Icons[13])
     {
-        i=1;
+        i=2;
     }
 
     ui->widgetsOfCenter->setCurrentIndex(3);
-    
+    ui->pageOfRepair->setCurrentIndex(i);
 }
 
 void widget::funcOfAnnouncementManagement(const clickLabel *label)
@@ -317,6 +315,7 @@ void widget::initalLoginBox()
 
         ui->student->setId(id);
         ui->pageOfDormitory->setId(id);
+        ui->pageOfRepair->setId(id);
     });
 }
 

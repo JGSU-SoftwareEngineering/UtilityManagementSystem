@@ -15,6 +15,7 @@ class repairManagement : public QWidget
     private:
         Ui::repairManagement* ui;
         bool isStudent;
+        QString m_Id;
 
     public:
         explicit repairManagement(QWidget* parent = nullptr);
@@ -25,7 +26,9 @@ class repairManagement : public QWidget
         bool eventFilter(QObject* obj,QEvent* e) override;
 
     public slots:
-        // void setId(const QString& str);
+        void setId(const QString& str);
+        void refreshHandleRecord();
+        void refreshRepairRecord();
 
     signals:
 

@@ -70,6 +70,10 @@ void studentManagement::initalWidget()
 
     ui->idOfNeedToSearch->setValidator(reg);
 
+    ui->infoOfSearch->setColumnCount(4);
+    ui->infoOfSearch->setHorizontalHeaderLabels(QStringList()<<"姓名"<<"性别"<<"年龄"<<"电话");
+    ui->infoOfSearch->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
     connect(ui->btnOfAdd,&QPushButton::clicked,this,[=]()
     {
         if(ui->inputOfId->text().isEmpty()||ui->inputOfName->text().isEmpty()||ui->inputOfAge->text().isEmpty())
@@ -97,6 +101,11 @@ void studentManagement::initalWidget()
             ui->inputOfId->text()<<
             ui->inputOfId->text()
         );
+    });
+
+    connect(ui->btnOfBulkAdd,&QPushButton::clicked,this,[=]()
+    {
+        
     });
 
     connect(ui->btnOfDelete,&QPushButton::clicked,this,[=]()
@@ -198,6 +207,15 @@ void studentManagement::initalWidget()
         auto db=database.getInstance();
 
         const auto& list=db->select("student","id="+str);
-        ui->infoOfSearch->setText(Student_Fields.join(" ")+"\n"+toString(list));
+
+        ui->infoOfSearch->setRowCount(list.size());
+
+        for(int i=0;i<list.size();i++)
+        {
+            for(int j=1;j<list[i].size();j++)
+            {
+                ui->infoOfSearch->setItem(i,j-1,new QTableWidgetItem(list[i][j].toString()));
+            }
+        }        
     });
 }

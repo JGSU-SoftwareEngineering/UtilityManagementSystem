@@ -92,18 +92,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
-          <widget class="QLabel" name="labelOfAllocationInfo">
-           <property name="font">
-            <font>
-             <pointsize>15</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
+          <widget class="QTableWidget" name="infoOfAllocation"/>
          </item>
          <item>
           <widget class="QPushButton" name="btnOfAllocate">
@@ -173,11 +162,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QLabel" name="labelOfSearchInfo">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
+          <widget class="QTableWidget" name="infoOfSearch"/>
          </item>
          <item>
           <widget class="QPushButton" name="btnOfSearch">

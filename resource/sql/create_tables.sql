@@ -26,18 +26,21 @@ CREATE TABLE if not exists dormitory
 (
     d_id CHAR(10) NOT NULL,
     id CHAR(10) NOT NULL,
-    capacity INT NOT NULL,
+    capacity INTEGER NOT NULL,
     primary key(id),
     foreign key(id) references student(id) on delete cascade on update cascade
 );
 
 CREATE TABLE if not exists repair
 (
-    r_id CHAR(10) NOT NULL,
+    r_id INTEGER PRIMARY KEY AUTOINCREMENT,
     d_id CHAR(10) NOT NULL,
     info TEXT NOT NULL,
-    primary key(r_id),
+    isSolved INTEGER NOT NULL,
     foreign key(d_id) references dormitory(d_id) on delete cascade on update cascade
 );
 
-INSERT INTO admin_account VALUES('admin','admin')
+INSERT INTO admin_account VALUES('admin','admin');
+INSERT INTO student VALUES('1','123','1',21,'18231329131');
+INSERT INTO student_account VALUES('1','1');
+INSERT INTO dormitory VALUES('630','1',4)

@@ -43,6 +43,8 @@ class _DataBase
             execSql(":/sql/create_tables");
         }
 
+        QString lastError() { return m_LastError; }
+
         void execSql(const QString& filePath)
         {
             QString str=readFile(filePath);
@@ -59,6 +61,18 @@ class _DataBase
                     m_LastError="create table Failed!";
                 }
             }
+        }
+
+        bool query(const QString& str)
+        {
+            QSqlQuery query;
+
+            bool isSuccess=query.exec(str);
+
+            if(!isSuccess)
+                m_LastError=query.lastError().text();
+
+            return isSuccess;
         }
 
         bool insert(const QString& table_name,const QList<QVariant>& fields)

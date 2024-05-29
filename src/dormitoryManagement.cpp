@@ -36,7 +36,11 @@ void dormitoryManagement::updateAllocation()
     const auto& idOfDormitory=db->select("dormitory");
     const auto& idOfStudent=db->select("student");
 
-    QString str="未分配宿舍的学号：\n";
+    ui->infoOfAllocation->clear();
+    ui->infoOfAllocation->setColumnCount(1);
+    ui->infoOfAllocation->setColumnWidth(1,4);
+    ui->infoOfAllocation->setHorizontalHeaderLabels(QStringList()<<"未分配宿舍的学号");
+    
     QStringList list;
 
     if(!idOfStudent.isEmpty())
@@ -55,9 +59,12 @@ void dormitoryManagement::updateAllocation()
         }
     }
 
-    str+=list.join("\n");
+    ui->infoOfAllocation->setRowCount(list.size());
 
-    ui->labelOfAllocationInfo->setText(str);
+    for(int i=0;i<list.size();i++)
+    {
+        ui->infoOfAllocation->setItem(i,0,new QTableWidgetItem(list[i]));
+    }
 }
 
 void dormitoryManagement::setId(const QString& str)
@@ -80,6 +87,12 @@ void dormitoryManagement::initalWidget()
     ui->setupUi(this);
     installEventFilter(this);
 
+    ui->infoOfAllocation->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    ui->infoOfSearch->setColumnCount(2);
+    ui->infoOfSearch->setHorizontalHeaderLabels(QStringList()<<"宿舍号"<<"学号");
+    ui->infoOfSearch->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    
     connect(ui->btnOfAllocate,&QPushButton::clicked,this,[=]()
     {
         updateAllocation();
@@ -133,7 +146,8 @@ void dormitoryManagement::initalWidget()
 
     connect(ui->btnOfSearch,&QPushButton::clicked,this,[=]()
     {
-        ui->labelOfSearchInfo->setText("");
+        ui->infoOfSearch->clear();
+        ui->infoOfSearch->setHorizontalHeaderLabels(QStringList()<<"宿舍号"<<"学号");
 
         if(!isStudent)
         {
@@ -169,15 +183,18 @@ void dormitoryManagement::initalWidget()
         const auto& sameDormitoryInfo=db->select("dormitory","d_id='"+dormitoryInfo[0][0].toString()+"'");
 
         QStringList roommate;
-        QString str="该学号所在寝室为："+dormitoryInfo[0][0].toString()+"\n其中学生学号有：\n";
 
         for(const auto& i : sameDormitoryInfo)
         {
             roommate<<i[1].toString();
         }
 
-        str+=roommate.join("\n");
+        ui->infoOfSearch->setRowCount(roommate.size());
 
-        ui->labelOfSearchInfo->setText(str);
+        for(int i=0;i<sameDormitoryInfo.size();i++)
+        {
+            ui->infoOfSearch->setItem(i,0,new QTableWidgetItem(dormitoryInfo[0][0].toString()));
+            ui->infoOfSearch->setItem(i,1,new QTableWidgetItem(roommate[i]));
+        }
     });
 }

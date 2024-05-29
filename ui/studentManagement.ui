@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>500</width>
-    <height>320</height>
+    <height>336</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -210,10 +210,28 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_14">
             <item>
+             <widget class="QPushButton" name="btnOfBulkAdd">
+              <property name="font">
+               <font>
+                <family>Arial</family>
+                <pointsize>15</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>批量添加</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QPushButton" name="btnOfAdd">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>15</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
                </font>
               </property>
               <property name="text">
@@ -296,7 +314,10 @@
              <widget class="QPushButton" name="btnOfDelete">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>15</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
                </font>
               </property>
               <property name="text">
@@ -475,7 +496,10 @@
              <widget class="QPushButton" name="btnOfEdit">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>15</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
                </font>
               </property>
               <property name="text">
@@ -544,22 +568,16 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_15">
             <item>
-             <widget class="QLabel" name="infoOfSearch">
-              <property name="font">
-               <font>
-                <pointsize>15</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
+             <widget class="QTableWidget" name="infoOfSearch"/>
             </item>
             <item>
              <widget class="QPushButton" name="btnOfSearch">
               <property name="font">
                <font>
+                <family>Arial</family>
                 <pointsize>15</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
                </font>
               </property>
               <property name="text">
