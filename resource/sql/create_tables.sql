@@ -27,6 +27,7 @@ CREATE TABLE if not exists dormitory
     d_id CHAR(10) NOT NULL,
     id CHAR(10) NOT NULL,
     capacity INTEGER NOT NULL,
+    gender CHAR(2) NOT NULL,
     primary key(id),
     foreign key(id) references student(id) on delete cascade on update cascade
 );

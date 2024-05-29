@@ -11,7 +11,7 @@ const QString UserPassword=passwd;
 const int dormitoryCapacity=4;
 
 const QStringList Student_Fields={"id","name","gender","age","telephone"};
-const QStringList Dormitory_Fields={"d_id","id","capacity"};
+const QStringList Dormitory_Fields={"d_id","id","capacity","gender"};
 const QStringList Student_Account_Fields={"id","passwd"};
 const QStringList Admin_Account_Fields={"id","passwd"};
 const QStringList Repair_Fields={"r_id","d_id","info","isSolved"};

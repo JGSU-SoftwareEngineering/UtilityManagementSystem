@@ -89,8 +89,8 @@ void dormitoryManagement::initalWidget()
 
     ui->infoOfAllocation->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    ui->infoOfSearch->setColumnCount(2);
-    ui->infoOfSearch->setHorizontalHeaderLabels(QStringList()<<"宿舍号"<<"学号");
+    ui->infoOfSearch->setColumnCount(3);
+    ui->infoOfSearch->setHorizontalHeaderLabels(QStringList()<<"宿舍号"<<"学号"<<"男（女）寝");
     ui->infoOfSearch->setEditTriggers(QAbstractItemView::NoEditTriggers);
     
     connect(ui->btnOfAllocate,&QPushButton::clicked,this,[=]()
@@ -129,11 +129,20 @@ void dormitoryManagement::initalWidget()
             QMessageBox::warning(this,"宿舍分配","分配失败,该宿舍已满");
             return;
         }
+        else if(listOfDormitory.size()>=1)
+        {
+            if(studentInfo[0][2].toString()!=listOfDormitory[0][3].toString())
+            {
+                QMessageBox::warning(this,"宿舍分配","该学生性别为"+studentInfo[0][2].toString()+"，无法入住"+listOfDormitory[0][3].toString()+"寝，请选择其他寝室");
+                return;
+            }
+        }
 
         bool isSuccess=db->insert("dormitory",QList<QVariant>()<<
             ui->didOfAllocation->text()<<
             ui->idOfAllocation->text()<<
-            dormitoryCapacity
+            dormitoryCapacity<<
+            studentInfo[0][2].toString()
         );
 
         if(isSuccess)
@@ -147,7 +156,7 @@ void dormitoryManagement::initalWidget()
     connect(ui->btnOfSearch,&QPushButton::clicked,this,[=]()
     {
         ui->infoOfSearch->clear();
-        ui->infoOfSearch->setHorizontalHeaderLabels(QStringList()<<"宿舍号"<<"学号");
+        ui->infoOfSearch->setHorizontalHeaderLabels(QStringList()<<"宿舍号"<<"学号"<<"男（女）寝");
 
         if(!isStudent)
         {
@@ -195,6 +204,7 @@ void dormitoryManagement::initalWidget()
         {
             ui->infoOfSearch->setItem(i,0,new QTableWidgetItem(dormitoryInfo[0][0].toString()));
             ui->infoOfSearch->setItem(i,1,new QTableWidgetItem(roommate[i]));
+            ui->infoOfSearch->setItem(i,2,new QTableWidgetItem(sameDormitoryInfo[0][3].toString()));
         }
     });
 }

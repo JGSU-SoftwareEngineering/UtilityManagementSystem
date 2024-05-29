@@ -132,6 +132,7 @@ void repairManagement::initalWidget()
         if(selectedRepairId.isEmpty())
         {
             QMessageBox::about(this,"处理报修","暂无报修处理");
+            return;
         }
 
         DataBase database;
