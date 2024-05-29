@@ -37,6 +37,7 @@ class widget : public QWidget
         void funcOfRepairManagement(const clickLabel* label);
         void funcOfAnnouncementManagement(const clickLabel *label);
         void reset();
+        void updateAnnouncement();
 
     private:
         void initalWidget();

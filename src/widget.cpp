@@ -14,6 +14,7 @@
 #include <QComboBox>
 
 #include "constans.h"
+#include "database.hpp"
 
 widget::widget(QWidget *parent)
     : QWidget(parent)
@@ -145,6 +146,7 @@ void widget::funcOfAnnouncementManagement(const clickLabel *label)
     else if(label==m_Icons[15])
     {
         i=1;
+        updateAnnouncement();
     }
 
     ui->widgetsOfCenter->setCurrentIndex(4);
@@ -194,6 +196,17 @@ void widget::reset()
         
     if(ui->widgetsOfCenter->currentIndex()!=0)
         ui->widgetsOfCenter->setCurrentIndex(0);
+}
+
+void widget::updateAnnouncement()
+{
+    DataBase database;
+    auto db=database.getInstance();
+
+    const auto& list=db->select("announcement");
+
+    if(!list.isEmpty())
+        ui->labelOfAnnouncement->setText(list[0][1].toString());
 }
 
 void widget::initalWidget()
@@ -326,12 +339,26 @@ void widget::initalAnnouncement()
         if(ui->editOfAnnouncement->toPlainText()=="")
         {
             QMessageBox::warning(this,"公告管理","发布内容为空，请重新输入");
+            return;
+        }
+
+        const QString& content=ui->editOfAnnouncement->toPlainText();
+
+        DataBase database;
+        auto db=database.getInstance();
+
+        const auto& list=db->select("announcement");
+
+        if(list.isEmpty())
+        {
+            db->query("insert into announcement values(NULL,'"+content+"')");
         }
         else
         {
-            ui->labelOfAnnouncement->setText(ui->editOfAnnouncement->toPlainText());
-            QMessageBox::about(this,"公告管理","发布成功");
+            db->query("update announcement set info='"+content+"' where id="+list[0][0].toString());
         }
+
+        QMessageBox::about(this,"公告管理","发布成功");
     });
 }
 

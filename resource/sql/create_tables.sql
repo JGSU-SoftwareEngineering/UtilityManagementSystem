@@ -41,6 +41,12 @@ CREATE TABLE if not exists repair
     foreign key(d_id) references dormitory(d_id) on delete cascade on update cascade
 );
 
+CREATE TABLE if not exists announcement
+(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    info TEXT NOT NULL
+);
+
 INSERT INTO admin_account VALUES('admin','admin');
 INSERT INTO student VALUES('1','123','1',21,'18231329131');
 INSERT INTO student_account VALUES('1','1');

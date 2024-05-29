@@ -155,7 +155,14 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="idOfNeedToSearch"/>
+          <widget class="QLineEdit" name="idOfNeedToSearch">
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>15</pointsize>
+            </font>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>

@@ -34,7 +34,13 @@
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="contentOfRaise"/>
+        <widget class="QTextEdit" name="contentOfRaise">
+         <property name="font">
+          <font>
+           <pointsize>15</pointsize>
+          </font>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QPushButton" name="btnOfRaise">

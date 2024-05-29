@@ -39,7 +39,7 @@ class _DataBase
                 qDebug() << "Database opened failed:" << m_Database.lastError().text();
             }
 
-            execSql(":/sql/drop_tables");
+            // execSql(":/sql/drop_tables");
             execSql(":/sql/create_tables");
         }
 
@@ -54,11 +54,11 @@ class _DataBase
             {
                 if(query.exec(i))
                 {
-                    qDebug()<<"create table Successful!";
+                    qDebug()<<"execSql Successful!";
                 }
                 else
                 {
-                    m_LastError="create table Failed!";
+                    m_LastError="execSql Failed!";
                 }
             }
         }
