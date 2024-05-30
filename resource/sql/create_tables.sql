@@ -48,6 +48,6 @@ CREATE TABLE if not exists announcement
 );
 
 INSERT INTO admin_account VALUES('admin','admin');
-INSERT INTO student VALUES('1','123','1',21,'18231329131');
-INSERT INTO student_account VALUES('1','1');
-INSERT INTO dormitory VALUES('630','1',4)
+-- INSERT INTO student VALUES('1','123','1',21,'18231329131');
+-- INSERT INTO student_account VALUES('1','1');
+-- INSERT INTO dormitory VALUES('630','1',4)
