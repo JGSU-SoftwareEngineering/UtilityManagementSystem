@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>dormitoryManagement</class>
- <widget class="dormitoryManagement" name="dormitoryManagement">
+ <class>utilityManagement</class>
+ <widget class="utilityManagement" name="utilityManagement">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>dormitoryManagement</string>
+   <string>utilityManagement</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -28,7 +28,7 @@
           </font>
          </property>
          <property name="text">
-          <string>宿舍分配</string>
+          <string>更新水电</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -47,7 +47,7 @@
             </font>
            </property>
            <property name="text">
-            <string>学号</string>
+            <string>编号</string>
            </property>
           </widget>
          </item>
@@ -74,7 +74,7 @@
             </font>
            </property>
            <property name="text">
-            <string>宿舍号</string>
+            <string>水电号</string>
            </property>
           </widget>
          </item>
@@ -130,7 +130,7 @@
           </font>
          </property>
          <property name="text">
-          <string>宿舍查询</string>
+          <string>水电查询</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -150,7 +150,7 @@
             </font>
            </property>
            <property name="text">
-            <string>学号</string>
+            <string>编号</string>
            </property>
           </widget>
          </item>
@@ -196,9 +196,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>dormitoryManagement</class>
+   <class>utilityManagement</class>
    <extends>QWidget</extends>
-   <header>dormitorymanagement.h</header>
+   <header>utilitymanagement.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

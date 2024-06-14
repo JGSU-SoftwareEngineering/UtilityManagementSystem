@@ -224,7 +224,7 @@
            </item>
           </layout>
          </widget>
-         <widget class="dormitoryManagement" name="pageOfDormitory"/>
+         <widget class="utilityManagement" name="pageOfDormitory"/>
          <widget class="repairManagement" name="pageOfRepair"/>
          <widget class="QWidget" name="pageOfAnnouncement">
           <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -432,7 +432,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>学生管理</string>
+                <string>租客管理</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -455,7 +455,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>宿舍管理</string>
+                <string>水电管理</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -478,7 +478,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>报修管理</string>
+                <string>缴费管理</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -501,7 +501,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>公告管理</string>
+                <string>统计</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -615,7 +615,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>添加学生</string>
+                <string>添加租客</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -638,7 +638,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>删除学生</string>
+                <string>删除租客</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -661,7 +661,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>编辑学生</string>
+                <string>编辑租客</string>
                </property>
                <property name="scaledContents">
                 <bool>false</bool>
@@ -688,7 +688,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>查询学生</string>
+                <string>查询租客</string>
                </property>
               </widget>
              </item>
@@ -783,7 +783,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>宿舍分配</string>
+                <string>水电分配</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -806,7 +806,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>宿舍调整</string>
+                <string>水电调整</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -927,7 +927,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>申请报修</string>
+                <string>申请缴费</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -950,7 +950,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>处理报修</string>
+                <string>处理缴费</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -973,7 +973,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>查询报修</string>
+                <string>查询缴费</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -1108,9 +1108,9 @@ border-radius:20px;</string>
    <header>clicklabel.h</header>
   </customwidget>
   <customwidget>
-   <class>dormitoryManagement</class>
+   <class>utilityManagement</class>
    <extends>QWidget</extends>
-   <header>dormitoryManagement.h</header>
+   <header>utilityManagement.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

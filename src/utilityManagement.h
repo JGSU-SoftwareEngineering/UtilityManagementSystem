@@ -1,24 +1,24 @@
-#ifndef DORMITORY_MANAGEMENT_H
-#define DORMITORY_MANAGEMENT_H
+#ifndef UTIlIY_MANAGEMENT_H
+#define UTIlIY_MANAGEMENT_H
 
 #include <QWidget>
 
 namespace Ui
 {
-    class dormitoryManagement;
+    class utilityManagement;
 }
 
-class dormitoryManagement : public QWidget
+class utilityManagement : public QWidget
 {
     Q_OBJECT
 
     private:
-        Ui::dormitoryManagement* ui;
+        Ui::utilityManagement* ui;
         bool isStudent;
 
     public:
-        explicit dormitoryManagement(QWidget* parent = nullptr);
-        ~dormitoryManagement();
+        explicit utilityManagement(QWidget* parent = nullptr);
+        ~utilityManagement();
         void setCurrentIndex(int i);
 
     protected:
@@ -34,4 +34,4 @@ class dormitoryManagement : public QWidget
         void initalWidget();
 };
 
-#endif /* DORMITORY_MANAGEMENT_H */
+#endif /* UTIlIY_MANAGEMENT_H */
