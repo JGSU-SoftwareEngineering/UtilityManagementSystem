@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(DormitoryManagementSystem VERSION 0.1 LANGUAGES CXX)
+project(UtilityManagementSystem VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -8,10 +8,6 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# 请自行填写 qt 工具链所在路径
-# set(CMAKE_PREFIX_PATH "D:/Qt/6.5.0/mingw_64") # Qt Kit Dir
-
-# 默认使用 Qt6 版本，其次 Qt5(用Qt5的时候不要打开中文路径的题库)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Sql)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Sql)
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

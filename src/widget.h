@@ -32,7 +32,7 @@ class widget : public QWidget
         bool eventFilter(QObject* obj,QEvent* e) override;
 
     public slots:
-        void funcOfStudentManagement(const clickLabel* label);
+        void funcOfTenantManagement(const clickLabel* label);
         void funcOfDormitoryManagement(const clickLabel* label);
         void funcOfRepairManagement(const clickLabel* label);
         void funcOfAnnouncementManagement(const clickLabel *label);

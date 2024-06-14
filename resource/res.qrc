@@ -6,7 +6,7 @@
     </qresource>
 
     <qresource prefix="/img/main">
-        <file alias="student_management">img/main/student_management.png</file>
+        <file alias="tenant_management">img/main/tenant_management.png</file>
     </qresource>
     <qresource prefix="/img/main">
         <file alias="dormitory_management">img/main/dormitory_management.png</file>
@@ -60,17 +60,17 @@
     
     <!-- 学生管理 -->
 
-    <qresource prefix="/img/student">
-        <file alias="add">img/student/add.png</file>
+    <qresource prefix="/img/tenant">
+        <file alias="add">img/tenant/add.png</file>
     </qresource>
-    <qresource prefix="/img/student">
-        <file alias="delete">img/student/delete.png</file>
+    <qresource prefix="/img/tenant">
+        <file alias="delete">img/tenant/delete.png</file>
     </qresource>
-    <qresource prefix="/img/student">
-        <file alias="edit">img/student/edit.png</file>
+    <qresource prefix="/img/tenant">
+        <file alias="edit">img/tenant/edit.png</file>
     </qresource>
-    <qresource prefix="/img/student">
-        <file alias="search">img/student/search.png</file>
+    <qresource prefix="/img/tenant">
+        <file alias="search">img/tenant/search.png</file>
     </qresource>
 
     <!-- 宿舍管理 -->

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>studentManagement</class>
- <widget class="studentManagement" name="studentManagement">
+ <class>tenantManagement</class>
+ <widget class="tenantManagement" name="tenantManagement">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -40,7 +40,7 @@
         <property name="styleSheet">
          <string notr="true"/>
         </property>
-        <widget class="QWidget" name="addStudent">
+        <widget class="QWidget" name="addTenant">
          <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,2,2,2,2,2,2">
           <property name="spacing">
            <number>10</number>
@@ -64,7 +64,7 @@
                </font>
               </property>
               <property name="text">
-               <string>添加学生</string>
+               <string>添加租客</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -108,7 +108,7 @@
                </font>
               </property>
               <property name="text">
-               <string>学号</string>
+               <string>编号</string>
               </property>
              </widget>
             </item>
@@ -243,7 +243,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="deleteStudent">
+        <widget class="QWidget" name="deleteTenant">
          <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,2,2">
           <property name="spacing">
            <number>10</number>
@@ -267,7 +267,7 @@
                </font>
               </property>
               <property name="text">
-               <string>删除学生</string>
+               <string>删除租客</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -286,7 +286,7 @@
                </font>
               </property>
               <property name="text">
-               <string>学号</string>
+               <string>编号</string>
               </property>
              </widget>
             </item>
@@ -329,7 +329,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="editStudent">
+        <widget class="QWidget" name="editTenant">
          <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,2,2,2,2,2,2">
           <property name="spacing">
            <number>10</number>
@@ -351,7 +351,7 @@
              </font>
             </property>
             <property name="text">
-             <string>编辑学生</string>
+             <string>编辑租客</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -368,7 +368,7 @@
                </font>
               </property>
               <property name="text">
-               <string>学号</string>
+               <string>编号</string>
               </property>
              </widget>
             </item>
@@ -511,7 +511,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="searchStudent">
+        <widget class="QWidget" name="searchTenant">
          <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,2,2">
           <property name="spacing">
            <number>10</number>
@@ -533,7 +533,7 @@
              </font>
             </property>
             <property name="text">
-             <string>查询学生</string>
+             <string>查询租客</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -550,7 +550,7 @@
                </font>
               </property>
               <property name="text">
-               <string>学号</string>
+               <string>编号</string>
               </property>
              </widget>
             </item>
@@ -598,9 +598,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>studentManagement</class>
+   <class>tenantManagement</class>
    <extends>QWidget</extends>
-   <header>studentManagement.h</header>
+   <header>tenantManagement.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

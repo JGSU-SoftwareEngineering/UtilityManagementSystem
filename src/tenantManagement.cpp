@@ -1,5 +1,5 @@
-#include "studentManagement.h"
-#include "ui_studentManagement.h"
+#include "tenantManagement.h"
+#include "ui_tenantManagement.h"
 
 #include "database.hpp"
 #include "excelReader.h"
@@ -7,16 +7,16 @@
 #include <QMessageBox>
 #include <QFileDialog>
 
-studentManagement::studentManagement(QWidget * parent)
+tenantManagement::tenantManagement(QWidget * parent)
     : QWidget(parent)
-    , ui(new Ui::studentManagement)
-    , isStudent(false)
+    , ui(new Ui::tenantManagement)
+    , isTenant(false)
     , reader(nullptr)
 {
     initalWidget();
 }
 
-studentManagement::~studentManagement()
+tenantManagement::~tenantManagement()
 {
     delete ui;
 
@@ -24,31 +24,31 @@ studentManagement::~studentManagement()
         delete reader;
 }
 
-void studentManagement::setCurrentIndex(int i)
+void tenantManagement::setCurrentIndex(int i)
 {
     ui->stackedWidget->setCurrentIndex(i);
 }
 
-bool studentManagement::eventFilter(QObject *obj, QEvent *e)
+bool tenantManagement::eventFilter(QObject *obj, QEvent *e)
 {
     return false;
 }
 
-void studentManagement::setId(const QString &str)
+void tenantManagement::setId(const QString &str)
 {
     if(str!="")
-        isStudent=true;
+        isTenant=true;
     else
-        isStudent=false;
+        isTenant=false;
     
     ui->editOfId->setText(str);
     ui->idOfNeedToSearch->setText(str);
 
-    ui->editOfId->setEnabled(!isStudent);
-    ui->idOfNeedToSearch->setEnabled(!isStudent);
+    ui->editOfId->setEnabled(!isTenant);
+    ui->idOfNeedToSearch->setEnabled(!isTenant);
 }
 
-void studentManagement::setEdit(bool isEdit)
+void tenantManagement::setEdit(bool isEdit)
 {
     ui->editOfName->setEnabled(isEdit);
     ui->editOfAge->setEnabled(isEdit);
@@ -56,7 +56,7 @@ void studentManagement::setEdit(bool isEdit)
     ui->editOfTelephone->setEnabled(isEdit);
 }
 
-void studentManagement::initalWidget()
+void tenantManagement::initalWidget()
 {
     ui->setupUi(this);
 
@@ -71,7 +71,7 @@ void studentManagement::initalWidget()
     ui->idOfNeedToDelete->setValidator(reg);
 
     ui->editOfId->setValidator(reg);
-    ui->editOfId->setPlaceholderText("请输入所需编辑学生的学号，再点击确认按钮即可编辑");
+    ui->editOfId->setPlaceholderText("请输入所需编辑租客的编号，再点击确认按钮即可编辑");
     setEdit(false);
 
     ui->idOfNeedToSearch->setValidator(reg);
@@ -84,13 +84,13 @@ void studentManagement::initalWidget()
     {
         if(ui->inputOfId->text().isEmpty()||ui->inputOfName->text().isEmpty()||ui->inputOfAge->text().isEmpty())
         {
-            QMessageBox::warning(this,"添加学生","添加失败,还有未填写的信息");
+            QMessageBox::warning(this,"添加租客","添加失败,还有未填写的信息");
             return;
         }
 
         DataBase database;
         auto db=database.getInstance();
-        bool isSuccess=db->insert("student",QList<QVariant>()<<
+        bool isSuccess=db->insert("tenant",QList<QVariant>()<<
             ui->inputOfId->text()<<
             ui->inputOfName->text()<<
             ui->gender->currentText()<<
@@ -99,11 +99,11 @@ void studentManagement::initalWidget()
         );
 
         if(isSuccess)
-            QMessageBox::about(this,"添加学生","添加成功");
+            QMessageBox::about(this,"添加租客","添加成功");
         else
-            QMessageBox::warning(this,"添加学生","添加失败，该学号可能已存在");
+            QMessageBox::warning(this,"添加租客","添加失败，该编号可能已存在");
 
-        db->insert("student_account",QList<QVariant>()<<
+        db->insert("tenant_account",QList<QVariant>()<<
             ui->inputOfId->text()<<
             ui->inputOfId->text()
         );
@@ -136,7 +136,7 @@ void studentManagement::initalWidget()
         data.removeFirst();
         qDebug()<<data;
 
-        if(data[0].size()<columnOfStudentFields)
+        if(data[0].size()<columnOfTenantFields)
         {
             QMessageBox::warning(this,"批量添加","导入数据的格式有误");
             return;
@@ -151,12 +151,12 @@ void studentManagement::initalWidget()
         for(const auto& i : data)
         {
             bool isSuccess=false;
-            const auto& studentInfo=db->select("student","id='"+i[0]+"'");
-            if(!studentInfo.isEmpty())
+            const auto& tenantInfo=db->select("tenant","id='"+i[0]+"'");
+            if(!tenantInfo.isEmpty())
             {
                 // 进行修改数据
-                db->remove("student","id="+i[0]);
-                isSuccess=db->insert("student",QList<QVariant>()<<
+                db->remove("tenant","id="+i[0]);
+                isSuccess=db->insert("tenant",QList<QVariant>()<<
                     i[0]<<
                     i[1]<<
                     i[2]<<
@@ -169,7 +169,7 @@ void studentManagement::initalWidget()
             }
             else
             {
-                isSuccess=db->insert("student",QList<QVariant>()<<
+                isSuccess=db->insert("tenant",QList<QVariant>()<<
                     i[0]<<
                     i[1]<<
                     i[2]<<
@@ -180,14 +180,14 @@ void studentManagement::initalWidget()
                 if(isSuccess)
                     countOfAdd++;
 
-                db->insert("student_account",QList<QVariant>()<<
+                db->insert("tenant_account",QList<QVariant>()<<
                     i[0]<<
                     i[0]
                 );
             }
         }
 
-        QMessageBox::about(this,"批量添加","成功添加"+QString::number(countOfAdd)+"个学生,"+"同时修改了"+QString::number(countOfAlter)+"个学生");
+        QMessageBox::about(this,"批量添加","成功添加"+QString::number(countOfAdd)+"个租客,"+"同时修改了"+QString::number(countOfAlter)+"个租客");
     });
 
     connect(ui->btnOfDelete,&QPushButton::clicked,this,[=]()
@@ -196,19 +196,19 @@ void studentManagement::initalWidget()
 
         if(str.isEmpty())
         {
-            QMessageBox::warning(this,"删除学生","删除失败，学号不能为空");
+            QMessageBox::warning(this,"删除租客","删除失败，编号不能为空");
             return;
         }
 
         DataBase database;
         auto db=database.getInstance();
 
-        bool isSuccess=db->remove("student","id="+str);
+        bool isSuccess=db->remove("tenant","id="+str);
         
         if(isSuccess)
-            QMessageBox::about(this,"删除学生","删除成功");
+            QMessageBox::about(this,"删除租客","删除成功");
         else
-            QMessageBox::warning(this,"删除学生","删除失败，该学号可能不存在");
+            QMessageBox::warning(this,"删除租客","删除失败，该编号可能不存在");
     });
 
     connect(ui->btnOfEdit,&QPushButton::clicked,this,[=]()
@@ -219,7 +219,7 @@ void studentManagement::initalWidget()
 
         if(str.isEmpty())
         {
-            QMessageBox::warning(this,"编辑学生","执行失败，学号不能为空");
+            QMessageBox::warning(this,"编辑租客","执行失败，编号不能为空");
             return;
         }
 
@@ -228,10 +228,10 @@ void studentManagement::initalWidget()
 
         if(!isEdit)
         {
-            const auto& list=db->select("student","id="+str);
+            const auto& list=db->select("tenant","id="+str);
             if(list.isEmpty())
             {
-                QMessageBox::warning(this,"编辑学生","编辑失败,学号不存在，请重新输入学号");
+                QMessageBox::warning(this,"编辑租客","编辑失败,编号不存在，请重新输入编号");
                 ui->editOfId->setText("");
                 ui->editOfName->setText("");
                 ui->editOfGender->setCurrentText("男");
@@ -254,12 +254,12 @@ void studentManagement::initalWidget()
         {
             if(ui->editOfName->text().isEmpty()||ui->editOfAge->text().isEmpty())
             {
-                QMessageBox::warning(this,"编辑学生","编辑失败,还有未填写的信息，请重试");
+                QMessageBox::warning(this,"编辑租客","编辑失败,还有未填写的信息，请重试");
                 return;
             }
 
-            db->remove("student","id="+ui->editOfId->text());
-            db->insert("student",QList<QVariant>()<<
+            db->remove("tenant","id="+ui->editOfId->text());
+            db->insert("tenant",QList<QVariant>()<<
                 ui->editOfId->text()<<
                 ui->editOfName->text()<<
                 ui->editOfGender->currentText()<<
@@ -267,8 +267,8 @@ void studentManagement::initalWidget()
                 ui->editOfTelephone->text()
             );
 
-            QMessageBox::about(this,"编辑学生","编辑成功");
-            if(!isStudent)
+            QMessageBox::about(this,"编辑租客","编辑成功");
+            if(!isTenant)
                 ui->editOfId->setEnabled(isEdit);
             setEdit(!isEdit);
             isEdit=false;
@@ -281,14 +281,14 @@ void studentManagement::initalWidget()
 
         if(str.isEmpty())
         {
-            QMessageBox::warning(this,"查询学生","查询失败，学号不能为空");
+            QMessageBox::warning(this,"查询租客","查询失败，编号不能为空");
             return;
         }
 
         DataBase database;
         auto db=database.getInstance();
 
-        const auto& list=db->select("student","id="+str);
+        const auto& list=db->select("tenant","id="+str);
 
         ui->infoOfSearch->setRowCount(list.size());
 

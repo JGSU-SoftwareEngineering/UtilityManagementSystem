@@ -179,7 +179,7 @@
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="pageOfStudent">
+         <widget class="QWidget" name="pageOfTenant">
           <property name="styleSheet">
            <string notr="true"/>
           </property>
@@ -207,7 +207,7 @@
              <property name="widgetResizable">
               <bool>true</bool>
              </property>
-             <widget class="studentManagement" name="student">
+             <widget class="tenantManagement" name="tenant">
               <property name="geometry">
                <rect>
                 <x>0</x>
@@ -337,7 +337,7 @@ border-radius:20px;</string>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
-              <widget class="clickLabel" name="iconOfStudentManagement">
+              <widget class="clickLabel" name="iconOfTenantManagement">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -417,7 +417,7 @@ border-radius:20px;</string>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_8">
              <item>
-              <widget class="QLabel" name="labelOfStudentManagement">
+              <widget class="QLabel" name="labelOfTenantManagement">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -520,7 +520,7 @@ border-radius:20px;</string>
               <enum>QLayout::SetNoConstraint</enum>
              </property>
              <item>
-              <widget class="clickLabel" name="iconOfAddStudent">
+              <widget class="clickLabel" name="iconOfAddTenant">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -539,7 +539,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="clickLabel" name="iconOfDeleteStudent">
+              <widget class="clickLabel" name="iconOfDeleteTenant">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -558,7 +558,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="clickLabel" name="iconOfEditStudent">
+              <widget class="clickLabel" name="iconOfEditTenant">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -577,7 +577,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="clickLabel" name="iconOfSearchStudent">
+              <widget class="clickLabel" name="iconOfSearchTenant">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -600,7 +600,7 @@ border-radius:20px;</string>
               <enum>QLayout::SetNoConstraint</enum>
              </property>
              <item>
-              <widget class="QLabel" name="labelOfAddStudent">
+              <widget class="QLabel" name="labelOfAddTenant">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -623,7 +623,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="labelOfDeleteStudent">
+              <widget class="QLabel" name="labelOfDeleteTenant">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -646,7 +646,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="labelOfEditStudent">
+              <widget class="QLabel" name="labelOfEditTenant">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -672,7 +672,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="labelOfSearchStudent">
+              <widget class="QLabel" name="labelOfSearchTenant">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -1097,9 +1097,9 @@ border-radius:20px;</string>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>studentManagement</class>
+   <class>tenantManagement</class>
    <extends>QWidget</extends>
-   <header>studentManagement.h</header>
+   <header>tenantManagement.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

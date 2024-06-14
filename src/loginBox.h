@@ -8,7 +8,7 @@ QT_END_NAMESPACE
 
 enum class loginType
 {
-    Student,
+    Tenant,
     Admin
 };
 

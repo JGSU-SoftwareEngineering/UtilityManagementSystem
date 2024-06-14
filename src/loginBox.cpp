@@ -38,7 +38,7 @@ void loginBox::reset()
 {
     ui->account->setText("");
     ui->passwd->setText("");
-    ui->type->setCurrentText("学生");
+    ui->type->setCurrentText("租客");
     m_Logged=false;
 }
 
@@ -51,7 +51,7 @@ void loginBox::initalWidget()
     setWindowFlags(windowFlags() | Qt::Dialog);
     setWindowModality(Qt::ApplicationModal);
 
-    ui->type->addItems(QStringList()<<"学生"<<"管理员");
+    ui->type->addItems(QStringList()<<"租客"<<"管理员");
 
     ui->labelOfReset->hide();
     ui->resetPasswd->hide();
@@ -70,10 +70,10 @@ void loginBox::initalWidget()
         QString table_name;
         loginType type;
 
-        if(ui->type->currentText()=="学生")
+        if(ui->type->currentText()=="租客")
         {
             table_name="student_account";
-            type=loginType::Student;
+            type=loginType::Tenant;
         }
         else
         {
@@ -101,7 +101,7 @@ void loginBox::initalWidget()
         m_Logged=true;
         QMessageBox::about(this,"登录","登录成功");
         close();
-        emit logged(type,(type==loginType::Student?ui->account->text():""));
+        emit logged(type,(type==loginType::Tenant?ui->account->text():""));
     });
 
     connect(ui->btnOfResetPassword,&QPushButton::clicked,this,[=]()
@@ -123,10 +123,10 @@ void loginBox::initalWidget()
         QString table_name;
         loginType type;
 
-        if(ui->type->currentText()=="学生")
+        if(ui->type->currentText()=="租客")
         {
             table_name="student_account";
-            type=loginType::Student;
+            type=loginType::Tenant;
         }
         else
         {

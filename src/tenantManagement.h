@@ -1,27 +1,27 @@
-#ifndef STUDENT_MANAGEMENT_H
-#define STUDENT_MANAGEMENT_H
+#ifndef TENANT_MANAGEMENT_H
+#define TENANT_MANAGEMENT_H
 
 #include <QWidget>
 
 namespace Ui
 {
-    class studentManagement;
+    class tenantManagement;
 }
 
 class excelReader;
 
-class studentManagement : public QWidget
+class tenantManagement : public QWidget
 {
     Q_OBJECT
 
     private:
-        Ui::studentManagement* ui;
-        bool isStudent;
+        Ui::tenantManagement* ui;
+        bool isTenant;
         excelReader* reader;
 
     public:
-        explicit studentManagement(QWidget* parent = nullptr);
-        ~studentManagement();
+        explicit tenantManagement(QWidget* parent = nullptr);
+        ~tenantManagement();
         void setCurrentIndex(int i);
 
     protected:
@@ -37,4 +37,4 @@ class studentManagement : public QWidget
         void initalWidget();
 };
 
-#endif /* STUDENT_MANAGEMENT_H */
+#endif /* TENANT_MANAGEMENT_H */

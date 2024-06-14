@@ -23,8 +23,6 @@ widget::widget(QWidget *parent)
 {
     /* 初始化界面 */
     initalWidget();
-    DataBase database;
-    database.getInstance()->select("admin_account");
 }
 
 widget::~widget()
@@ -70,7 +68,7 @@ bool widget::eventFilter(QObject *obj, QEvent *e)
     return false;
 }
 
-void widget::funcOfStudentManagement(const clickLabel *label)
+void widget::funcOfTenantManagement(const clickLabel *label)
 {
     int i=0;
     if(label==m_Icons[4])
@@ -91,7 +89,7 @@ void widget::funcOfStudentManagement(const clickLabel *label)
     }
 
     ui->widgetsOfCenter->setCurrentIndex(1);
-    ui->student->setCurrentIndex(i);
+    ui->tenant->setCurrentIndex(i);
 }
 
 void widget::funcOfDormitoryManagement(const clickLabel *label)
@@ -157,12 +155,12 @@ void widget::funcOfAnnouncementManagement(const clickLabel *label)
 
 void widget::reset()
 {
-    if(m_UserType==loginType::Student)
+    if(m_UserType==loginType::Tenant)
     {
-        ui->iconOfAddStudent->hide();
-        ui->labelOfAddStudent->hide();
-        ui->iconOfDeleteStudent->hide();
-        ui->labelOfDeleteStudent->hide();
+        ui->iconOfAddTenant->hide();
+        ui->labelOfAddTenant->hide();
+        ui->iconOfDeleteTenant->hide();
+        ui->labelOfDeleteTenant->hide();
 
         ui->iconOfDormitoryAllocation->hide();
         ui->labelOfDormitoryAllocation->hide();
@@ -177,10 +175,10 @@ void widget::reset()
     }
     else
     {
-        ui->iconOfAddStudent->show();
-        ui->labelOfAddStudent->show();
-        ui->iconOfDeleteStudent->show();
-        ui->labelOfDeleteStudent->show();
+        ui->iconOfAddTenant->show();
+        ui->labelOfAddTenant->show();
+        ui->iconOfDeleteTenant->show();
+        ui->labelOfDeleteTenant->show();
 
         ui->iconOfDormitoryAllocation->show();
         ui->labelOfDormitoryAllocation->show();
@@ -227,8 +225,8 @@ void widget::initalWidget()
 
     QList<clickLabel*> icons=
     {
-        ui->iconOfStudentManagement,ui->iconOfDormitoryManagement,ui->iconOfRepairManagement,ui->iconOfAnnouncementManagement,
-        ui->iconOfAddStudent,ui->iconOfDeleteStudent,ui->iconOfEditStudent,ui->iconOfSearchStudent,
+        ui->iconOfTenantManagement,ui->iconOfDormitoryManagement,ui->iconOfRepairManagement,ui->iconOfAnnouncementManagement,
+        ui->iconOfAddTenant,ui->iconOfDeleteTenant,ui->iconOfEditTenant,ui->iconOfSearchTenant,
         ui->iconOfDormitoryAllocation,ui->iconOfDormitoryAdjustment,ui->iconOfDormitorySearch,
         ui->iconOfRaiseRepair,ui->iconOfHandleRepair,ui->iconOfSearchRepair,
         ui->iconOfPublicAnnouncement,ui->iconOfSearchAnnouncement
@@ -238,14 +236,14 @@ void widget::initalWidget()
 
     QList<QString> pathOfIcons=
     {
-        ":/img/main/student_management",
+        ":/img/main/tenant_management",
         ":/img/main/dormitory_management",
         ":/img/main/warranty_management",
         ":/img/main/announcement_management",
-        ":/img/student/add",
-        ":/img/student/delete",
-        ":/img/student/edit",
-        ":/img/student/search",
+        ":/img/tenant/add",
+        ":/img/tenant/delete",
+        ":/img/tenant/edit",
+        ":/img/tenant/search",
         ":/img/dormitory/allocate",
         ":/img/dormitory/adjust",
         ":/img/dormitory/search",
@@ -259,7 +257,7 @@ void widget::initalWidget()
     QList<void(widget::*)(const clickLabel*)> functions=
     {
         nullptr,nullptr,nullptr,nullptr,
-        &widget::funcOfStudentManagement,&widget::funcOfStudentManagement,&widget::funcOfStudentManagement,&widget::funcOfStudentManagement,
+        &widget::funcOfTenantManagement,&widget::funcOfTenantManagement,&widget::funcOfTenantManagement,&widget::funcOfTenantManagement,
         &widget::funcOfDormitoryManagement,&widget::funcOfDormitoryManagement,&widget::funcOfDormitoryManagement,
         &widget::funcOfRepairManagement,&widget::funcOfRepairManagement,&widget::funcOfRepairManagement,
         &widget::funcOfAnnouncementManagement,&widget::funcOfAnnouncementManagement
@@ -328,7 +326,7 @@ void widget::initalLoginBox()
         this->m_UserType=type;
         reset();
 
-        ui->student->setId(id);
+        ui->tenant->setId(id);
         ui->pageOfDormitory->setId(id);
         ui->pageOfRepair->setId(id);
     });

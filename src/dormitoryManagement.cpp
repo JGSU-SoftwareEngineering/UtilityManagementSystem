@@ -133,7 +133,7 @@ void dormitoryManagement::initalWidget()
         {
             if(studentInfo[0][2].toString()!=listOfDormitory[0][3].toString())
             {
-                QMessageBox::warning(this,"宿舍分配","该学生性别为"+studentInfo[0][2].toString()+"，无法入住"+listOfDormitory[0][3].toString()+"寝，请选择其他寝室");
+                QMessageBox::warning(this,"宿舍分配","该租客性别为"+studentInfo[0][2].toString()+"，无法入住"+listOfDormitory[0][3].toString()+"寝，请选择其他寝室");
                 return;
             }
         }
@@ -185,7 +185,7 @@ void dormitoryManagement::initalWidget()
 
         if(dormitoryInfo.isEmpty())
         {
-            QMessageBox::warning(this,"信息查询","查询失败,该学生未入住宿舍");
+            QMessageBox::warning(this,"信息查询","查询失败,该租客未入住宿舍");
             return;
         }
 
