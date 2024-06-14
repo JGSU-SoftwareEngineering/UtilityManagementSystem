@@ -38,7 +38,7 @@ void repairManagement::refreshHandleRecord()
 
     for(int i=0;i<repairInfo.size();i++)
     {
-        for(int j=0;j<Repair_Fields.size();j++)
+        for(int j=0;j<columnOfRepairFields;j++)
         {
             ui->recordOfHandle->setItem(i,j,new QTableWidgetItem(repairInfo[i][j].toString()));
         }
@@ -56,7 +56,7 @@ void repairManagement::refreshRepairRecord()
 
     for(int i=0;i<repairInfo.size();i++)
     {
-        for(int j=0;j<Repair_Fields.size();j++)
+        for(int j=0;j<columnOfRepairFields;j++)
         {
             ui->recordOfRepair->setItem(i,j,new QTableWidgetItem(repairInfo[i][j].toString()));
         }
@@ -73,11 +73,11 @@ void repairManagement::initalWidget()
     ui->setupUi(this);
     installEventFilter(this);
 
-    ui->recordOfHandle->setColumnCount(Repair_Fields.size());
+    ui->recordOfHandle->setColumnCount(columnOfRepairFields);
     ui->recordOfHandle->setHorizontalHeaderLabels(QStringList()<<"报修ID"<<"寝室号"<<"报修详情"<<"是否解决");
     ui->recordOfHandle->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    ui->recordOfRepair->setColumnCount(Repair_Fields.size());
+    ui->recordOfRepair->setColumnCount(columnOfRepairFields);
     ui->recordOfRepair->setHorizontalHeaderLabels(QStringList()<<"报修ID"<<"寝室号"<<"报修详情"<<"是否解决");
     ui->recordOfRepair->setEditTriggers(QAbstractItemView::NoEditTriggers);
 

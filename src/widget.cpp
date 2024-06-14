@@ -23,6 +23,8 @@ widget::widget(QWidget *parent)
 {
     /* 初始化界面 */
     initalWidget();
+    DataBase database;
+    database.getInstance()->select("admin_account");
 }
 
 widget::~widget()

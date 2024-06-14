@@ -136,7 +136,7 @@ void studentManagement::initalWidget()
         data.removeFirst();
         qDebug()<<data;
 
-        if(data[0].size()<Student_Fields.size())
+        if(data[0].size()<columnOfStudentFields)
         {
             QMessageBox::warning(this,"批量添加","导入数据的格式有误");
             return;

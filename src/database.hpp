@@ -4,6 +4,7 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
+#include <QSqlRecord>
 #include <QDebug>
 
 #include "constans.h"
@@ -24,7 +25,8 @@ class _DataBase
             }
             else
             {
-                m_Database = QSqlDatabase::addDatabase("QSQLITE");
+                m_Database = QSqlDatabase::addDatabase(DataBaseType);
+                m_Database.setHostName(Host);
                 m_Database.setDatabaseName(DatabaseName);
                 m_Database.setUserName(UserName);
                 m_Database.setPassword(UserPassword);
@@ -133,18 +135,14 @@ class _DataBase
 
             while(query.next())
             {
-                int size;
                 QList<QVariant> list;
-                if(field=="*")
+                const QSqlRecord& record=query.record();
+
+                for(int i=0;i<record.count();i++)
                 {
-                    for(const auto& i : relationOfFields)
-                    {
-                        if(i.first==table_name)
-                            size=i.second.size();
-                    }
+                    list<<record.value(i);
                 }
-                for(int i=0;i<size;i++)
-                    list<<query.value(i);
+                
                 result<<list;
             }
 
@@ -171,18 +169,14 @@ class _DataBase
 
             while(query.next())
             {
-                int size;
                 QList<QVariant> list;
-                if(field=="*")
+                const QSqlRecord& record=query.record();
+
+                for(int i=0;i<record.count();i++)
                 {
-                    for(const auto& i : relationOfFields)
-                    {
-                        if(i.first==table_name)
-                            size=i.second.size();
-                    }
+                    list<<record.value(i);
                 }
-                for(int i=0;i<size;i++)
-                    list<<query.value(i);
+                
                 result<<list;
             }
 

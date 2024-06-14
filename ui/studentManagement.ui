@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>500</width>
-    <height>339</height>
+    <height>348</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -192,7 +192,7 @@
                </font>
               </property>
               <property name="text">
-               <string>联系方式</string>
+               <string>电话</string>
               </property>
              </widget>
             </item>
@@ -468,7 +468,7 @@
                </font>
               </property>
               <property name="text">
-               <string>联系方式</string>
+               <string>电话</string>
               </property>
              </widget>
             </item>
