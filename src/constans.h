@@ -25,6 +25,6 @@ const QString UserPassword="7go0NB6JVsEW4WpP";
 const int dormitoryCapacity=4;
 
 const int columnOfTenantFields=5;
-const int columnOfRepairFields=4;
+const int columnOfPaymentFields=4;
 
 #endif /* CONSTANTS_H */

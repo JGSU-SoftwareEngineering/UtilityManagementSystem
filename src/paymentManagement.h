@@ -28,7 +28,7 @@ class paymentManagement : public QWidget
     public slots:
         void setId(const QString& str);
         void refreshHandleRecord();
-        void refreshRepairRecord();
+        void refreshPaymentRecord();
 
     signals:
 

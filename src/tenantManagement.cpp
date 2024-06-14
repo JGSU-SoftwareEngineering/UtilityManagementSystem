@@ -10,7 +10,6 @@
 tenantManagement::tenantManagement(QWidget * parent)
     : QWidget(parent)
     , ui(new Ui::tenantManagement)
-    , isTenant(false)
     , reader(nullptr)
 {
     initalWidget();
@@ -32,20 +31,6 @@ void tenantManagement::setCurrentIndex(int i)
 bool tenantManagement::eventFilter(QObject *obj, QEvent *e)
 {
     return false;
-}
-
-void tenantManagement::setId(const QString &str)
-{
-    if(str!="")
-        isTenant=true;
-    else
-        isTenant=false;
-    
-    ui->editOfId->setText(str);
-    ui->idOfNeedToSearch->setText(str);
-
-    ui->editOfId->setEnabled(!isTenant);
-    ui->idOfNeedToSearch->setEnabled(!isTenant);
 }
 
 void tenantManagement::setEdit(bool isEdit)
@@ -268,8 +253,7 @@ void tenantManagement::initalWidget()
             );
 
             QMessageBox::about(this,"编辑租客","编辑成功");
-            if(!isTenant)
-                ui->editOfId->setEnabled(isEdit);
+
             setEdit(!isEdit);
             isEdit=false;
         }

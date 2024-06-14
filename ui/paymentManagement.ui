@@ -16,7 +16,7 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
-     <widget class="QWidget" name="pageOfRaiseRepair">
+     <widget class="QWidget" name="pageOfRaisePayment">
       <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,0,2">
        <item>
         <widget class="QLabel" name="label_2">
@@ -59,7 +59,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="pageOfHandleRepair">
+     <widget class="QWidget" name="pageOfHandlePayment">
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
         <widget class="QLabel" name="label_3">
@@ -115,7 +115,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="pageOfSearchRepair">
+     <widget class="QWidget" name="pageOfSearchPayment">
       <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,0,2">
        <item>
         <widget class="QLabel" name="label">
@@ -133,7 +133,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTableWidget" name="recordOfRepair"/>
+        <widget class="QTableWidget" name="recordOfPayment"/>
        </item>
        <item>
         <widget class="QPushButton" name="btnOfRefresh">

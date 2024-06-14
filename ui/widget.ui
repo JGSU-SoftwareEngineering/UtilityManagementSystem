@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>DormitoryManagement</string>
+   <string>UtilityManagement</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../resource/res.qrc">
@@ -224,9 +224,9 @@
            </item>
           </layout>
          </widget>
-         <widget class="utilityManagement" name="pageOfDormitory"/>
-         <widget class="paymentManagement" name="pageOfRepair"/>
-         <widget class="QWidget" name="pageOfAnnouncement">
+         <widget class="utilityManagement" name="pageOfUtility"/>
+         <widget class="paymentManagement" name="pageOfPayment"/>
+         <widget class="QWidget" name="pageOfStat">
           <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
             <widget class="QStackedWidget" name="announcement">
@@ -250,7 +250,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QTextEdit" name="editOfAnnouncement">
+                <widget class="QTextEdit" name="editOfStat">
                  <property name="font">
                   <font>
                    <pointsize>15</pointsize>
@@ -259,7 +259,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="btnOfSubmitAnnouncement">
+                <widget class="QPushButton" name="btnOfSubmitStat">
                  <property name="font">
                   <font>
                    <pointsize>15</pointsize>
@@ -274,9 +274,9 @@
                </item>
               </layout>
              </widget>
-             <widget class="QWidget" name="pageOfAnnouncement2">
+             <widget class="QWidget" name="pageOfStat2">
               <property name="styleSheet">
-               <string notr="true">QWidget#pageOfAnnouncement2
+               <string notr="true">QWidget#pageOfStat2
 {
 	background-color: rgba(140, 140, 140, 50%);
 	border-radius:20px;
@@ -301,7 +301,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="labelOfAnnouncement">
+                <widget class="QLabel" name="labelOfStat">
                  <property name="font">
                   <font>
                    <pointsize>15</pointsize>
@@ -356,7 +356,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="clickLabel" name="iconOfDormitoryManagement">
+              <widget class="clickLabel" name="iconOfUtilityManagement">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -375,7 +375,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="clickLabel" name="iconOfRepairManagement">
+              <widget class="clickLabel" name="iconOfPaymentManagement">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -394,7 +394,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="clickLabel" name="iconOfAnnouncementManagement">
+              <widget class="clickLabel" name="iconOfStatManagement">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -440,7 +440,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="labelOfDormitoryManagement">
+              <widget class="QLabel" name="labelOfUtilityManagement">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -463,7 +463,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="labelOfRepairManagement">
+              <widget class="QLabel" name="labelOfPaymentManagement">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -486,7 +486,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="labelOfAnnouncementManagement">
+              <widget class="QLabel" name="labelOfStatManagement">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -704,7 +704,7 @@ border-radius:20px;</string>
               <enum>QLayout::SetNoConstraint</enum>
              </property>
              <item>
-              <widget class="clickLabel" name="iconOfDormitoryAllocation">
+              <widget class="clickLabel" name="iconOfUtilityAllocation">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -723,7 +723,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="clickLabel" name="iconOfDormitoryAdjustment">
+              <widget class="clickLabel" name="iconOfUtilityAdjustment">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -742,7 +742,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="clickLabel" name="iconOfDormitorySearch">
+              <widget class="clickLabel" name="iconOfUtilitySearch">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -768,7 +768,7 @@ border-radius:20px;</string>
               <enum>QLayout::SetNoConstraint</enum>
              </property>
              <item>
-              <widget class="QLabel" name="labelOfDormitoryAllocation">
+              <widget class="QLabel" name="labelOfUtilityAllocation">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -791,7 +791,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="labelOfDormitoryAdjustment">
+              <widget class="QLabel" name="labelOfUtilityAdjustment">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -814,7 +814,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="labelDormitorySearch">
+              <widget class="QLabel" name="labelUtilitySearch">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -848,7 +848,7 @@ border-radius:20px;</string>
               <enum>QLayout::SetNoConstraint</enum>
              </property>
              <item>
-              <widget class="clickLabel" name="iconOfRaiseRepair">
+              <widget class="clickLabel" name="iconOfRaisePayment">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -867,7 +867,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="clickLabel" name="iconOfHandleRepair">
+              <widget class="clickLabel" name="iconOfHandlePayment">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -886,7 +886,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="clickLabel" name="iconOfSearchRepair">
+              <widget class="clickLabel" name="iconOfSearchPayment">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -912,7 +912,7 @@ border-radius:20px;</string>
               <enum>QLayout::SetNoConstraint</enum>
              </property>
              <item>
-              <widget class="QLabel" name="labelOfRaiseRepair">
+              <widget class="QLabel" name="labelOfRaisePayment">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -935,7 +935,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="labelOfHandleRepair">
+              <widget class="QLabel" name="labelOfHandlePayment">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -958,7 +958,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_OfSearchRepair">
+              <widget class="QLabel" name="label_OfSearchPayment">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -991,7 +991,7 @@ border-radius:20px;</string>
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_6">
                <item>
-                <widget class="clickLabel" name="iconOfPublicAnnouncement">
+                <widget class="clickLabel" name="iconOfPublicStat">
                  <property name="maximumSize">
                   <size>
                    <width>100</width>
@@ -1012,7 +1012,7 @@ border-radius:20px;</string>
               </layout>
              </item>
              <item>
-              <widget class="QLabel" name="labelOfPublicAnnouncement">
+              <widget class="QLabel" name="labelOfPublicStat">
                <property name="font">
                 <font>
                  <pointsize>15</pointsize>
@@ -1035,7 +1035,7 @@ border-radius:20px;</string>
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_7">
                <item>
-                <widget class="clickLabel" name="iconOfSearchAnnouncement">
+                <widget class="clickLabel" name="iconOfSearchStat">
                  <property name="maximumSize">
                   <size>
                    <width>100</width>
@@ -1056,7 +1056,7 @@ border-radius:20px;</string>
               </layout>
              </item>
              <item>
-              <widget class="QLabel" name="labelOfSearchAnnouncement">
+              <widget class="QLabel" name="labelOfSearchStat">
                <property name="font">
                 <font>
                  <pointsize>15</pointsize>

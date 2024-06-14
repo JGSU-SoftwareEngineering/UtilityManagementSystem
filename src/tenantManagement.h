@@ -16,7 +16,6 @@ class tenantManagement : public QWidget
 
     private:
         Ui::tenantManagement* ui;
-        bool isTenant;
         excelReader* reader;
 
     public:
@@ -29,7 +28,6 @@ class tenantManagement : public QWidget
 
     public slots:
         void setEdit(bool isEdit);
-        void setId(const QString& str);
 
     signals:
 

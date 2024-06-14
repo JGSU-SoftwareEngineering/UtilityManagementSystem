@@ -92,14 +92,13 @@ void widget::funcOfTenantManagement(const clickLabel *label)
     ui->tenant->setCurrentIndex(i);
 }
 
-void widget::funcOfDormitoryManagement(const clickLabel *label)
+void widget::funcOfUtilityManagement(const clickLabel *label)
 {
     int i=0;
 
     if(label==m_Icons[8])
     {
         i=0;
-        ui->pageOfDormitory->updateAllocation();
     }
     else if(label==m_Icons[9])
     {
@@ -111,10 +110,10 @@ void widget::funcOfDormitoryManagement(const clickLabel *label)
     }
 
     ui->widgetsOfCenter->setCurrentIndex(2);
-    ui->pageOfDormitory->setCurrentIndex(i);
+    ui->pageOfUtility->setCurrentIndex(i);
 }
 
-void widget::funcOfRepairManagement(const clickLabel *label)
+void widget::funcOfPaymentManagement(const clickLabel *label)
 {
     int i=0;
 
@@ -132,10 +131,10 @@ void widget::funcOfRepairManagement(const clickLabel *label)
     }
 
     ui->widgetsOfCenter->setCurrentIndex(3);
-    ui->pageOfRepair->setCurrentIndex(i);
+    ui->pageOfPayment->setCurrentIndex(i);
 }
 
-void widget::funcOfAnnouncementManagement(const clickLabel *label)
+void widget::funcOfStatManagement(const clickLabel *label)
 {
     int i=0;
 
@@ -146,7 +145,7 @@ void widget::funcOfAnnouncementManagement(const clickLabel *label)
     else if(label==m_Icons[15])
     {
         i=1;
-        updateAnnouncement();
+        updateStat();
     }
 
     ui->widgetsOfCenter->setCurrentIndex(4);
@@ -162,16 +161,16 @@ void widget::reset()
         ui->iconOfDeleteTenant->hide();
         ui->labelOfDeleteTenant->hide();
 
-        ui->iconOfDormitoryAllocation->hide();
-        ui->labelOfDormitoryAllocation->hide();
+        ui->iconOfUtilityAllocation->hide();
+        ui->labelOfUtilityAllocation->hide();
 
-        ui->iconOfHandleRepair->hide();
-        ui->labelOfHandleRepair->hide();
-        ui->iconOfRaiseRepair->show();
-        ui->labelOfRaiseRepair->show();
+        ui->iconOfHandlePayment->hide();
+        ui->labelOfHandlePayment->hide();
+        ui->iconOfRaisePayment->show();
+        ui->labelOfRaisePayment->show();
 
-        ui->iconOfPublicAnnouncement->hide();
-        ui->labelOfPublicAnnouncement->hide();
+        ui->iconOfPublicStat->hide();
+        ui->labelOfPublicStat->hide();
     }
     else
     {
@@ -180,16 +179,16 @@ void widget::reset()
         ui->iconOfDeleteTenant->show();
         ui->labelOfDeleteTenant->show();
 
-        ui->iconOfDormitoryAllocation->show();
-        ui->labelOfDormitoryAllocation->show();
+        ui->iconOfUtilityAllocation->show();
+        ui->labelOfUtilityAllocation->show();
 
-        ui->iconOfHandleRepair->show();
-        ui->labelOfHandleRepair->show();
-        ui->iconOfRaiseRepair->hide();
-        ui->labelOfRaiseRepair->hide();
+        ui->iconOfHandlePayment->show();
+        ui->labelOfHandlePayment->show();
+        ui->iconOfRaisePayment->hide();
+        ui->labelOfRaisePayment->hide();
 
-        ui->iconOfPublicAnnouncement->show();
-        ui->labelOfPublicAnnouncement->show();
+        ui->iconOfPublicStat->show();
+        ui->labelOfPublicStat->show();
     }
 
     ui->widgetsOfSubModule->setCurrentIndex(0);
@@ -198,7 +197,7 @@ void widget::reset()
         ui->widgetsOfCenter->setCurrentIndex(0);
 }
 
-void widget::updateAnnouncement()
+void widget::updateStat()
 {
     DataBase database;
     auto db=database.getInstance();
@@ -206,7 +205,7 @@ void widget::updateAnnouncement()
     const auto& list=db->select("announcement");
 
     if(!list.isEmpty())
-        ui->labelOfAnnouncement->setText(list[0][1].toString());
+        ui->labelOfStat->setText(list[0][1].toString());
 }
 
 void widget::initalWidget()
@@ -225,11 +224,11 @@ void widget::initalWidget()
 
     QList<clickLabel*> icons=
     {
-        ui->iconOfTenantManagement,ui->iconOfDormitoryManagement,ui->iconOfRepairManagement,ui->iconOfAnnouncementManagement,
+        ui->iconOfTenantManagement,ui->iconOfUtilityManagement,ui->iconOfPaymentManagement,ui->iconOfStatManagement,
         ui->iconOfAddTenant,ui->iconOfDeleteTenant,ui->iconOfEditTenant,ui->iconOfSearchTenant,
-        ui->iconOfDormitoryAllocation,ui->iconOfDormitoryAdjustment,ui->iconOfDormitorySearch,
-        ui->iconOfRaiseRepair,ui->iconOfHandleRepair,ui->iconOfSearchRepair,
-        ui->iconOfPublicAnnouncement,ui->iconOfSearchAnnouncement
+        ui->iconOfUtilityAllocation,ui->iconOfUtilityAdjustment,ui->iconOfUtilitySearch,
+        ui->iconOfRaisePayment,ui->iconOfHandlePayment,ui->iconOfSearchPayment,
+        ui->iconOfPublicStat,ui->iconOfSearchStat
     };
 
     m_Icons=icons;
@@ -258,9 +257,9 @@ void widget::initalWidget()
     {
         nullptr,nullptr,nullptr,nullptr,
         &widget::funcOfTenantManagement,&widget::funcOfTenantManagement,&widget::funcOfTenantManagement,&widget::funcOfTenantManagement,
-        &widget::funcOfDormitoryManagement,&widget::funcOfDormitoryManagement,&widget::funcOfDormitoryManagement,
-        &widget::funcOfRepairManagement,&widget::funcOfRepairManagement,&widget::funcOfRepairManagement,
-        &widget::funcOfAnnouncementManagement,&widget::funcOfAnnouncementManagement
+        &widget::funcOfUtilityManagement,&widget::funcOfUtilityManagement,&widget::funcOfUtilityManagement,
+        &widget::funcOfPaymentManagement,&widget::funcOfPaymentManagement,&widget::funcOfPaymentManagement,
+        &widget::funcOfStatManagement,&widget::funcOfStatManagement
     };
 
     QSizePolicy sp = ui->iconOfFront->sizePolicy();
@@ -268,8 +267,8 @@ void widget::initalWidget()
     ui->iconOfFront->setSizePolicy(sp);
     ui->iconOfFront->hide();
 
-    ui->iconOfDormitoryAdjustment->hide();
-    ui->labelOfDormitoryAdjustment->hide();
+    ui->iconOfUtilityAdjustment->hide();
+    ui->labelOfUtilityAdjustment->hide();
 
     connect(stackWidget,&QStackedWidget::currentChanged,this,[=](int i)
     {
@@ -308,7 +307,7 @@ void widget::initalWidget()
     }
 
     initalLoginBox();
-    initalAnnouncement();
+    initalStat();
 }
 
 void widget::initalLoginBox()
@@ -326,23 +325,22 @@ void widget::initalLoginBox()
         this->m_UserType=type;
         reset();
 
-        ui->tenant->setId(id);
-        ui->pageOfDormitory->setId(id);
-        ui->pageOfRepair->setId(id);
+        ui->pageOfUtility->setId(id);
+        ui->pageOfPayment->setId(id);
     });
 }
 
-void widget::initalAnnouncement()
+void widget::initalStat()
 {
-    connect(ui->btnOfSubmitAnnouncement,&QPushButton::clicked,this,[=]()
+    connect(ui->btnOfSubmitStat,&QPushButton::clicked,this,[=]()
     {
-        if(ui->editOfAnnouncement->toPlainText()=="")
+        if(ui->editOfStat->toPlainText()=="")
         {
             QMessageBox::warning(this,"公告管理","发布内容为空，请重新输入");
             return;
         }
 
-        const QString& content=ui->editOfAnnouncement->toPlainText();
+        const QString& content=ui->editOfStat->toPlainText();
 
         DataBase database;
         auto db=database.getInstance();

@@ -33,7 +33,7 @@ void utilityManagement::updateAllocation()
     DataBase database;
     auto db=database.getInstance();
 
-    const auto& idOfDormitory=db->select("utility");
+    const auto& idOfUtility=db->select("utility");
     const auto& idOfStudent=db->select("tenant");
 
     ui->infoOfAllocation->clear();
@@ -47,14 +47,14 @@ void utilityManagement::updateAllocation()
     {
         for(const auto& i : idOfStudent)
         {
-            bool inDormitory=false;
-            for(const auto& j : idOfDormitory)
+            bool inUtility=false;
+            for(const auto& j : idOfUtility)
             {
                 if(i[0].toString()==j[1].toString())
-                    inDormitory=true;
+                    inUtility=true;
             }
 
-            if(!inDormitory)
+            if(!inUtility)
                 list<<i[0].toString();
         }
     }

@@ -38,27 +38,27 @@ void paymentManagement::refreshHandleRecord()
 
     for(int i=0;i<paymentInfo.size();i++)
     {
-        for(int j=0;j<columnOfRepairFields;j++)
+        for(int j=0;j<columnOfPaymentFields;j++)
         {
             ui->recordOfHandle->setItem(i,j,new QTableWidgetItem(paymentInfo[i][j].toString()));
         }
     }
 }
 
-void paymentManagement::refreshRepairRecord()
+void paymentManagement::refreshPaymentRecord()
 {
     DataBase database;
     auto db=database.getInstance();
 
     const auto& paymentInfo=db->select("payment");
 
-    ui->recordOfRepair->setRowCount(paymentInfo.size());
+    ui->recordOfPayment->setRowCount(paymentInfo.size());
 
     for(int i=0;i<paymentInfo.size();i++)
     {
-        for(int j=0;j<columnOfRepairFields;j++)
+        for(int j=0;j<columnOfPaymentFields;j++)
         {
-            ui->recordOfRepair->setItem(i,j,new QTableWidgetItem(paymentInfo[i][j].toString()));
+            ui->recordOfPayment->setItem(i,j,new QTableWidgetItem(paymentInfo[i][j].toString()));
         }
     }
 }
@@ -73,13 +73,13 @@ void paymentManagement::initalWidget()
     ui->setupUi(this);
     installEventFilter(this);
 
-    ui->recordOfHandle->setColumnCount(columnOfRepairFields);
+    ui->recordOfHandle->setColumnCount(columnOfPaymentFields);
     ui->recordOfHandle->setHorizontalHeaderLabels(QStringList()<<"报修ID"<<"寝室号"<<"报修详情"<<"是否解决");
     ui->recordOfHandle->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    ui->recordOfRepair->setColumnCount(columnOfRepairFields);
-    ui->recordOfRepair->setHorizontalHeaderLabels(QStringList()<<"报修ID"<<"寝室号"<<"报修详情"<<"是否解决");
-    ui->recordOfRepair->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->recordOfPayment->setColumnCount(columnOfPaymentFields);
+    ui->recordOfPayment->setHorizontalHeaderLabels(QStringList()<<"报修ID"<<"寝室号"<<"报修详情"<<"是否解决");
+    ui->recordOfPayment->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     connect(ui->btnOfRaise,&QPushButton::clicked,this,[=]()
     {
@@ -120,16 +120,16 @@ void paymentManagement::initalWidget()
 
         const auto& list=ui->recordOfHandle->selectedItems();
 
-        QList<int> selectedRepairId;
+        QList<int> selectedPaymentId;
 
         for(int i=0;i<list.count();i++)
         {
-            selectedRepairId.push_back(ui->recordOfHandle->item(list[i]->row(),0)->text().toInt());
+            selectedPaymentId.push_back(ui->recordOfHandle->item(list[i]->row(),0)->text().toInt());
         }
 
-        selectedRepairId=selectedRepairId.toSet().toList();
+        selectedPaymentId=selectedPaymentId.toSet().toList();
 
-        if(selectedRepairId.isEmpty())
+        if(selectedPaymentId.isEmpty())
         {
             QMessageBox::about(this,"处理报修","暂无报修处理");
             return;
@@ -138,7 +138,7 @@ void paymentManagement::initalWidget()
         DataBase database;
         auto db=database.getInstance();
 
-        for(const auto& i : selectedRepairId)
+        for(const auto& i : selectedPaymentId)
         {
             db->update("payment","isSolved=1","r_id="+QString::number(i));
         }
@@ -148,6 +148,6 @@ void paymentManagement::initalWidget()
         refreshHandleRecord();
     });
 
-    connect(ui->btnOfRefresh,&QPushButton::clicked,this,&paymentManagement::refreshRepairRecord);
+    connect(ui->btnOfRefresh,&QPushButton::clicked,this,&paymentManagement::refreshPaymentRecord);
     connect(ui->btnOfRefreshForHandle,&QPushButton::clicked,this,&paymentManagement::refreshHandleRecord);
 }
