@@ -4,15 +4,9 @@ CREATE TABLE if not exists tenant
     name TEXT NOT NULL,
     gender CHAR(2) NOT NULL,
     age INT NOT NULL,
-    telephone CHAR(11)
-);
-
-CREATE TABLE if not exists tenant_account
-(
-    id CHAR(10) NOT NULL,
-    passwd TEXT NOT NULL,
-    primary key(id),
-    foreign key(id) references tenant(id) on delete cascade on update cascade
+    telephone CHAR(11),
+    d_id CHAR(10) NOT NULL,
+    passwd CHAR(20) NOT NULL
 );
 
 CREATE TABLE if not exists admin_account

@@ -14,7 +14,7 @@ const QString DatabaseName="User.db";
 #else
 
 const QString DataBaseType="QMYSQL";
-const QString DatabaseName="dormitory";
+const QString DatabaseName="Utility";
 
 #endif
 
@@ -24,7 +24,7 @@ const QString UserPassword="7go0NB6JVsEW4WpP";
 
 const int dormitoryCapacity=4;
 
-const int columnOfTenantFields=5;
+const int columnOfTenantFields=7;
 const int columnOfPaymentFields=4;
 
 #endif /* CONSTANTS_H */

@@ -7,6 +7,31 @@
 #include <QMessageBox>
 #include <QFileDialog>
 
+bool validateChinesePhoneNumber(const QString &phoneNumber)
+{
+    // 定义正则表达式用于匹配手机号码和固定电话
+    QRegularExpression mobileRegex("^1[3-9][0-9]{9}$");
+    QRegularExpression landlineRegex("^0[0-9]{2,3}-?[0-9]{7,8}$");
+
+    // 检查是否匹配手机号码或固定电话
+    return mobileRegex.match(phoneNumber).hasMatch() || landlineRegex.match(phoneNumber).hasMatch();
+}
+
+bool dormitoryIsFull(const QString& dormitory)
+{
+    DataBase database;
+    auto db=database.getInstance();
+
+    const auto& tenantInfo=db->select("tenant","d_id='"+dormitory+"'");
+
+    if(tenantInfo.size()>=dormitoryCapacity)
+    {
+        return true;
+    }
+
+    return false;
+}
+
 tenantManagement::tenantManagement(QWidget * parent)
     : QWidget(parent)
     , ui(new Ui::tenantManagement)
@@ -61,15 +86,24 @@ void tenantManagement::initalWidget()
 
     ui->idOfNeedToSearch->setValidator(reg);
 
-    ui->infoOfSearch->setColumnCount(4);
-    ui->infoOfSearch->setHorizontalHeaderLabels(QStringList()<<"姓名"<<"性别"<<"年龄"<<"电话");
+    ui->infoOfSearch->setColumnCount(5);
+    ui->infoOfSearch->setHorizontalHeaderLabels(QStringList()<<"姓名"<<"性别"<<"年龄"<<"电话"<<"宿舍编号");
     ui->infoOfSearch->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     connect(ui->btnOfAdd,&QPushButton::clicked,this,[=]()
     {
-        if(ui->inputOfId->text().isEmpty()||ui->inputOfName->text().isEmpty()||ui->inputOfAge->text().isEmpty())
+        if(ui->inputOfId->text().isEmpty()||ui->inputOfName->text().isEmpty()
+            ||ui->inputOfAge->text().isEmpty()||ui->inputOfTelephone->text().isEmpty()
+            ||ui->inputOfDormitory->text().isEmpty()
+        )
         {
             QMessageBox::warning(this,"添加租客","添加失败,还有未填写的信息");
+            return;
+        }
+
+        if(!validateChinesePhoneNumber(ui->inputOfTelephone->text()))
+        {
+            QMessageBox::warning(this,"添加租客","添加失败,电话输入非法");
             return;
         }
 
@@ -80,18 +114,15 @@ void tenantManagement::initalWidget()
             ui->inputOfName->text()<<
             ui->gender->currentText()<<
             ui->inputOfAge->text().toInt()<<
-            ui->inputOfTelephone->text()
+            ui->inputOfTelephone->text()<<
+            ui->inputOfDormitory->text()<<
+            ui->inputOfId->text() // 密码默认为租客编号
         );
 
         if(isSuccess)
             QMessageBox::about(this,"添加租客","添加成功");
         else
-            QMessageBox::warning(this,"添加租客","添加失败，该编号可能已存在");
-
-        db->insert("tenant_account",QList<QVariant>()<<
-            ui->inputOfId->text()<<
-            ui->inputOfId->text()
-        );
+            QMessageBox::warning(this,"添加租客","添加失败，该租客可能已存在");
     });
 
     connect(ui->btnOfBulkAdd,&QPushButton::clicked,this,[=]()
@@ -132,11 +163,19 @@ void tenantManagement::initalWidget()
 
         int countOfAdd=0;
         int countOfAlter=0;
+        int countOfError=0;
 
         for(const auto& i : data)
         {
             bool isSuccess=false;
             const auto& tenantInfo=db->select("tenant","id='"+i[0]+"'");
+
+            if(dormitoryIsFull(i[5]))
+            {
+                countOfError++;
+                continue;
+            }
+
             if(!tenantInfo.isEmpty())
             {
                 // 进行修改数据
@@ -146,7 +185,9 @@ void tenantManagement::initalWidget()
                     i[1]<<
                     i[2]<<
                     i[3].toInt()<<
-                    i[4]
+                    i[4]<<
+                    i[5]<<
+                    i[6]
                 );
 
                 if(isSuccess)
@@ -159,20 +200,17 @@ void tenantManagement::initalWidget()
                     i[1]<<
                     i[2]<<
                     i[3].toInt()<<
-                    i[4]
+                    i[4]<<
+                    i[5]<<
+                    i[6]
                 );
 
                 if(isSuccess)
                     countOfAdd++;
-
-                db->insert("tenant_account",QList<QVariant>()<<
-                    i[0]<<
-                    i[0]
-                );
             }
         }
 
-        QMessageBox::about(this,"批量添加","成功添加"+QString::number(countOfAdd)+"个租客,"+"同时修改了"+QString::number(countOfAlter)+"个租客");
+        QMessageBox::about(this,"批量添加","成功添加"+QString::number(countOfAdd)+"个租客,"+"同时修改了"+QString::number(countOfAlter)+"个租客,失败了"+QString::number(countOfError)+"次");
     });
 
     connect(ui->btnOfDelete,&QPushButton::clicked,this,[=]()
@@ -222,6 +260,7 @@ void tenantManagement::initalWidget()
                 ui->editOfGender->setCurrentText("男");
                 ui->editOfAge->setText("");
                 ui->editOfTelephone->setText("");
+                ui->editOfDormitory->setText("");
                 return;
             }
 
@@ -229,6 +268,7 @@ void tenantManagement::initalWidget()
             ui->editOfGender->setCurrentText(list[0][2].toString());
             ui->editOfAge->setText(list[0][3].toString());
             ui->editOfTelephone->setText(list[0][4].toString());
+            ui->editOfDormitory->setText(list[0][5].toString());
 
             ui->editOfId->setEnabled(isEdit);
             
@@ -243,13 +283,22 @@ void tenantManagement::initalWidget()
                 return;
             }
 
+            if(validateChinesePhoneNumber(ui->editOfTelephone->text()))
+            {
+                QMessageBox::warning(this,"编辑租客","编辑失败,电话输入非法，请重试");
+                return;
+            }
+
+            const auto& tenantInfo=db->select("tenant","id='"+ui->editOfId->text()+"'");
+
             db->remove("tenant","id="+ui->editOfId->text());
             db->insert("tenant",QList<QVariant>()<<
                 ui->editOfId->text()<<
                 ui->editOfName->text()<<
                 ui->editOfGender->currentText()<<
                 ui->editOfAge->text().toInt()<<
-                ui->editOfTelephone->text()
+                ui->editOfTelephone->text()<<
+                tenantInfo[6]
             );
 
             QMessageBox::about(this,"编辑租客","编辑成功");

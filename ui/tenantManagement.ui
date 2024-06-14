@@ -41,7 +41,7 @@
          <string notr="true"/>
         </property>
         <widget class="QWidget" name="addTenant">
-         <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,2,2,2,2,2,2">
+         <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,2,2,2,2,2,0,2">
           <property name="spacing">
            <number>10</number>
           </property>
@@ -208,6 +208,31 @@
            </layout>
           </item>
           <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_20">
+            <item>
+             <widget class="QLabel" name="labelOfDormitory">
+              <property name="font">
+               <font>
+                <pointsize>15</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>宿舍号</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="inputOfDormitory">
+              <property name="font">
+               <font>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_14">
             <item>
              <widget class="QPushButton" name="btnOfBulkAdd">
@@ -330,7 +355,7 @@
          </layout>
         </widget>
         <widget class="QWidget" name="editTenant">
-         <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,2,2,2,2,2,2">
+         <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,2,2,2,2,2,0,2">
           <property name="spacing">
            <number>10</number>
           </property>
@@ -474,6 +499,31 @@
             </item>
             <item>
              <widget class="QLineEdit" name="editOfTelephone">
+              <property name="font">
+               <font>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_21">
+            <item>
+             <widget class="QLabel" name="label_17">
+              <property name="font">
+               <font>
+                <pointsize>15</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>宿舍号</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editOfDormitory">
               <property name="font">
                <font>
                 <pointsize>12</pointsize>
