@@ -5,21 +5,21 @@
 
 namespace Ui
 {
-    class repairManagement;
+    class paymentManagement;
 }
 
-class repairManagement : public QWidget
+class paymentManagement : public QWidget
 {
     Q_OBJECT
 
     private:
-        Ui::repairManagement* ui;
+        Ui::paymentManagement* ui;
         bool isStudent;
         QString m_Id;
 
     public:
-        explicit repairManagement(QWidget* parent = nullptr);
-        ~repairManagement();
+        explicit paymentManagement(QWidget* parent = nullptr);
+        ~paymentManagement();
         void setCurrentIndex(int i);
 
     protected:

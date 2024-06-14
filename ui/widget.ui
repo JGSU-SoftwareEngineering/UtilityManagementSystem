@@ -225,7 +225,7 @@
           </layout>
          </widget>
          <widget class="utilityManagement" name="pageOfDormitory"/>
-         <widget class="repairManagement" name="pageOfRepair"/>
+         <widget class="paymentManagement" name="pageOfRepair"/>
          <widget class="QWidget" name="pageOfAnnouncement">
           <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
@@ -1114,9 +1114,9 @@ border-radius:20px;</string>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>repairManagement</class>
+   <class>paymentManagement</class>
    <extends>QWidget</extends>
-   <header>repairManagement.h</header>
+   <header>paymentManagement.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

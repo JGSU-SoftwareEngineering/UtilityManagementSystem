@@ -87,7 +87,7 @@ class _DataBase
 
             if(!query.exec(query_str))
             {
-                m_LastError="insert student table Failed! "+query.lastError().text();
+                m_LastError="insert "+table_name+" table Failed! "+query.lastError().text();
                 return false;
             }
 
@@ -109,7 +109,7 @@ class _DataBase
 
             if(query.value(0).toInt()==0)
             {
-                m_LastError="delete student table Failed! "+query.lastError().text();
+                m_LastError="delete "+table_name+" table Failed! "+query.lastError().text();
                 return false;
             }
 
@@ -125,11 +125,11 @@ class _DataBase
 
             if(query.exec(query_str))
             {
-                qDebug()<<"select student table Successful!";
+                qDebug()<<"select "+table_name+" table Successful!";
             }
             else
             {
-                m_LastError="select student table Failed! "+query.lastError().text();
+                m_LastError="select "+table_name+" table Failed! "+query.lastError().text();
                 return result;
             }
 
@@ -159,11 +159,11 @@ class _DataBase
 
             if(query.exec(query_str))
             {
-                qDebug()<<"select student table Successful!";
+                qDebug()<<"select "+table_name+" table Successful!";
             }
             else
             {
-                m_LastError="select student table Failed! "+query.lastError().text();
+                m_LastError="select "+table_name+" table Failed! "+query.lastError().text();
                 return result;
             }
 
@@ -200,7 +200,7 @@ class _DataBase
 
             if(query.value(0).toInt()==0)
             {
-                m_LastError="update student table Failed! "+query.lastError().text();
+                m_LastError="update "+table_name+" table Failed! "+query.lastError().text();
                 return false;
             }
 

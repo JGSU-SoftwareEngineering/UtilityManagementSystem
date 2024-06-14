@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>repairManagement</class>
- <widget class="repairManagement" name="repairManagement">
+ <class>paymentManagement</class>
+ <widget class="paymentManagement" name="paymentManagement">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>repairManagement</string>
+   <string>paymentManagement</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -158,9 +158,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>repairManagement</class>
+   <class>paymentManagement</class>
    <extends>QWidget</extends>
-   <header>repairmanagement.h</header>
+   <header>paymentmanagement.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

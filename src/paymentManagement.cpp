@@ -1,74 +1,74 @@
-#include "repairManagement.h"
-#include "ui_repairManagement.h"
+#include "paymentManagement.h"
+#include "ui_paymentManagement.h"
 
 #include "database.hpp"
 
 #include <QMessageBox>
 
-repairManagement::repairManagement(QWidget *parent)
+paymentManagement::paymentManagement(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::repairManagement)
+    , ui(new Ui::paymentManagement)
 {
     initalWidget();
 }
 
-repairManagement::~repairManagement()
+paymentManagement::~paymentManagement()
 {
     delete ui;
 }
 
-void repairManagement::setCurrentIndex(int i)
+void paymentManagement::setCurrentIndex(int i)
 {
     ui->stackedWidget->setCurrentIndex(i);
 }
 
-bool repairManagement::eventFilter(QObject *obj, QEvent *e)
+bool paymentManagement::eventFilter(QObject *obj, QEvent *e)
 {
     return false;
 }
 
-void repairManagement::refreshHandleRecord()
+void paymentManagement::refreshHandleRecord()
 {
     DataBase database;
     auto db=database.getInstance();
 
-    const auto& repairInfo=db->select("repair","isSolved=0");
+    const auto& paymentInfo=db->select("payment","isSolved=0");
 
-    ui->recordOfHandle->setRowCount(repairInfo.size());
+    ui->recordOfHandle->setRowCount(paymentInfo.size());
 
-    for(int i=0;i<repairInfo.size();i++)
+    for(int i=0;i<paymentInfo.size();i++)
     {
         for(int j=0;j<columnOfRepairFields;j++)
         {
-            ui->recordOfHandle->setItem(i,j,new QTableWidgetItem(repairInfo[i][j].toString()));
+            ui->recordOfHandle->setItem(i,j,new QTableWidgetItem(paymentInfo[i][j].toString()));
         }
     }
 }
 
-void repairManagement::refreshRepairRecord()
+void paymentManagement::refreshRepairRecord()
 {
     DataBase database;
     auto db=database.getInstance();
 
-    const auto& repairInfo=db->select("repair");
+    const auto& paymentInfo=db->select("payment");
 
-    ui->recordOfRepair->setRowCount(repairInfo.size());
+    ui->recordOfRepair->setRowCount(paymentInfo.size());
 
-    for(int i=0;i<repairInfo.size();i++)
+    for(int i=0;i<paymentInfo.size();i++)
     {
         for(int j=0;j<columnOfRepairFields;j++)
         {
-            ui->recordOfRepair->setItem(i,j,new QTableWidgetItem(repairInfo[i][j].toString()));
+            ui->recordOfRepair->setItem(i,j,new QTableWidgetItem(paymentInfo[i][j].toString()));
         }
     }
 }
 
-void repairManagement::setId(const QString& str)
+void paymentManagement::setId(const QString& str)
 {
     m_Id=str;
 }
 
-void repairManagement::initalWidget()
+void paymentManagement::initalWidget()
 {
     ui->setupUi(this);
     installEventFilter(this);
@@ -102,7 +102,7 @@ void repairManagement::initalWidget()
             return;
         }
 
-        bool isSuccess=db->query("insert into repair values(NULL,"+dormitoryInfo[0][0].toString()+",'"+str+"',0)");
+        bool isSuccess=db->query("insert into payment values(NULL,"+dormitoryInfo[0][0].toString()+",'"+str+"',0)");
 
         if(isSuccess)
         {
@@ -140,7 +140,7 @@ void repairManagement::initalWidget()
 
         for(const auto& i : selectedRepairId)
         {
-            db->update("repair","isSolved=1","r_id="+QString::number(i));
+            db->update("payment","isSolved=1","r_id="+QString::number(i));
         }
         
         QMessageBox::about(this,"处理报修","处理成功");
@@ -148,6 +148,6 @@ void repairManagement::initalWidget()
         refreshHandleRecord();
     });
 
-    connect(ui->btnOfRefresh,&QPushButton::clicked,this,&repairManagement::refreshRepairRecord);
-    connect(ui->btnOfRefreshForHandle,&QPushButton::clicked,this,&repairManagement::refreshHandleRecord);
+    connect(ui->btnOfRefresh,&QPushButton::clicked,this,&paymentManagement::refreshRepairRecord);
+    connect(ui->btnOfRefreshForHandle,&QPushButton::clicked,this,&paymentManagement::refreshHandleRecord);
 }

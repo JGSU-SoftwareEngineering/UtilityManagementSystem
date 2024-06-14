@@ -72,7 +72,7 @@ void loginBox::initalWidget()
 
         if(ui->type->currentText()=="租客")
         {
-            table_name="student_account";
+            table_name="tenant_account";
             type=loginType::Tenant;
         }
         else
@@ -125,7 +125,7 @@ void loginBox::initalWidget()
 
         if(ui->type->currentText()=="租客")
         {
-            table_name="student_account";
+            table_name="tenant_account";
             type=loginType::Tenant;
         }
         else
