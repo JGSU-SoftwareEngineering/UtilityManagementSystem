@@ -229,7 +229,7 @@
          <widget class="QWidget" name="pageOfStat">
           <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
-            <widget class="QStackedWidget" name="announcement">
+            <widget class="QStackedWidget" name="stat">
              <widget class="QWidget" name="page">
               <layout class="QVBoxLayout" name="verticalLayout_11">
                <item>

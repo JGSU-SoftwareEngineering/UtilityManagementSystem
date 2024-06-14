@@ -145,21 +145,18 @@ void widget::funcOfStatManagement(const clickLabel *label)
     else if(label==m_Icons[15])
     {
         i=1;
-        updateStat();
     }
 
     ui->widgetsOfCenter->setCurrentIndex(4);
-    ui->announcement->setCurrentIndex(i);
+    ui->stat->setCurrentIndex(i);
 }
 
 void widget::reset()
 {
     if(m_UserType==loginType::Tenant)
     {
-        ui->iconOfAddTenant->hide();
-        ui->labelOfAddTenant->hide();
-        ui->iconOfDeleteTenant->hide();
-        ui->labelOfDeleteTenant->hide();
+        ui->iconOfTenantManagement->hide();
+        ui->labelOfTenantManagement->hide();
 
         ui->iconOfUtilityAllocation->hide();
         ui->labelOfUtilityAllocation->hide();
@@ -174,10 +171,8 @@ void widget::reset()
     }
     else
     {
-        ui->iconOfAddTenant->show();
-        ui->labelOfAddTenant->show();
-        ui->iconOfDeleteTenant->show();
-        ui->labelOfDeleteTenant->show();
+        ui->iconOfTenantManagement->show();
+        ui->labelOfTenantManagement->show();
 
         ui->iconOfUtilityAllocation->show();
         ui->labelOfUtilityAllocation->show();
@@ -202,7 +197,7 @@ void widget::updateStat()
     DataBase database;
     auto db=database.getInstance();
 
-    const auto& list=db->select("announcement");
+    const auto& list=db->select("stat");
 
     if(!list.isEmpty())
         ui->labelOfStat->setText(list[0][1].toString());
@@ -236,21 +231,21 @@ void widget::initalWidget()
     QList<QString> pathOfIcons=
     {
         ":/img/main/tenant_management",
-        ":/img/main/dormitory_management",
-        ":/img/main/warranty_management",
-        ":/img/main/announcement_management",
+        ":/img/main/utility_management",
+        ":/img/main/payment_management",
+        ":/img/main/stat_management",
         ":/img/tenant/add",
         ":/img/tenant/delete",
         ":/img/tenant/edit",
         ":/img/tenant/search",
-        ":/img/dormitory/allocate",
-        ":/img/dormitory/adjust",
-        ":/img/dormitory/search",
-        ":/img/repair/raise",
-        ":/img/repair/handle",
-        ":/img/repair/search",
-        ":/img/announcement/publish",
-        ":/img/announcement/search"
+        ":/img/utility/allocate",
+        ":/img/utility/adjust",
+        ":/img/utility/search",
+        ":/img/payment/raise",
+        ":/img/payment/handle",
+        ":/img/payment/search",
+        ":/img/stat/publish",
+        ":/img/stat/search"
     };
 
     QList<void(widget::*)(const clickLabel*)> functions=
@@ -345,15 +340,15 @@ void widget::initalStat()
         DataBase database;
         auto db=database.getInstance();
 
-        const auto& list=db->select("announcement");
+        const auto& list=db->select("stat");
 
         if(list.isEmpty())
         {
-            db->query("insert into announcement values(NULL,'"+content+"')");
+            db->query("insert into stat values(NULL,'"+content+"')");
         }
         else
         {
-            db->query("update announcement set info='"+content+"' where id="+list[0][0].toString());
+            db->query("update stat set info='"+content+"' where id="+list[0][0].toString());
         }
 
         QMessageBox::about(this,"公告管理","发布成功");

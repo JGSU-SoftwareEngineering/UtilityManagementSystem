@@ -9,13 +9,13 @@
         <file alias="tenant_management">img/main/tenant_management.png</file>
     </qresource>
     <qresource prefix="/img/main">
-        <file alias="dormitory_management">img/main/dormitory_management.png</file>
+        <file alias="utility_management">img/main/utility_management.png</file>
     </qresource>
     <qresource prefix="/img/main">
-        <file alias="warranty_management">img/main/warranty_management.png</file>
+        <file alias="payment_management">img/main/payment_management.png</file>
     </qresource>
     <qresource prefix="/img/main">
-        <file alias="announcement_management">img/main/announcement_management.png</file>
+        <file alias="stat_management">img/main/stat_management.png</file>
     </qresource>
     <qresource prefix="/img/main">
         <file alias="right_management">img/main/right_management.png</file>
@@ -75,35 +75,35 @@
 
     <!-- 宿舍管理 -->
 
-    <qresource prefix="/img/dormitory">
-        <file alias="allocate">img/dormitory/allocate.png</file>
+    <qresource prefix="/img/utility">
+        <file alias="allocate">img/utility/allocate.png</file>
     </qresource>
-    <qresource prefix="/img/dormitory">
-        <file alias="adjust">img/dormitory/adjust.png</file>
+    <qresource prefix="/img/utility">
+        <file alias="adjust">img/utility/adjust.png</file>
     </qresource>
-    <qresource prefix="/img/dormitory">
-        <file alias="search">img/dormitory/search.png</file>
+    <qresource prefix="/img/utility">
+        <file alias="search">img/utility/search.png</file>
     </qresource>
 
     <!-- 报修管理 -->
 
-    <qresource prefix="/img/repair">
-        <file alias="raise">img/repair/raise.png</file>
+    <qresource prefix="/img/payment">
+        <file alias="raise">img/payment/raise.png</file>
     </qresource>
-    <qresource prefix="/img/repair">
-        <file alias="handle">img/repair/handle.png</file>
+    <qresource prefix="/img/payment">
+        <file alias="handle">img/payment/handle.png</file>
     </qresource>
-    <qresource prefix="/img/repair">
-        <file alias="search">img/repair/search.png</file>
+    <qresource prefix="/img/payment">
+        <file alias="search">img/payment/search.png</file>
     </qresource>
 
     <!-- 公告管理 -->
 
-    <qresource prefix="/img/announcement">
-        <file alias="publish">img/announcement/publish.png</file>
+    <qresource prefix="/img/stat">
+        <file alias="publish">img/stat/publish.png</file>
     </qresource>
-    <qresource prefix="/img/announcement">
-        <file alias="search">img/announcement/search.png</file>
+    <qresource prefix="/img/stat">
+        <file alias="search">img/stat/search.png</file>
     </qresource>
 
     <!-- sql 文件 -->
