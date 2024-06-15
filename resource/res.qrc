@@ -108,8 +108,11 @@
 
     <!-- sql 文件 -->
 
-    <qresource prefix="/sql">
-        <file alias="create_tables">sql/create_tables.sql</file>
+    <qresource prefix="/sql/mysql">
+        <file alias="create_tables">sql/mysql/create_tables.sql</file>
+    </qresource>
+    <qresource prefix="/sql/sqlite">
+        <file alias="create_tables">sql/sqlite/create_tables.sql</file>
     </qresource>
     <qresource prefix="/sql">
         <file alias="drop_tables">sql/drop_tables.sql</file>
