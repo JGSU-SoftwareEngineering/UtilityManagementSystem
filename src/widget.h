@@ -23,6 +23,7 @@ class widget : public QWidget
         QList<clickLabel*> m_Icons;
         loginBox* m_Login;
         loginType m_UserType;
+        bool isLogOut;
 
     public:
         explicit widget(QWidget* parent = nullptr);

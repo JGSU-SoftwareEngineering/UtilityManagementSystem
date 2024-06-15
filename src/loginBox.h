@@ -19,6 +19,7 @@ class loginBox : public QWidget
     private:
         Ui::loginBox* ui;
         bool m_Logged;
+        bool m_Connected;
 
     public:
         explicit loginBox(QWidget* parent = nullptr);
@@ -30,11 +31,14 @@ class loginBox : public QWidget
 
     public slots:
         void reset();
+        void updateConnectState();
 
     signals:
         void closed();
         void logged(const loginType& type,const QString& id);
+        void logout();
 
     private:
         void initalWidget();
+        void initalConnectState();
 };

@@ -72,16 +72,34 @@ void utilityManagement::initalWidget()
             return;
         }
 
+        if(!validateDormitoryId(ui->inputOfDormitory->text()))
+        {
+            QMessageBox::warning(this,"更新水电","更新失败,该宿舍不存在");
+            return;
+        }
+
         DataBase database;
         auto db=database.getInstance();
 
-        bool isSuccess=db->insert("utility",QVariantList()<<
-            NULL<<
-            ui->inputOfDormitory->text()<<
-            ui->inputOfWater->text()<<
-            ui->inputOfElectricity->text()<<
-            QDateTime::currentDateTime().toString("yyyy-MM-dd")
-        );
+        const auto& list=getUtilityDateList(ui->inputOfDormitory->text());
+        QString currDate=QDateTime::currentDateTime().toString("yyyy-MM-dd");
+        bool isSame=false;
+
+        for(const auto& i : list)
+            if(isSameMonth(i,currDate))
+                isSame=true;
+
+        if(isSame)
+        {
+            QMessageBox::warning(this,"更新水电","更新失败,该宿舍当月已更新水电");
+            return;
+        }
+
+        bool isSuccess=db->query("insert into utility values(NULL," \
+            +ui->inputOfDormitory->text()+"," \
+            +ui->inputOfWater->text()+"," \
+            +ui->inputOfElectricity->text()+"," \
+            +currDate+")");
 
         if(isSuccess)
             QMessageBox::about(this,"更新水电","更新成功");

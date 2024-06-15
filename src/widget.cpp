@@ -323,6 +323,15 @@ void widget::initalLoginBox()
         ui->pageOfUtility->setId(id);
         ui->pageOfPayment->setId(id);
     });
+
+    connect(m_Login,&loginBox::logout,this,[=]()
+    {
+        if(m_Login->isHidden())
+        {
+            reset();
+            m_Login->show();
+        }
+    });
 }
 
 void widget::initalStat()

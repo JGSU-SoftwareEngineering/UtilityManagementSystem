@@ -3,6 +3,7 @@
 
 #include <QRegularExpressionValidator>
 #include <QMessageBox>
+#include <QTimer>
 
 #include "database_utils.hpp"
 
@@ -10,8 +11,10 @@ loginBox::loginBox(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::loginBox)
     , m_Logged(false)
+    , m_Connected(false)
 {
     initalWidget();
+    initalConnectState();
 }
 
 loginBox::~loginBox()
@@ -32,6 +35,37 @@ bool loginBox::eventFilter(QObject *obj, QEvent *e)
     }
 
     return false;
+}
+
+void loginBox::updateConnectState()
+{
+    DataBase database;
+    auto db=database.getInstance();
+
+    db->open();
+
+    static bool flag=false;
+
+    bool isConnected=db->isOpened();
+    QString str=!isConnected?"<html><head/><body><p><span style=\" color:#ff0000;\">未连接服务器</span></p></body></html>":"<html><head/><body><p><span style=\" color:#00aa00;\">已连接服务器</span></p></body></html>";
+    
+    ui->labelOfConnectState->setText(str);
+
+    if(!isConnected&&!flag)
+    {
+        emit logout();
+    }
+
+    if(isConnected)
+    {
+        m_Connected=true;
+        flag=false;
+    }  
+    else
+    {
+        m_Connected=false;
+        flag=true;
+    }
 }
 
 void loginBox::reset()
@@ -58,6 +92,12 @@ void loginBox::initalWidget()
 
     connect(ui->btnOfLogin,&QPushButton::clicked,this,[=]()
     {
+        if(!m_Connected)
+        {
+            QMessageBox::warning(this,"登录","登录失败，未连接到远程数据库");
+            return;
+        }
+
         if(ui->account->text()==""||ui->passwd->text()=="")
         {
             QMessageBox::warning(this,"登录","登录失败，账号或密码不能为空");
@@ -74,7 +114,7 @@ void loginBox::initalWidget()
         }
         else
         {
-            table_name="admin_account";
+            table_name="admin";
             type=loginType::Admin;
         }
 
@@ -100,6 +140,12 @@ void loginBox::initalWidget()
 
     connect(ui->btnOfResetPassword,&QPushButton::clicked,this,[=]()
     {
+        if(!m_Connected)
+        {
+            QMessageBox::warning(this,"登录","登录失败，未连接到远程数据库");
+            return;
+        }
+
         static bool isResetting=false;
 
         if(!isResetting)
@@ -177,4 +223,12 @@ void loginBox::initalWidget()
             ui->passwd->clear();
         }
     });
+}
+
+void loginBox::initalConnectState()
+{
+    QTimer* timer=new QTimer;
+    connect(timer,&QTimer::timeout,this,&loginBox::updateConnectState);
+
+    timer->start(10000);
 }

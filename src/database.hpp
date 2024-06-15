@@ -15,9 +15,10 @@ class _DataBase
     private:
         QSqlDatabase m_Database;
         QString m_LastError;
+        bool m_IsOpened;
 
     public:
-        _DataBase()
+        _DataBase(): m_IsOpened(false)
         {
             if (QSqlDatabase::contains("qt_sql_default_connection"))
             {
@@ -32,18 +33,36 @@ class _DataBase
                 m_Database.setPassword(UserPassword);
             }
 
+            open();
+
+            // execSql(":/sql/drop_tables");
+            
+            #ifndef USE_MYSQL
+
+            execSql(":/sql/sqlite/create_tables");
+
+            #else
+
+            execSql(":/sql/mysql/create_tables");
+
+            #endif
+        }
+
+        void open()
+        {
             if (m_Database.open())
             {
                 qDebug() << "Database opened successfully！";
+                m_IsOpened=true;
             }
             else
             {
                 qDebug() << "Database opened failed:" << m_Database.lastError().text();
+                m_IsOpened=false;
             }
-
-            // execSql(":/sql/drop_tables");
-            execSql(":/sql/create_tables");
         }
+
+        bool isOpened() { return m_IsOpened; }
 
         QString lastError() { return m_LastError; }
 

@@ -59,4 +59,31 @@ inline bool dormitoryIsFull(const QString& d_id)
     return false;
 }
 
+inline QList<QString> getUtilityDateList(const QString& d_id)
+{
+    DataBase database;
+    auto db=database.getInstance();
+
+    QList<QString> dates;
+
+    const auto& utilityInfo=db->select("utility","d_id='"+d_id+"'",QStringList()<<"create_time");
+
+    for(const auto& i : utilityInfo)
+    {
+        dates<<i[0].toString();
+    }
+
+    return dates;
+}
+
+inline bool validateDormitoryId(const QString& d_id)
+{
+    DataBase database;
+    auto db=database.getInstance();
+
+    const auto& info=db->select("tenant","d_id='"+d_id+"'");
+
+    return !info.isEmpty();
+}
+
 #endif /* DATABASE_UTILS */

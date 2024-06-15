@@ -2,6 +2,7 @@
 #define UTILS_H
 
 #include <QFile>
+#include <QDate>
 
 /* 读取指定路径下的文件，并将其中内容返回 */
 inline QString readFile(const QString &filePath)
@@ -88,6 +89,20 @@ inline bool isDecimal(const QString& str)
     }
    
     return false;
+}
+
+inline bool isSameMonth(const QString &dateStr1, const QString &dateStr2, const QString &format="yyyy-MM-dd")
+{
+    QDate date1 = QDate::fromString(dateStr1, format);
+    QDate date2 = QDate::fromString(dateStr2, format);
+
+    if (date1.isNull() || date2.isNull())
+    {
+        // 无效的日期字符串
+        return false;
+    }
+
+    return (date1.year() == date2.year()) && (date1.month() == date2.month());
 }
 
 #endif /* UTILS_H */
