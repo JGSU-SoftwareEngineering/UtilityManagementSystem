@@ -4,7 +4,7 @@
 #include <QRegularExpressionValidator>
 #include <QMessageBox>
 
-#include "database.hpp"
+#include "database_utils.hpp"
 
 loginBox::loginBox(QWidget *parent)
     : QWidget(parent)
@@ -63,16 +63,13 @@ void loginBox::initalWidget()
             QMessageBox::warning(this,"登录","登录失败，账号或密码不能为空");
             return;
         }
-
-        DataBase database;
-        auto db=database.getInstance();
     
         QString table_name;
         loginType type;
 
         if(ui->type->currentText()=="租客")
         {
-            table_name="tenant_account";
+            table_name="tenant";
             type=loginType::Tenant;
         }
         else
@@ -81,21 +78,18 @@ void loginBox::initalWidget()
             type=loginType::Admin;
         }
 
-        const auto& list=db->select(table_name,"id='"+ui->account->text()+"'");
-        if(list.isEmpty())
+        if(!validateId(table_name,ui->account->text()))
         {
             QMessageBox::warning(this,"登录","登录失败，账号错误");
             reset();
             return;
         }
-        else
+
+        if(getPasswd(table_name,ui->account->text())!=ui->passwd->text())
         {
-            if(list[0][1].toString()!=ui->passwd->text())
-            {
-                QMessageBox::warning(this,"登录","登录失败，密码错误");
-                reset();
-                return;
-            }
+            QMessageBox::warning(this,"登录","登录失败，密码错误");
+            reset();
+            return;
         }
 
         m_Logged=true;
@@ -116,9 +110,6 @@ void loginBox::initalWidget()
                 return;
             }
         }
-
-        DataBase database;
-        auto db=database.getInstance();
     
         QString table_name;
         loginType type;
@@ -136,21 +127,18 @@ void loginBox::initalWidget()
 
         if(!isResetting)
         {
-            const auto& list=db->select(table_name,"id='"+ui->account->text()+"'");
-            if(list.isEmpty())
+            if(!validateId(table_name,ui->account->text()))
             {
                 QMessageBox::warning(this,"修改密码","账号错误");
                 reset();
                 return;
             }
-            else
+
+            if(getPasswd(table_name,ui->account->text())!=ui->passwd->text())
             {
-                if(list[0][1].toString()!=ui->passwd->text())
-                {
-                    QMessageBox::warning(this,"修改密码","密码错误");
-                    reset();
-                    return;
-                }
+                QMessageBox::warning(this,"修改密码","密码错误");
+                reset();
+                return;
             }
 
             ui->labelOfReset->show();
@@ -168,7 +156,7 @@ void loginBox::initalWidget()
                 return;
             }
 
-            bool isSuccess=db->update(table_name,"passwd='"+ui->resetPasswd->text()+"'","id='"+ui->account->text()+"'");
+            bool isSuccess=updatePasswd(table_name,ui->account->text(),ui->resetPasswd->text());
 
             if(isSuccess)
             {

@@ -76,7 +76,7 @@
     <!-- 宿舍管理 -->
 
     <qresource prefix="/img/utility">
-        <file alias="allocate">img/utility/allocate.png</file>
+        <file alias="update">img/utility/update.png</file>
     </qresource>
     <qresource prefix="/img/utility">
         <file alias="adjust">img/utility/adjust.png</file>

@@ -783,7 +783,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>水电分配</string>
+                <string>更新水电</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -806,7 +806,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>水电调整</string>
+                <string>调整</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -829,7 +829,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>信息查询</string>
+                <string>水电查询</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>

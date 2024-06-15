@@ -14,7 +14,7 @@ class utilityManagement : public QWidget
 
     private:
         Ui::utilityManagement* ui;
-        bool isStudent;
+        bool isTenant;
 
     public:
         explicit utilityManagement(QWidget* parent = nullptr);
@@ -26,7 +26,6 @@ class utilityManagement : public QWidget
 
     public slots:
         void setId(const QString& str);
-        void updateAllocation();
 
     signals:
 

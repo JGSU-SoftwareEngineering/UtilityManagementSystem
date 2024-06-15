@@ -18,12 +18,12 @@ CREATE TABLE if not exists admin_account
 
 CREATE TABLE if not exists utility
 (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     d_id CHAR(10) NOT NULL,
-    id CHAR(10) NOT NULL,
-    capacity INTEGER NOT NULL,
-    gender CHAR(2) NOT NULL,
-    primary key(id),
-    foreign key(id) references tenant(id) on delete cascade on update cascade
+    water CHAR(10) NOT NULL,
+    electricity CHAR(10) NOT NULL,
+    create_time DATA NOT NULL,
+    foreign key(d_id) references tenant(d_id) on delete cascade on update cascade
 );
 
 CREATE TABLE if not exists payment

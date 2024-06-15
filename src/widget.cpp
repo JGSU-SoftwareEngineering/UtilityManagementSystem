@@ -238,7 +238,7 @@ void widget::initalWidget()
         ":/img/tenant/delete",
         ":/img/tenant/edit",
         ":/img/tenant/search",
-        ":/img/utility/allocate",
+        ":/img/utility/update",
         ":/img/utility/adjust",
         ":/img/utility/search",
         ":/img/payment/raise",

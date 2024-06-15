@@ -7,30 +7,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 
-bool validateChinesePhoneNumber(const QString &phoneNumber)
-{
-    // 定义正则表达式用于匹配手机号码和固定电话
-    QRegularExpression mobileRegex("^1[3-9][0-9]{9}$");
-    QRegularExpression landlineRegex("^0[0-9]{2,3}-?[0-9]{7,8}$");
-
-    // 检查是否匹配手机号码或固定电话
-    return mobileRegex.match(phoneNumber).hasMatch() || landlineRegex.match(phoneNumber).hasMatch();
-}
-
-bool dormitoryIsFull(const QString& dormitory)
-{
-    DataBase database;
-    auto db=database.getInstance();
-
-    const auto& tenantInfo=db->select("tenant","d_id='"+dormitory+"'");
-
-    if(tenantInfo.size()>=dormitoryCapacity)
-    {
-        return true;
-    }
-
-    return false;
-}
+#include "database_utils.hpp"
 
 tenantManagement::tenantManagement(QWidget * parent)
     : QWidget(parent)
@@ -86,8 +63,11 @@ void tenantManagement::initalWidget()
 
     ui->idOfNeedToSearch->setValidator(reg);
 
-    ui->infoOfSearch->setColumnCount(5);
-    ui->infoOfSearch->setHorizontalHeaderLabels(QStringList()<<"姓名"<<"性别"<<"年龄"<<"电话"<<"宿舍编号");
+    QStringList info;
+    info<<"租客编号"<<"姓名"<<"性别"<<"年龄"<<"电话"<<"宿舍编号";
+
+    ui->infoOfSearch->setColumnCount(info.size());
+    ui->infoOfSearch->setHorizontalHeaderLabels(info);
     ui->infoOfSearch->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     connect(ui->btnOfAdd,&QPushButton::clicked,this,[=]()
@@ -168,7 +148,6 @@ void tenantManagement::initalWidget()
         for(const auto& i : data)
         {
             bool isSuccess=false;
-            const auto& tenantInfo=db->select("tenant","id='"+i[0]+"'");
 
             if(dormitoryIsFull(i[5]))
             {
@@ -176,7 +155,7 @@ void tenantManagement::initalWidget()
                 continue;
             }
 
-            if(!tenantInfo.isEmpty())
+            if(validateId("tenant",i[0]))
             {
                 // 进行修改数据
                 db->remove("tenant","id="+i[0]);
@@ -252,6 +231,7 @@ void tenantManagement::initalWidget()
         if(!isEdit)
         {
             const auto& list=db->select("tenant","id="+str);
+
             if(list.isEmpty())
             {
                 QMessageBox::warning(this,"编辑租客","编辑失败,编号不存在，请重新输入编号");
@@ -289,8 +269,6 @@ void tenantManagement::initalWidget()
                 return;
             }
 
-            const auto& tenantInfo=db->select("tenant","id='"+ui->editOfId->text()+"'");
-
             db->remove("tenant","id="+ui->editOfId->text());
             db->insert("tenant",QList<QVariant>()<<
                 ui->editOfId->text()<<
@@ -298,7 +276,7 @@ void tenantManagement::initalWidget()
                 ui->editOfGender->currentText()<<
                 ui->editOfAge->text().toInt()<<
                 ui->editOfTelephone->text()<<
-                tenantInfo[6]
+                getPasswd("tenant","id='"+ui->editOfId->text()+"'")
             );
 
             QMessageBox::about(this,"编辑租客","编辑成功");
@@ -312,25 +290,19 @@ void tenantManagement::initalWidget()
     {
         QString str=ui->idOfNeedToSearch->text();
 
-        if(str.isEmpty())
-        {
-            QMessageBox::warning(this,"查询租客","查询失败，编号不能为空");
-            return;
-        }
-
         DataBase database;
         auto db=database.getInstance();
 
-        const auto& list=db->select("tenant","id="+str);
+        const auto& list=(!str.isEmpty())?(db->select("tenant","id="+str)):(db->select("tenant"));
 
         ui->infoOfSearch->setRowCount(list.size());
 
         for(int i=0;i<list.size();i++)
         {
-            for(int j=1;j<list[i].size();j++)
+            for(int j=0;j<list[i].size();j++)
             {
-                ui->infoOfSearch->setItem(i,j-1,new QTableWidgetItem(list[i][j].toString()));
+                ui->infoOfSearch->setItem(i,j,new QTableWidgetItem(list[i][j].toString()));
             }
-        }        
+        }
     });
 }

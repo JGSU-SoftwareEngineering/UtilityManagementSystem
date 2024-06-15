@@ -64,4 +64,30 @@ inline QString toString(const QList<QList<QVariant>>& list,const QString& sep1="
     return str;
 }
 
+inline bool validateChinesePhoneNumber(const QString &phoneNumber)
+{
+    // 定义正则表达式用于匹配手机号码和固定电话
+    QRegularExpression mobileRegex("^1[3-9][0-9]{9}$");
+    QRegularExpression landlineRegex("^0[0-9]{2,3}-?[0-9]{7,8}$");
+
+    // 检查是否匹配手机号码或固定电话
+    return mobileRegex.match(phoneNumber).hasMatch() || landlineRegex.match(phoneNumber).hasMatch();
+}
+
+inline bool isDecimal(const QString& str)
+{
+    QRegularExpression reg("^[+]?\\d*\\.?\\d+$"); // 正则表达式匹配小数，允许带正号，小数点前后可以有数字
+    QRegularExpressionValidator v(reg,0);
+
+    int pos=0;
+    QValidator::State result=v.validate(QString(str),pos);
+
+    if(result==QValidator::State::Acceptable)
+    {
+        return true;
+    }
+   
+    return false;
+}
+
 #endif /* UTILS_H */

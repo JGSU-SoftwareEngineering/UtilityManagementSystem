@@ -16,8 +16,8 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
-     <widget class="QWidget" name="pageOfAllocate">
-      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,1,1,2">
+     <widget class="QWidget" name="pageOfUpdate">
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,1,1,0,0,2">
        <item>
         <widget class="QLabel" name="label">
          <property name="font">
@@ -47,12 +47,12 @@
             </font>
            </property>
            <property name="text">
-            <string>编号</string>
+            <string>宿舍编号</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="idOfAllocation">
+          <widget class="QLineEdit" name="inputOfDormitory">
            <property name="font">
             <font>
              <pointsize>15</pointsize>
@@ -65,7 +65,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
-          <widget class="QLabel" name="label_5">
+          <widget class="QLabel" name="labelOfWater">
            <property name="font">
             <font>
              <pointsize>15</pointsize>
@@ -74,12 +74,42 @@
             </font>
            </property>
            <property name="text">
-            <string>水电号</string>
+            <string>本月水用量</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="didOfAllocation">
+          <widget class="QLineEdit" name="inputOfWater">
+           <property name="font">
+            <font>
+             <pointsize>15</pointsize>
+            </font>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4"/>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="font">
+            <font>
+             <pointsize>15</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>本月电用量</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="inputOfElectricity">
            <property name="font">
             <font>
              <pointsize>15</pointsize>
@@ -92,10 +122,10 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
-          <widget class="QTableWidget" name="infoOfAllocation"/>
+          <widget class="QTableWidget" name="infoOfDormitory"/>
          </item>
          <item>
-          <widget class="QPushButton" name="btnOfAllocate">
+          <widget class="QPushButton" name="btnOfUpdate">
            <property name="font">
             <font>
              <pointsize>15</pointsize>
@@ -150,12 +180,12 @@
             </font>
            </property>
            <property name="text">
-            <string>编号</string>
+            <string>宿舍编号</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="idOfNeedToSearch">
+          <widget class="QLineEdit" name="didOfNeedToSearch">
            <property name="font">
             <font>
              <family>Arial</family>
