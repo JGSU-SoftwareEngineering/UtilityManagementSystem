@@ -3,8 +3,12 @@
 
 #include <QMessageBox>
 #include <QDateTime>
+#include <QFileDialog>
 
 #include "database_utils.hpp"
+
+#define EXPORT_GLOBAL
+#include "global.h"
 
 utilityManagement::utilityManagement(QWidget *parent)
     : QWidget(parent)
@@ -113,6 +117,96 @@ void utilityManagement::initalWidget()
         }
         else
             QMessageBox::warning(this,"更新水电","更新失败，该月水电可能已更新");
+    });
+
+    connect(ui->btnOfBulk,&QPushButton::clicked,this,[=]()
+    {
+        /* 获取用户选择 excel 文件的路径 */
+        const QString& filepath=QFileDialog::getOpenFileName(this, QStringLiteral("select excel file"), "",QStringLiteral("Excel file(*.xls *.xlsx)"));
+
+        if(filepath.isEmpty())
+        {
+            QMessageBox::warning(this,"批量添加","未选择任何 excel 文件进行批量添加");
+            return;
+        }
+
+        if(reader==nullptr)
+            reader=new excelReader;
+
+        reader->readExcel(filepath);
+
+        auto data=reader->getData();
+
+        if(data.isEmpty())
+        {
+            QMessageBox::warning(this,"批量添加","导入数据为空");
+            return;
+        }
+
+        data.removeFirst();
+        qDebug()<<data;
+
+        DataBase database;
+        auto db=database.getInstance();
+
+        int countOfAdd=0;
+        int countOfError=0;
+
+        for(const auto& i : data)
+        {
+            bool isSuccess=false;
+
+            if(i.size()<4)
+            {
+                countOfError++;
+                qDebug()<<"数据太少";
+                continue;
+            }
+
+            const auto& list=getUtilityDateList(i[0]);
+            QString currDate=i[3];
+            QString currTime=QDateTime::currentDateTimeUtc().toString("yyyy-MM-dd HH:mm:ss");
+            bool isSame=false;
+
+            for(const auto& i : list)
+                if(isSameMonth(i,currDate))
+                    isSame=true;
+
+            if(isSame)
+            {
+                countOfError++;
+                qDebug()<<"相同月份";
+                continue;
+            }
+
+            isSuccess=db->query("insert into utility values(NULL,'" \
+                +i[0]+"'," \
+                +"'"+i[1]+"'," \
+                +"'"+i[2]+"'," \
+                +"'"+i[3]+"')");
+
+            if(isSuccess)
+            {
+                countOfAdd++;
+                db->query("insert into bill values(NULL,'" \
+                +QString::number(db->getLastInsertId())+"'," \
+                +"'"+caculateUtilityMoney(i[1],i[2])+"'," \
+                +"'"+currTime+"'," \
+                +"0)");
+            }
+            else
+            {
+                countOfError++;
+                qDebug()<<"更新失败，插入失败";
+                qDebug()<<"insert into utility values(NULL,'" \
+                +i[0]+"'," \
+                +"'"+i[1]+"'," \
+                +"'"+i[2]+"'," \
+                +"'"+i[3]+"')";
+            }
+        }
+
+        QMessageBox::about(this,"批量添加水电信息","成功添加"+QString::number(countOfAdd)+"条水电记录,"+"失败了"+QString::number(countOfError)+"次");
     });
 
     connect(ui->btnOfSearch,&QPushButton::clicked,this,[=]()

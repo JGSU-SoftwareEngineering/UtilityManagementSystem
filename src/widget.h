@@ -38,7 +38,6 @@ class widget : public QWidget
         void funcOfPaymentManagement(const clickLabel* label);
         void funcOfStatManagement(const clickLabel *label);
         void reset();
-        void updateStat();
 
     private:
         void initalWidget();

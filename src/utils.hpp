@@ -134,4 +134,17 @@ inline QList<int> toInt(const QList<QString>& list)
     return data;
 }
 
+inline void addToRecordTable(QTableWidget *record, const QList<QVariantList> &info)
+{
+    record->setRowCount(info.size());
+
+    for(int i=0;i<info.size();i++)
+    {
+        for(int j=0;j<info[i].size();j++)
+        {
+            record->setItem(i,j,new QTableWidgetItem(info[i][j].toString()));
+        }
+    }
+}
+
 #endif /* UTILS_H */

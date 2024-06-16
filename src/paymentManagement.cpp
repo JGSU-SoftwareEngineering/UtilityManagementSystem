@@ -34,7 +34,12 @@ void paymentManagement::refreshRaiseRecord()
     DataBase database;
     auto db=database.getInstance();
 
-    QStringList listOfUtilityIds=getUtilityIdsByDId(getDormitoryIdById(m_Id));
+    const QString& d_id=getDormitoryIdById(m_Id);
+
+    QStringList listOfUtilityIds;
+    
+    if(!d_id.isEmpty())
+        listOfUtilityIds=getUtilityIdsByDId(d_id);
 
     QStringList listOfRaise=QStringList()<<"账单ID"<<"缴费金额"<<"创建时间"<<"是否支付";
 
@@ -42,13 +47,23 @@ void paymentManagement::refreshRaiseRecord()
 
     for(int i=0;i<listOfUtilityIds.size();i++)
     {
-        QVariantList tmp;
         const auto& bills=getBillNotPayByUId(listOfUtilityIds[i]);
+
+        if(bills.isEmpty())
+        {
+            continue;
+        }
+
+        QVariantList tmp;
         
         for(const auto& j : bills)
+        {
             tmp.push_back(j);
+        }
         
+        // tmp[3]=tmp[3].toInt()==1?"是":"否";
         tmp.removeAt(1);
+
         info.push_back(tmp);
     }
 
@@ -72,7 +87,9 @@ void paymentManagement::refreshBillRecord()
     }
     else
     {
-        info=db->select("utility","d_id='"+getDormitoryIdById(m_Id)+"'");
+        const QString& d_id=getDormitoryIdById(m_Id);
+        if(!d_id.isEmpty())
+            info=db->select("utility","d_id='"+d_id+"'");
     }
 
     for(int i=0;i<info.size();i++)
@@ -122,13 +139,13 @@ void paymentManagement::refreshPaymentRecord()
 
     for(const auto& i : bills)
     {
-        const auto& info=db->select("payment","id="+i);
         const auto& billInfo=db->select("bill","id="+i);
-        if(info.isEmpty()||billInfo.isEmpty())
+        const auto& utilityInfo=db->select("utility","id="+billInfo[0][1].toString());
+        if(utilityInfo.isEmpty()||billInfo.isEmpty())
             continue;
 
         QVariantList tmp;
-        tmp<<i<<getDormitoryIdByBId(i)<<billInfo[0][2]<<billInfo[0][3]<<info[0][2].toString().left(7);
+        tmp<<i<<getDormitoryIdByBId(i)<<billInfo[0][2]<<billInfo[0][3]<<utilityInfo[0][4].toString().left(7);
         list<<tmp;
     }
 
@@ -193,17 +210,4 @@ void paymentManagement::initalWidget()
         QMessageBox::about(this,"提交缴费","缴费成功");
         refreshRaiseRecord();
     });
-}
-
-void paymentManagement::addToRecordTable(QTableWidget *record, const QList<QVariantList> &info)
-{
-    record->setRowCount(info.size());
-
-    for(int i=0;i<info.size();i++)
-    {
-        for(int j=0;j<info[i].size();j++)
-        {
-            record->setItem(i,j,new QTableWidgetItem(info[i][j].toString()));
-        }
-    }
 }

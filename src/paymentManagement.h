@@ -15,7 +15,6 @@ class paymentManagement : public QWidget
 
     private:
         Ui::paymentManagement* ui;
-        bool isStudent;
         QString m_Id;
 
     public:
@@ -37,7 +36,6 @@ class paymentManagement : public QWidget
     private:
         void initalWidget();
         void initalTimer();
-        void addToRecordTable(QTableWidget* record,const QList<QVariantList>& info);
 };
 
 #endif /* REPAIR_MANAGEMENT_H */

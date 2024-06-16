@@ -16,6 +16,26 @@ inline QString getDormitoryIdById(const QString& id)
     return tenantInfo[0][5].toString();
 }
 
+inline QStringList getDormitoryIds()
+{
+    DataBase database;
+    auto db=database.getInstance();
+
+    const auto& info=db->select("tenant",QStringList()<<"d_id");
+
+    QStringList data;
+
+    if(info.isEmpty())
+        return data;
+
+    for(const auto& i : info)
+    {
+        data.push_back(i[0].toString());
+    }
+
+    return data;
+}
+
 inline QString getDormitoryIdByBId(const QString& b_id)
 {
     DataBase database;
@@ -233,6 +253,51 @@ inline QString getMoneyByBId(const QString& b_id)
         return "";
 
     return info[0][0].toString();
+}
+
+inline QVector<double> getDataByDIdAndYear(const QString& d_id,const QString& year,const QString& field)
+{
+    DataBase database;
+    auto db=database.getInstance();
+
+    const auto& info=db->select("utility","d_id="+d_id,QStringList()<<"create_date"<<field);
+    
+    QVector<double> data;
+
+    if(info.isEmpty())
+        return data;
+
+    for(const auto& i : info)
+    {
+        if(i[0].toString().left(4)==year)
+            data<<i[1].toDouble();
+    }
+
+    return data;
+}
+
+inline QString getDataByDIdAndMonth(const QString& d_id,const QString& month,const QString& field)
+{
+    DataBase database;
+    auto db=database.getInstance();
+
+    const auto& info=db->select("utility","d_id="+d_id,QStringList()<<"create_date"<<field);
+    
+    QString date=month+"-01";
+    QString data="0";
+
+    if(info.isEmpty())
+        return data;
+
+    for(const auto& i : info)
+    {
+        if(isSameMonth(i[0].toString(),date))
+        {
+            data=i[1].toString();
+        }
+    }
+
+    return data;
 }
 
 #endif /* DATABASE_UTILS */

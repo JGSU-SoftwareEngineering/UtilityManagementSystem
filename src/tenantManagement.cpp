@@ -12,7 +12,6 @@
 tenantManagement::tenantManagement(QWidget * parent)
     : QWidget(parent)
     , ui(new Ui::tenantManagement)
-    , reader(nullptr)
 {
     initalWidget();
 }
@@ -20,9 +19,6 @@ tenantManagement::tenantManagement(QWidget * parent)
 tenantManagement::~tenantManagement()
 {
     delete ui;
-
-    if(reader!=nullptr)
-        delete reader;
 }
 
 void tenantManagement::setCurrentIndex(int i)
@@ -130,7 +126,6 @@ void tenantManagement::initalWidget()
         }
 
         data.removeFirst();
-        qDebug()<<data;
 
         if(data[0].size()<columnOfTenantFields)
         {

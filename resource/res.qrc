@@ -100,10 +100,10 @@
     <!-- 公告管理 -->
 
     <qresource prefix="/img/stat">
-        <file alias="publish">img/stat/publish.png</file>
+        <file alias="month">img/stat/month.png</file>
     </qresource>
     <qresource prefix="/img/stat">
-        <file alias="search">img/stat/search.png</file>
+        <file alias="year">img/stat/year.png</file>
     </qresource>
 
     <!-- sql 文件 -->

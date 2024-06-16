@@ -3,12 +3,12 @@
 
 #include <QWidget>
 
+#include "global.h"
+
 namespace Ui
 {
     class tenantManagement;
 }
-
-class excelReader;
 
 class tenantManagement : public QWidget
 {
@@ -16,7 +16,6 @@ class tenantManagement : public QWidget
 
     private:
         Ui::tenantManagement* ui;
-        excelReader* reader;
 
     public:
         explicit tenantManagement(QWidget* parent = nullptr);

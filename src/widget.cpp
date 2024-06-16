@@ -33,6 +33,9 @@ widget::~widget()
             delete i;
     delete ui;
     delete m_Login;
+
+    if(reader!=nullptr)
+        delete reader;
 }
 
 bool widget::eventFilter(QObject *obj, QEvent *e)
@@ -148,7 +151,7 @@ void widget::funcOfStatManagement(const clickLabel *label)
     }
 
     ui->widgetsOfCenter->setCurrentIndex(4);
-    ui->stat->setCurrentIndex(i);
+    ui->pageOfState->setCurrentIndex(i);
 }
 
 void widget::reset()
@@ -163,9 +166,6 @@ void widget::reset()
 
         ui->iconOfRaisePayment->show();
         ui->labelOfRaisePayment->show();
-
-        ui->iconOfPublicStat->hide();
-        ui->labelOfPublicStat->hide();
     }
     else
     {
@@ -177,26 +177,12 @@ void widget::reset()
 
         ui->iconOfRaisePayment->hide();
         ui->labelOfRaisePayment->hide();
-
-        ui->iconOfPublicStat->show();
-        ui->labelOfPublicStat->show();
     }
 
     ui->widgetsOfSubModule->setCurrentIndex(0);
         
     if(ui->widgetsOfCenter->currentIndex()!=0)
         ui->widgetsOfCenter->setCurrentIndex(0);
-}
-
-void widget::updateStat()
-{
-    DataBase database;
-    auto db=database.getInstance();
-
-    const auto& list=db->select("stat");
-
-    if(!list.isEmpty())
-        ui->labelOfStat->setText(list[0][1].toString());
 }
 
 void widget::initalWidget()
@@ -219,7 +205,7 @@ void widget::initalWidget()
         ui->iconOfAddTenant,ui->iconOfDeleteTenant,ui->iconOfEditTenant,ui->iconOfSearchTenant,
         ui->iconOfUtilityAllocation,ui->iconOfUtilityAdjustment,ui->iconOfUtilitySearch,
         ui->iconOfRaisePayment,ui->iconOfSearchBill,ui->iconOfSearchPayment,
-        ui->iconOfPublicStat,ui->iconOfSearchStat
+        ui->iconOfMonthStat,ui->iconOfYearStat
     };
 
     m_Icons=icons;
@@ -240,8 +226,8 @@ void widget::initalWidget()
         ":/img/payment/raise",
         ":/img/payment/handle",
         ":/img/payment/search",
-        ":/img/stat/publish",
-        ":/img/stat/search"
+        ":/img/stat/month",
+        ":/img/stat/year"
     };
 
     QList<void(widget::*)(const clickLabel*)> functions=
@@ -332,32 +318,7 @@ void widget::initalLoginBox()
 
 void widget::initalStat()
 {
-    connect(ui->btnOfSubmitStat,&QPushButton::clicked,this,[=]()
-    {
-        if(ui->editOfStat->toPlainText()=="")
-        {
-            QMessageBox::warning(this,"公告管理","发布内容为空，请重新输入");
-            return;
-        }
 
-        const QString& content=ui->editOfStat->toPlainText();
-
-        DataBase database;
-        auto db=database.getInstance();
-
-        const auto& list=db->select("stat");
-
-        if(list.isEmpty())
-        {
-            db->query("insert into stat values(NULL,'"+content+"')");
-        }
-        else
-        {
-            db->query("update stat set info='"+content+"' where id="+list[0][0].toString());
-        }
-
-        QMessageBox::about(this,"公告管理","发布成功");
-    });
 }
 
 void widget::moveToCenter(QWidget& widget)

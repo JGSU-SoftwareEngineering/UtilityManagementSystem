@@ -54,7 +54,7 @@
     border-image: url(:/img/background/background);
 }</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,10,1">
+      <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,4,0">
        <property name="spacing">
         <number>15</number>
        </property>
@@ -71,7 +71,7 @@
         <number>20</number>
        </property>
        <item>
-        <layout class="QHBoxLayout" name="layoutOfBackBtn">
+        <layout class="QHBoxLayout" name="layoutOfBackBtn" stretch="0,0,0">
          <item>
           <spacer name="horizontalSpacer_3">
            <property name="orientation">
@@ -212,8 +212,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>98</width>
-                <height>28</height>
+                <width>608</width>
+                <height>301</height>
                </rect>
               </property>
               <property name="styleSheet">
@@ -226,101 +226,7 @@
          </widget>
          <widget class="utilityManagement" name="pageOfUtility"/>
          <widget class="paymentManagement" name="pageOfPayment"/>
-         <widget class="QWidget" name="pageOfStat">
-          <layout class="QVBoxLayout" name="verticalLayout_3">
-           <item>
-            <widget class="QStackedWidget" name="stat">
-             <widget class="QWidget" name="page">
-              <layout class="QVBoxLayout" name="verticalLayout_11">
-               <item>
-                <widget class="QLabel" name="label_2">
-                 <property name="font">
-                  <font>
-                   <pointsize>15</pointsize>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>发布公告</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QTextEdit" name="editOfStat">
-                 <property name="font">
-                  <font>
-                   <pointsize>15</pointsize>
-                  </font>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="btnOfSubmitStat">
-                 <property name="font">
-                  <font>
-                   <pointsize>15</pointsize>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>提交</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-             <widget class="QWidget" name="pageOfStat2">
-              <property name="styleSheet">
-               <string notr="true">QWidget#pageOfStat2
-{
-	background-color: rgba(140, 140, 140, 50%);
-	border-radius:20px;
-}</string>
-              </property>
-              <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,10">
-               <item>
-                <widget class="QLabel" name="label">
-                 <property name="font">
-                  <font>
-                   <pointsize>15</pointsize>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>公告</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="labelOfStat">
-                 <property name="font">
-                  <font>
-                   <pointsize>15</pointsize>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>这是一段空的公告</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </widget>
-           </item>
-          </layout>
-         </widget>
+         <widget class="stateManagement" name="pageOfState"/>
         </widget>
        </item>
        <item>
@@ -991,7 +897,7 @@ border-radius:20px;</string>
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_6">
                <item>
-                <widget class="clickLabel" name="iconOfPublicStat">
+                <widget class="clickLabel" name="iconOfMonthStat">
                  <property name="maximumSize">
                   <size>
                    <width>100</width>
@@ -1021,7 +927,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>发布公告</string>
+                <string>月统计</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -1035,7 +941,7 @@ border-radius:20px;</string>
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_7">
                <item>
-                <widget class="clickLabel" name="iconOfSearchStat">
+                <widget class="clickLabel" name="iconOfYearStat">
                  <property name="maximumSize">
                   <size>
                    <width>100</width>
@@ -1065,7 +971,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>查看公告</string>
+                <string>年统计</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -1097,6 +1003,18 @@ border-radius:20px;</string>
  </widget>
  <customwidgets>
   <customwidget>
+   <class>stateManagement</class>
+   <extends>QWidget</extends>
+   <header>stateManagement.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>paymentManagement</class>
+   <extends>QWidget</extends>
+   <header>paymentmanagement.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>tenantManagement</class>
    <extends>QWidget</extends>
    <header>tenantManagement.h</header>
@@ -1111,12 +1029,6 @@ border-radius:20px;</string>
    <class>utilityManagement</class>
    <extends>QWidget</extends>
    <header>utilityManagement.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>paymentManagement</class>
-   <extends>QWidget</extends>
-   <header>paymentManagement.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
