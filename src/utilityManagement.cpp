@@ -83,6 +83,7 @@ void utilityManagement::initalWidget()
 
         const auto& list=getUtilityDateList(ui->inputOfDormitory->text());
         QString currDate=QDateTime::currentDateTime().toString("yyyy-MM-dd");
+        QString currTime=QDateTime::currentDateTimeUtc().toString("yyyy-MM-dd HH:mm:ss");
         bool isSame=false;
 
         for(const auto& i : list)
@@ -95,16 +96,23 @@ void utilityManagement::initalWidget()
             return;
         }
 
-        bool isSuccess=db->query("insert into utility values(NULL," \
-            +ui->inputOfDormitory->text()+"," \
-            +ui->inputOfWater->text()+"," \
-            +ui->inputOfElectricity->text()+"," \
-            +currDate+")");
+        bool isSuccess=db->query("insert into utility values(NULL,'" \
+            +ui->inputOfDormitory->text()+"'," \
+            +"'"+ui->inputOfWater->text()+"'," \
+            +"'"+ui->inputOfElectricity->text()+"'," \
+            +"'"+currDate+"')");
 
         if(isSuccess)
+        {
             QMessageBox::about(this,"更新水电","更新成功");
+            db->query("insert into bill values(NULL,'" \
+            +QString::number(db->getLastInsertId())+"'," \
+            +"'"+caculateUtilityMoney(ui->inputOfWater->text(),ui->inputOfElectricity->text())+"'," \
+            +"'"+currTime+"'," \
+            +"0)");
+        }
         else
-            QMessageBox::warning(this,"更新租客","更新失败，该月水电可能已更新");
+            QMessageBox::warning(this,"更新水电","更新失败，该月水电可能已更新");
     });
 
     connect(ui->btnOfSearch,&QPushButton::clicked,this,[=]()

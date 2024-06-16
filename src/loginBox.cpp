@@ -227,7 +227,9 @@ void loginBox::initalWidget()
 
 void loginBox::initalConnectState()
 {
-    QTimer* timer=new QTimer;
+    updateConnectState();
+    
+    QTimer* timer=new QTimer(this);
     connect(timer,&QTimer::timeout,this,&loginBox::updateConnectState);
 
     timer->start(10000);

@@ -29,18 +29,12 @@
           </font>
          </property>
          <property name="text">
-          <string>申请报修</string>
+          <string>提交缴费</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="contentOfRaise">
-         <property name="font">
-          <font>
-           <pointsize>15</pointsize>
-          </font>
-         </property>
-        </widget>
+        <widget class="QTableWidget" name="recordOfRaise"/>
        </item>
        <item>
         <widget class="QPushButton" name="btnOfRaise">
@@ -59,7 +53,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="pageOfHandlePayment">
+     <widget class="QWidget" name="pageOfBill">
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
         <widget class="QLabel" name="label_3">
@@ -72,51 +66,17 @@
           </font>
          </property>
          <property name="text">
-          <string>处理报修</string>
+          <string>水电账单查询</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTableWidget" name="recordOfHandle"/>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <item>
-          <widget class="QPushButton" name="btnOfRefreshForHandle">
-           <property name="font">
-            <font>
-             <family>Arial</family>
-             <pointsize>15</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>刷新</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="btnOfHandle">
-           <property name="font">
-            <font>
-             <family>Arial</family>
-             <pointsize>15</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>处理</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QTableWidget" name="recordOfBill"/>
        </item>
       </layout>
      </widget>
      <widget class="QWidget" name="pageOfSearchPayment">
-      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,0,2">
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,0">
        <item>
         <widget class="QLabel" name="label">
          <property name="font">
@@ -128,27 +88,12 @@
           </font>
          </property>
          <property name="text">
-          <string>查询报修</string>
+          <string>查询缴费记录</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QTableWidget" name="recordOfPayment"/>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnOfRefresh">
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <pointsize>15</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>刷新</string>
-         </property>
-        </widget>
        </item>
       </layout>
      </widget>

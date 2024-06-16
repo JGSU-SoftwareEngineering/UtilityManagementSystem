@@ -867,7 +867,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="clickLabel" name="iconOfHandlePayment">
+              <widget class="clickLabel" name="iconOfSearchBill">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -935,7 +935,7 @@ border-radius:20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="labelOfHandlePayment">
+              <widget class="QLabel" name="labelOfSearchBill">
                <property name="maximumSize">
                 <size>
                  <width>100</width>
@@ -950,7 +950,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>处理缴费</string>
+                <string>查询账单</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>

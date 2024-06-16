@@ -2,6 +2,7 @@
 #define REPAIR_MANAGEMENT_H
 
 #include <QWidget>
+#include <QTableWidget>
 
 namespace Ui
 {
@@ -27,13 +28,16 @@ class paymentManagement : public QWidget
 
     public slots:
         void setId(const QString& str);
-        void refreshHandleRecord();
+        void refreshRaiseRecord();
+        void refreshBillRecord();
         void refreshPaymentRecord();
 
     signals:
 
     private:
         void initalWidget();
+        void initalTimer();
+        void addToRecordTable(QTableWidget* record,const QList<QVariantList>& info);
 };
 
 #endif /* REPAIR_MANAGEMENT_H */

@@ -2,7 +2,7 @@
 #define CONSTANTS_H
 
 /* 若使用 mysql，请开启这个宏，需要设置 DatabaseName 为数据库名、Host 为远程数据库 ip、UserName 为用户名、UserPassword 为密码 */
-// #define USE_MYSQL
+#define USE_MYSQL
 
 /* DataBase */
 
@@ -25,6 +25,5 @@ const QString UserPassword="7go0NB6JVsEW4WpP";
 const int dormitoryCapacity=4;
 
 const int columnOfTenantFields=7;
-const int columnOfPaymentFields=4;
 
 #endif /* CONSTANTS_H */

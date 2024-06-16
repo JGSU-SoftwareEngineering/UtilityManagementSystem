@@ -3,6 +3,7 @@
 
 #include <QFile>
 #include <QDate>
+#include <QTableWidget>
 
 /* 读取指定路径下的文件，并将其中内容返回 */
 inline QString readFile(const QString &filePath)
@@ -103,6 +104,34 @@ inline bool isSameMonth(const QString &dateStr1, const QString &dateStr2, const 
     }
 
     return (date1.year() == date2.year()) && (date1.month() == date2.month());
+}
+
+inline QList<QString> getSelectRowsByTable(const QTableWidget& record,int column=0)
+{
+    const auto& list=record.selectedItems();
+
+    QList<QString> selected;
+
+    for(int i=0;i<list.count();i++)
+    {
+        selected.push_back(record.item(list[i]->row(),column)->text());
+    }
+
+    selected=selected.toSet().toList();
+
+    return selected;
+}
+
+inline QList<int> toInt(const QList<QString>& list)
+{
+    QList<int> data;
+
+    for(const auto& i : list)
+    {
+        data.push_back(i.toInt());
+    }
+
+    return data;
 }
 
 #endif /* UTILS_H */

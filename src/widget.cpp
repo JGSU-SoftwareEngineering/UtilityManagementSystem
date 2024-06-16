@@ -161,8 +161,6 @@ void widget::reset()
         ui->iconOfUtilityAllocation->hide();
         ui->labelOfUtilityAllocation->hide();
 
-        ui->iconOfHandlePayment->hide();
-        ui->labelOfHandlePayment->hide();
         ui->iconOfRaisePayment->show();
         ui->labelOfRaisePayment->show();
 
@@ -177,8 +175,6 @@ void widget::reset()
         ui->iconOfUtilityAllocation->show();
         ui->labelOfUtilityAllocation->show();
 
-        ui->iconOfHandlePayment->show();
-        ui->labelOfHandlePayment->show();
         ui->iconOfRaisePayment->hide();
         ui->labelOfRaisePayment->hide();
 
@@ -222,7 +218,7 @@ void widget::initalWidget()
         ui->iconOfTenantManagement,ui->iconOfUtilityManagement,ui->iconOfPaymentManagement,ui->iconOfStatManagement,
         ui->iconOfAddTenant,ui->iconOfDeleteTenant,ui->iconOfEditTenant,ui->iconOfSearchTenant,
         ui->iconOfUtilityAllocation,ui->iconOfUtilityAdjustment,ui->iconOfUtilitySearch,
-        ui->iconOfRaisePayment,ui->iconOfHandlePayment,ui->iconOfSearchPayment,
+        ui->iconOfRaisePayment,ui->iconOfSearchBill,ui->iconOfSearchPayment,
         ui->iconOfPublicStat,ui->iconOfSearchStat
     };
 

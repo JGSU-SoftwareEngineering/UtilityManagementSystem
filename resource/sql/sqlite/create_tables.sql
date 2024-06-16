@@ -26,7 +26,7 @@ CREATE TABLE if not exists utility
     d_id CHAR(10) NOT NULL,
     water CHAR(10) NOT NULL,
     electricity CHAR(10) NOT NULL,
-    create_time DATE NOT NULL
+    create_date DATE NOT NULL
 );
 
 CREATE TABLE if not exists bill
@@ -42,6 +42,7 @@ CREATE TABLE if not exists payment
 (
     id INTEGER PRIMARY KEY,
     money CHAR(20) NOT NULL,
+    pay_time DATETIME NOT NULL,
     foreign key(id) references bill(id) on delete cascade on update cascade
 );
 

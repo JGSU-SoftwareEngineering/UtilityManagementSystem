@@ -1,15 +1,17 @@
 #include "paymentManagement.h"
 #include "ui_paymentManagement.h"
 
-#include "database.hpp"
+#include "database_utils.hpp"
 
 #include <QMessageBox>
+#include <QTImer>
 
 paymentManagement::paymentManagement(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::paymentManagement)
 {
     initalWidget();
+    initalTimer();
 }
 
 paymentManagement::~paymentManagement()
@@ -27,22 +29,70 @@ bool paymentManagement::eventFilter(QObject *obj, QEvent *e)
     return false;
 }
 
-void paymentManagement::refreshHandleRecord()
+void paymentManagement::refreshRaiseRecord()
 {
     DataBase database;
     auto db=database.getInstance();
 
-    const auto& paymentInfo=db->select("payment","isSolved=0");
+    QStringList listOfUtilityIds=getUtilityIdsByDId(getDormitoryIdById(m_Id));
 
-    ui->recordOfHandle->setRowCount(paymentInfo.size());
+    QStringList listOfRaise=QStringList()<<"账单ID"<<"缴费金额"<<"创建时间"<<"是否支付";
 
-    for(int i=0;i<paymentInfo.size();i++)
+    QList<QVariantList> info;
+
+    for(int i=0;i<listOfUtilityIds.size();i++)
     {
-        for(int j=0;j<columnOfPaymentFields;j++)
-        {
-            ui->recordOfHandle->setItem(i,j,new QTableWidgetItem(paymentInfo[i][j].toString()));
-        }
+        QVariantList tmp;
+        const auto& bills=getBillNotPayByUId(listOfUtilityIds[i]);
+        
+        for(const auto& j : bills)
+            tmp.push_back(j);
+        
+        tmp.removeAt(1);
+        info.push_back(tmp);
     }
+
+    ui->recordOfRaise->clear();
+    ui->recordOfRaise->setColumnCount(listOfRaise.size());
+    ui->recordOfRaise->setHorizontalHeaderLabels(listOfRaise);
+    
+    addToRecordTable(ui->recordOfRaise,info);
+}
+
+void paymentManagement::refreshBillRecord()
+{
+    DataBase database;
+    auto db=database.getInstance();
+
+    QList<QVariantList> info;
+
+    if(m_Id.isEmpty())
+    {
+        info=db->select("utility");
+    }
+    else
+    {
+        info=db->select("utility","d_id='"+getDormitoryIdById(m_Id)+"'");
+    }
+
+    for(int i=0;i<info.size();i++)
+    {
+        const QStringList& list=getBillByUId(info[i][0].toString());
+        if(list.isEmpty())
+            continue;
+        const QString& b_id=list[0];
+        info[i][0]=b_id;
+        info[i][4]=info[i][4].toString().left(7);
+        info[i].push_back(getMoneyByBId(b_id));
+    }
+
+    QStringList listOfBill=QStringList()<<"账单ID"<<"宿舍号"<<"当月水用量"<<"当月电用量"<<"所属月份"<<"总金额";
+    
+    ui->recordOfBill->clear();
+    ui->recordOfBill->setColumnCount(listOfBill.size());
+    ui->recordOfBill->setHorizontalHeaderLabels(listOfBill);
+
+    addToRecordTable(ui->recordOfBill,info);
 }
 
 void paymentManagement::refreshPaymentRecord()
@@ -50,17 +100,57 @@ void paymentManagement::refreshPaymentRecord()
     DataBase database;
     auto db=database.getInstance();
 
-    const auto& paymentInfo=db->select("payment");
+    QStringList listOfPayment=QStringList()<<"账单ID"<<"寝室号"<<"支付金额"<<"支付时间"<<"所属月份";
 
-    ui->recordOfPayment->setRowCount(paymentInfo.size());
+    QStringList bills;
 
-    for(int i=0;i<paymentInfo.size();i++)
+    QList<QVariantList> list;
+
+    if(m_Id.isEmpty())
     {
-        for(int j=0;j<columnOfPaymentFields;j++)
+        bills=getBillIds();
+    }
+    else
+    {
+        const auto& u_ids=getUtilityIdsByDId(getDormitoryIdById(m_Id));
+
+        for(const auto& u_id : u_ids)
         {
-            ui->recordOfPayment->setItem(i,j,new QTableWidgetItem(paymentInfo[i][j].toString()));
+            bills.push_back(getBillIdByUId(u_id));
         }
     }
+
+    for(const auto& i : bills)
+    {
+        const auto& info=db->select("payment","id="+i);
+        const auto& billInfo=db->select("bill","id="+i);
+        if(info.isEmpty()||billInfo.isEmpty())
+            continue;
+
+        QVariantList tmp;
+        tmp<<i<<getDormitoryIdByBId(i)<<billInfo[0][2]<<billInfo[0][3]<<info[0][2].toString().left(7);
+        list<<tmp;
+    }
+
+    ui->recordOfPayment->clear();
+    ui->recordOfPayment->setColumnCount(listOfPayment.size());
+    ui->recordOfPayment->setHorizontalHeaderLabels(listOfPayment);
+
+    addToRecordTable(ui->recordOfPayment,list);
+}
+
+void paymentManagement::initalTimer()
+{
+    QTimer* timer=new QTimer(this);
+    connect(timer,&QTimer::timeout,this,[=]()
+    {
+        if(!m_Id.isEmpty())
+            refreshRaiseRecord();
+        refreshBillRecord();
+        refreshPaymentRecord();
+    });
+
+    timer->start(5000);
 }
 
 void paymentManagement::setId(const QString& str)
@@ -73,81 +163,47 @@ void paymentManagement::initalWidget()
     ui->setupUi(this);
     installEventFilter(this);
 
-    ui->recordOfHandle->setColumnCount(columnOfPaymentFields);
-    ui->recordOfHandle->setHorizontalHeaderLabels(QStringList()<<"报修ID"<<"寝室号"<<"报修详情"<<"是否解决");
-    ui->recordOfHandle->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-    ui->recordOfPayment->setColumnCount(columnOfPaymentFields);
-    ui->recordOfPayment->setHorizontalHeaderLabels(QStringList()<<"报修ID"<<"寝室号"<<"报修详情"<<"是否解决");
+    ui->recordOfRaise->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->recordOfBill->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->recordOfPayment->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     connect(ui->btnOfRaise,&QPushButton::clicked,this,[=]()
     {
-        QString str=ui->contentOfRaise->toPlainText();
-
-        if(str.isEmpty())
-        {
-            QMessageBox::warning(this,"申请报修","报修内容不能为空");
-            return;
-        }
-
         DataBase database;
         auto db=database.getInstance();
 
-        const auto& dormitoryInfo=db->select("dormitory","id='"+m_Id+"'");
+        const auto& list=getSelectRowsByTable(*ui->recordOfRaise);
 
-        if(dormitoryInfo.isEmpty())
+        if(list.isEmpty())
         {
-            QMessageBox::warning(this,"申请报修","该学生未入住，无法报修");
+            QMessageBox::about(this,"提交缴费","未选择任何账单进行缴费");
             return;
         }
 
-        bool isSuccess=db->query("insert into payment values(NULL,"+dormitoryInfo[0][0].toString()+",'"+str+"',0)");
+        for(const auto& i : list)
+        {
+            db->update("bill","isPay=1","id="+i);
+            db->query("insert into payment values(" \
+            +i+",'" \
+            +getMoneyByBId(i)+"','" \
+            +QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss")
+            +"')");
+        }
 
-        if(isSuccess)
-        {
-            QMessageBox::about(this,"申请报修","报修成功");
-        }
-        else
-        {
-            QMessageBox::warning(this,"申请报修","报修失败");
-        }
+        QMessageBox::about(this,"提交缴费","缴费成功");
+        refreshRaiseRecord();
     });
+}
 
-    connect(ui->btnOfHandle,&QPushButton::clicked,this,[=]()
+void paymentManagement::addToRecordTable(QTableWidget *record, const QList<QVariantList> &info)
+{
+    record->setRowCount(info.size());
+
+    for(int i=0;i<info.size();i++)
     {
-        QString str=ui->contentOfRaise->toPlainText();
-
-        const auto& list=ui->recordOfHandle->selectedItems();
-
-        QList<int> selectedPaymentId;
-
-        for(int i=0;i<list.count();i++)
+        for(int j=0;j<info[i].size();j++)
         {
-            selectedPaymentId.push_back(ui->recordOfHandle->item(list[i]->row(),0)->text().toInt());
+            record->setItem(i,j,new QTableWidgetItem(info[i][j].toString()));
         }
-
-        selectedPaymentId=selectedPaymentId.toSet().toList();
-
-        if(selectedPaymentId.isEmpty())
-        {
-            QMessageBox::about(this,"处理报修","暂无报修处理");
-            return;
-        }
-
-        DataBase database;
-        auto db=database.getInstance();
-
-        for(const auto& i : selectedPaymentId)
-        {
-            db->update("payment","isSolved=1","r_id="+QString::number(i));
-        }
-        
-        QMessageBox::about(this,"处理报修","处理成功");
-
-        refreshHandleRecord();
-    });
-
-    connect(ui->btnOfRefresh,&QPushButton::clicked,this,&paymentManagement::refreshPaymentRecord);
-    connect(ui->btnOfRefreshForHandle,&QPushButton::clicked,this,&paymentManagement::refreshHandleRecord);
+    }
 }

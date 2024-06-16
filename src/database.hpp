@@ -96,6 +96,30 @@ class _DataBase
             return isSuccess;
         }
 
+        int getLastInsertId()
+        {
+            QSqlQuery query;
+            bool isSuccess=query.exec("SELECT LAST_INSERT_ID();");
+
+            if(!isSuccess)
+            {
+                m_LastError=query.lastError().text();
+                return -1;
+            }
+
+            int lastId;
+                
+            while(query.next())
+            {
+                QList<QVariant> list;
+                const QSqlRecord& record=query.record();
+
+                lastId=record.value(0).toInt();
+            }
+
+            return lastId;
+        }
+
         bool insert(const QString& table_name,const QList<QVariant>& fields)
         {
             QString str=toString(fields,",");
