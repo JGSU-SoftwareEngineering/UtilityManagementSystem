@@ -83,11 +83,16 @@ void stateManagement::updateRecord()
 {
     const QString& d_id=ui->dormitoryOfMonth->currentText();
     const QString& month=ui->monthOfMonth->currentText();
+    const QString& year=ui->yearOfMonth->currentText();
+
+    QDate date(year.toInt(),month.toInt(),1);
 
     QList<QVariantList> info;
 
     QVariantList list;
-    list<<getDataByDIdAndMonth(d_id,month,"water")<<getDataByDIdAndMonth(d_id,month,"electricity");
+    list<<getDataByDIdAndDate(d_id,date,"water")<<getDataByDIdAndDate(d_id,date,"electricity");
+
+    qDebug()<<list;
 
     info<<list;
 
@@ -108,11 +113,20 @@ void stateManagement::updateChart()
 
     QCPGraph* graphOfWater=ui->chartOfYear->addGraph();
     QCPGraph* graphOfElectricity=ui->chartOfYear->addGraph();
-    graphOfWater->setData(getDataByDIdAndYear(d_id,year,"water"),getDataByDIdAndYear(d_id,year,"electricity"));
+
+    QVector vec1=getDataByDIdAndYear(d_id,year,"water");
+    QVector vec2=getDataByDIdAndYear(d_id,year,"electricity");
+
+    qDebug()<<vec1;
+    qDebug()<<vec2;
+
+    graphOfWater->setData(vec1,vec2);
 
     ui->chartOfYear->xAxis->setLabel("月份");
     ui->chartOfYear->yAxis->setLabel("水用量（吨）");
     ui->chartOfYear->yAxis2->setLabel("电用量（度）");
+    ui->chartOfYear->xAxis->setRange(0,12);
+    ui->chartOfYear->yAxis->setRange(0,200);
 
     ui->chartOfYear->replot();
 }
@@ -140,10 +154,12 @@ void stateManagement::initalWidget()
     {
         years<<QString::number(i);
     }
+    ui->yearOfMonth->addItems(years);
     ui->yearOfYear->addItems(years);
 
     connect(ui->dormitoryOfMonth,&QComboBox::currentTextChanged,this,&stateManagement::updateRecord);
     connect(ui->monthOfMonth,&QComboBox::currentTextChanged,this,&stateManagement::updateRecord);
+    connect(ui->yearOfMonth,&QComboBox::currentTextChanged,this,&stateManagement::updateRecord);
     connect(ui->dormitoryOfMonth,&QComboBox::currentTextChanged,this,&stateManagement::updateChart);
     connect(ui->yearOfYear,&QComboBox::currentTextChanged,this,&stateManagement::updateChart);
 

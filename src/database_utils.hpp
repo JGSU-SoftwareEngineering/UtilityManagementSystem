@@ -262,28 +262,30 @@ inline QVector<double> getDataByDIdAndYear(const QString& d_id,const QString& ye
 
     const auto& info=db->select("utility","d_id="+d_id,QStringList()<<"create_date"<<field);
     
-    QVector<double> data;
+    QVector<double> data(12,0.0);
 
     if(info.isEmpty())
         return data;
 
-    for(const auto& i : info)
+    for(int i=0;i<info.size();i++)
     {
-        if(i[0].toString().left(4)==year)
-            data<<i[1].toDouble();
+        QDate date=QDate::fromString(info[i][0].toString(),"yyyy-MM-dd");
+        if(date.year()==year.toInt())
+        {
+            data[date.month()-1]=info[i][1].toDouble();
+        }
     }
 
     return data;
 }
 
-inline QString getDataByDIdAndMonth(const QString& d_id,const QString& month,const QString& field)
+inline QString getDataByDIdAndDate(const QString& d_id,const QDate& date,const QString& field)
 {
     DataBase database;
     auto db=database.getInstance();
 
     const auto& info=db->select("utility","d_id="+d_id,QStringList()<<"create_date"<<field);
-    
-    QString date=month+"-01";
+
     QString data="0";
 
     if(info.isEmpty())
@@ -291,9 +293,13 @@ inline QString getDataByDIdAndMonth(const QString& d_id,const QString& month,con
 
     for(const auto& i : info)
     {
-        if(isSameMonth(i[0].toString(),date))
+        if(i[0].toString().left(7)==date.toString("yyyy-MM-dd").left(7))
         {
             data=i[1].toString();
+        }
+        else
+        {
+            qDebug()<<date;
         }
     }
 
