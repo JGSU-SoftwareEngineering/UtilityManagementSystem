@@ -169,7 +169,7 @@ void utilityManagement::initalWidget()
             bool isSame=false;
 
             for(const auto& i : list)
-                if(isSameMonth(i,currDate))
+                if(i.left(7)==currDate.left(7))
                     isSame=true;
 
             if(isSame)
