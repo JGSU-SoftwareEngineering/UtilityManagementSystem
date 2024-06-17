@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>500</width>
-    <height>348</height>
+    <height>387</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -41,7 +41,7 @@
          <string notr="true"/>
         </property>
         <widget class="QWidget" name="addTenant">
-         <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,2,2,2,2,2,0,2">
+         <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,2,2,2,2,2,2,2">
           <property name="spacing">
            <number>10</number>
           </property>
@@ -269,7 +269,7 @@
          </layout>
         </widget>
         <widget class="QWidget" name="deleteTenant">
-         <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,2,2">
+         <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,2,4">
           <property name="spacing">
            <number>10</number>
           </property>
@@ -355,7 +355,7 @@
          </layout>
         </widget>
         <widget class="QWidget" name="editTenant">
-         <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,2,2,2,2,2,0,2">
+         <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,2,2,2,2,2,2,2">
           <property name="spacing">
            <number>10</number>
           </property>
@@ -562,7 +562,7 @@
          </layout>
         </widget>
         <widget class="QWidget" name="searchTenant">
-         <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,2,2">
+         <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,1,5">
           <property name="spacing">
            <number>10</number>
           </property>

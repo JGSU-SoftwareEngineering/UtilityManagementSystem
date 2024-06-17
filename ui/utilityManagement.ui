@@ -17,7 +17,7 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <widget class="QWidget" name="pageOfUpdate">
-      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,1,1,0,0,2">
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,1,1,1,2">
        <item>
         <widget class="QLabel" name="label">
          <property name="font">
@@ -90,9 +90,6 @@
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4"/>
-       </item>
-       <item>
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
           <widget class="QLabel" name="label_4">
@@ -160,7 +157,7 @@
         <pointsize>15</pointsize>
        </font>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,2,2">
+      <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,1,5">
        <item>
         <widget class="QLabel" name="label_2">
          <property name="font">
@@ -239,7 +236,7 @@
   <customwidget>
    <class>utilityManagement</class>
    <extends>QWidget</extends>
-   <header>utilitymanagement.h</header>
+   <header>utilityManagement.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

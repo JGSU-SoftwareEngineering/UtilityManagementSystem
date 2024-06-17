@@ -41,7 +41,7 @@ void paymentManagement::refreshRaiseRecord()
     if(!d_id.isEmpty())
         listOfUtilityIds=getUtilityIdsByDId(d_id);
 
-    QStringList listOfRaise=QStringList()<<"账单ID"<<"缴费金额"<<"创建时间"<<"是否支付";
+    QStringList listOfRaise=QStringList()<<"账单ID"<<"缴费金额(元)"<<"创建时间"<<"是否支付";
 
     QList<QVariantList> info;
 
@@ -61,7 +61,7 @@ void paymentManagement::refreshRaiseRecord()
             tmp.push_back(j);
         }
         
-        // tmp[3]=tmp[3].toInt()==1?"是":"否";
+        tmp[4]=tmp[4].toInt()?"是":"否";
         tmp.removeAt(1);
 
         info.push_back(tmp);
@@ -103,7 +103,7 @@ void paymentManagement::refreshBillRecord()
         info[i].push_back(getMoneyByBId(b_id));
     }
 
-    QStringList listOfBill=QStringList()<<"账单ID"<<"宿舍号"<<"当月水用量"<<"当月电用量"<<"所属月份"<<"总金额";
+    QStringList listOfBill=QStringList()<<"账单ID"<<"宿舍号"<<"当月水用量(t)"<<"当月电用量(kW·h)"<<"所属月份"<<"总金额(元)";
     
     ui->recordOfBill->clear();
     ui->recordOfBill->setColumnCount(listOfBill.size());
@@ -117,7 +117,7 @@ void paymentManagement::refreshPaymentRecord()
     DataBase database;
     auto db=database.getInstance();
 
-    QStringList listOfPayment=QStringList()<<"账单ID"<<"寝室号"<<"支付金额"<<"支付时间"<<"所属月份";
+    QStringList listOfPayment=QStringList()<<"账单ID"<<"寝室号"<<"支付金额(元)"<<"支付时间"<<"所属月份";
 
     QStringList bills;
 
@@ -141,11 +141,12 @@ void paymentManagement::refreshPaymentRecord()
     {
         const auto& billInfo=db->select("bill","id="+i);
         const auto& utilityInfo=db->select("utility","id="+billInfo[0][1].toString());
-        if(utilityInfo.isEmpty()||billInfo.isEmpty())
+        const auto& paymentInfo=db->select("payment","id="+billInfo[0][1].toString());
+        if(utilityInfo.isEmpty()||billInfo.isEmpty()||paymentInfo.isEmpty())
             continue;
 
         QVariantList tmp;
-        tmp<<i<<getDormitoryIdByBId(i)<<billInfo[0][2]<<billInfo[0][3]<<utilityInfo[0][4].toString().left(7);
+        tmp<<i<<getDormitoryIdByBId(i)<<paymentInfo[0][1]<<paymentInfo[0][2]<<utilityInfo[0][4].toString().left(7);
         list<<tmp;
     }
 

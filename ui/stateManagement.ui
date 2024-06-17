@@ -26,7 +26,7 @@
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <widget class="QWidget" name="pageOfMonth">
-         <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,10,0,0,0">
+         <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,10,1,1,1">
           <item>
            <widget class="QLabel" name="label_3">
             <property name="font">
@@ -61,7 +61,13 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="dormitoryOfMonth"/>
+             <widget class="QComboBox" name="dormitoryOfMonth">
+              <property name="font">
+               <font>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -82,7 +88,13 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="monthOfMonth"/>
+             <widget class="QComboBox" name="monthOfMonth">
+              <property name="font">
+               <font>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -103,14 +115,20 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="yearOfMonth"/>
+             <widget class="QComboBox" name="yearOfMonth">
+              <property name="font">
+               <font>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
          </layout>
         </widget>
         <widget class="QWidget" name="pageOfYear">
-         <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,10,0,0">
+         <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,10,1,1,1">
           <item>
            <widget class="QLabel" name="label">
             <property name="font">
@@ -148,7 +166,7 @@
              <widget class="QComboBox" name="dormitoryOfYear">
               <property name="font">
                <font>
-                <pointsize>9</pointsize>
+                <pointsize>12</pointsize>
                </font>
               </property>
              </widget>
@@ -175,7 +193,34 @@
              <widget class="QComboBox" name="yearOfYear">
               <property name="font">
                <font>
-                <pointsize>9</pointsize>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
+             <widget class="QLabel" name="label_8">
+              <property name="font">
+               <font>
+                <pointsize>12</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>选择数据：</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="currDataOfYear">
+              <property name="font">
+               <font>
+                <pointsize>12</pointsize>
                </font>
               </property>
              </widget>

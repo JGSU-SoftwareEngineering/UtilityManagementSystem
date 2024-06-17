@@ -42,6 +42,5 @@ class widget : public QWidget
     private:
         void initalWidget();
         void initalLoginBox();
-        void initalStat();
         void moveToCenter(QWidget& widget);
 };

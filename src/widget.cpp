@@ -23,6 +23,7 @@ widget::widget(QWidget *parent)
 {
     /* 初始化界面 */
     initalWidget();
+    initalLoginBox();
 }
 
 widget::~widget()
@@ -113,7 +114,7 @@ void widget::funcOfUtilityManagement(const clickLabel *label)
     }
 
     ui->widgetsOfCenter->setCurrentIndex(2);
-    ui->pageOfUtility->setCurrentIndex(i);
+    ui->utility->setCurrentIndex(i);
 }
 
 void widget::funcOfPaymentManagement(const clickLabel *label)
@@ -134,7 +135,7 @@ void widget::funcOfPaymentManagement(const clickLabel *label)
     }
 
     ui->widgetsOfCenter->setCurrentIndex(3);
-    ui->pageOfPayment->setCurrentIndex(i);
+    ui->payment->setCurrentIndex(i);
 }
 
 void widget::funcOfStatManagement(const clickLabel *label)
@@ -151,7 +152,7 @@ void widget::funcOfStatManagement(const clickLabel *label)
     }
 
     ui->widgetsOfCenter->setCurrentIndex(4);
-    ui->pageOfState->setCurrentIndex(i);
+    ui->state->setCurrentIndex(i);
 }
 
 void widget::reset()
@@ -282,9 +283,6 @@ void widget::initalWidget()
             });
         }
     }
-
-    initalLoginBox();
-    initalStat();
 }
 
 void widget::initalLoginBox()
@@ -302,8 +300,8 @@ void widget::initalLoginBox()
         this->m_UserType=type;
         reset();
 
-        ui->pageOfUtility->setId(id);
-        ui->pageOfPayment->setId(id);
+        ui->utility->setId(id);
+        ui->payment->setId(id);
     });
 
     connect(m_Login,&loginBox::logout,this,[=]()
@@ -314,11 +312,6 @@ void widget::initalLoginBox()
             m_Login->show();
         }
     });
-}
-
-void widget::initalStat()
-{
-
 }
 
 void widget::moveToCenter(QWidget& widget)

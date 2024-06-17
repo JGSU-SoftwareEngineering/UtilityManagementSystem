@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>483</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -54,7 +54,7 @@
     border-image: url(:/img/background/background);
 }</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,4,0">
+      <layout class="QVBoxLayout" name="verticalLayout_8" stretch="1,10,1">
        <property name="spacing">
         <number>15</number>
        </property>
@@ -77,6 +77,9 @@
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
            <property name="sizeHint" stdset="0">
             <size>
              <width>40</width>
@@ -97,7 +100,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../resource/res.qrc">:/img/common/front.png</pixmap>
+            <pixmap resource="../resource/res.qrc">:/img/common/back2.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -110,7 +113,7 @@
             <enum>Qt::Horizontal</enum>
            </property>
            <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
+            <enum>QSizePolicy::Expanding</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -185,7 +188,7 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_10">
            <property name="spacing">
-            <number>11</number>
+            <number>0</number>
            </property>
            <property name="leftMargin">
             <number>0</number>
@@ -212,8 +215,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>608</width>
-                <height>301</height>
+                <width>768</width>
+                <height>418</height>
                </rect>
               </property>
               <property name="styleSheet">
@@ -224,9 +227,69 @@
            </item>
           </layout>
          </widget>
-         <widget class="utilityManagement" name="pageOfUtility"/>
-         <widget class="paymentManagement" name="pageOfPayment"/>
-         <widget class="stateManagement" name="pageOfState"/>
+         <widget class="QWidget" name="pageOfUtility">
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QScrollArea" name="scrollArea_3">
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="utilityManagement" name="utility">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>746</width>
+                <height>396</height>
+               </rect>
+              </property>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="pageOfPayment">
+          <layout class="QVBoxLayout" name="verticalLayout_11">
+           <item>
+            <widget class="QScrollArea" name="scrollArea_4">
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="paymentManagement" name="payment">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>746</width>
+                <height>396</height>
+               </rect>
+              </property>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="pageOfState">
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QScrollArea" name="scrollArea_2">
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="stateManagement" name="state">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>746</width>
+                <height>396</height>
+               </rect>
+              </property>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </widget>
        </item>
        <item>
@@ -407,7 +470,7 @@ border-radius:20px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>统计</string>
+                <string>数据统计</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>

@@ -5,6 +5,7 @@
 #include <QDateTime>
 #include <qcustomplot.h>
 #include <QCollator>
+#include <algorithm>
 
 #include "database_utils.hpp"
 
@@ -92,11 +93,9 @@ void stateManagement::updateRecord()
     QVariantList list;
     list<<getDataByDIdAndDate(d_id,date,"water")<<getDataByDIdAndDate(d_id,date,"electricity");
 
-    qDebug()<<list;
-
     info<<list;
 
-    QStringList listOfMonth=QStringList()<<"月用水量"<<"月用电量";
+    QStringList listOfMonth=QStringList()<<"月用水量(t)"<<"月用电量(kW·h)";
     
     ui->recordOfMonth->clear();
     ui->recordOfMonth->setColumnCount(listOfMonth.size());
@@ -114,18 +113,32 @@ void stateManagement::updateChart()
     QCPGraph* graphOfWater=ui->chartOfYear->addGraph();
     QCPGraph* graphOfElectricity=ui->chartOfYear->addGraph();
 
-    QVector vec1=getDataByDIdAndYear(d_id,year,"water");
-    QVector vec2=getDataByDIdAndYear(d_id,year,"electricity");
+    QVector<qreal> xData;
+    for(int i=1;i<=12;i++)
+        xData.push_back(i);
 
-    qDebug()<<vec1;
-    qDebug()<<vec2;
+    QString field;
+    QString currText;
 
-    graphOfWater->setData(vec1,vec2);
+    if(ui->currDataOfYear->currentText()=="水用量")
+    {
+        field="water";
+        currText="水用量/t";
+    }
+    else if(ui->currDataOfYear->currentText()=="电用量")
+    {
+        field="electricity";
+        currText="电用量/kW·h";
+    }
 
-    ui->chartOfYear->xAxis->setLabel("月份");
-    ui->chartOfYear->yAxis->setLabel("水用量（吨）");
-    ui->chartOfYear->yAxis2->setLabel("电用量（度）");
+    QVector<qreal> yData=getDataByDIdAndYear(d_id,year,field);
+
+    graphOfWater->setData(xData,yData);
+
+    ui->chartOfYear->xAxis->setLabel("月份/月");
+    ui->chartOfYear->yAxis->setLabel(currText);
     ui->chartOfYear->xAxis->setRange(0,12);
+    ui->chartOfYear->xAxis->ticker()->setTickCount(11);
     ui->chartOfYear->yAxis->setRange(0,200);
 
     ui->chartOfYear->replot();
@@ -137,7 +150,7 @@ void stateManagement::initalWidget()
     installEventFilter(this);
 
     QStringList info;
-    info<<"宿舍编号"<<"当月水用量"<<"当月电用量"<<"创建日期";
+    info<<"宿舍编号"<<"当月水用量(t)"<<"当月电用量(kW·h)"<<"创建日期";
 
     QTimer* timer=new QTimer(this);
     connect(timer,&QTimer::timeout,this,&stateManagement::updateCombox);
@@ -157,14 +170,24 @@ void stateManagement::initalWidget()
     ui->yearOfMonth->addItems(years);
     ui->yearOfYear->addItems(years);
 
+    ui->currDataOfYear->addItems(QStringList()<<"水用量"<<"电用量");
+
     connect(ui->dormitoryOfMonth,&QComboBox::currentTextChanged,this,&stateManagement::updateRecord);
     connect(ui->monthOfMonth,&QComboBox::currentTextChanged,this,&stateManagement::updateRecord);
     connect(ui->yearOfMonth,&QComboBox::currentTextChanged,this,&stateManagement::updateRecord);
     connect(ui->dormitoryOfMonth,&QComboBox::currentTextChanged,this,&stateManagement::updateChart);
     connect(ui->yearOfYear,&QComboBox::currentTextChanged,this,&stateManagement::updateChart);
+    connect(ui->currDataOfYear,&QComboBox::currentTextChanged,this,&stateManagement::updateChart);
 
     updateRecord();
     updateChart();
 
     timer->start(10000);
+
+    QDate date=QDateTime::currentDateTime().date();
+    
+    ui->monthOfMonth->setCurrentText(QString::number(date.month()));
+    ui->yearOfMonth->setCurrentText(QString::number(date.year()));
+
+    ui->yearOfYear->setCurrentText(QString::number(date.year()));
 }

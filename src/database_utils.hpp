@@ -297,10 +297,6 @@ inline QString getDataByDIdAndDate(const QString& d_id,const QDate& date,const Q
         {
             data=i[1].toString();
         }
-        else
-        {
-            qDebug()<<date;
-        }
     }
 
     return data;
