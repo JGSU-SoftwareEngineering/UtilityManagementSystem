@@ -52,7 +52,13 @@ void stateManagement::updateCombox()
         ui->dormitoryOfYear->blockSignals(true);
 
         QStringList list=getDormitoryIds();
-        list=list.toSet().toList();
+
+        #if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+            list=list.toSet().toList();
+        #elif (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+            QSet<QString> set(list.begin(),list.end());
+            list=QList::QList<QString>(set.begin(),set.end());
+        #endif
 
         QCollator collator;
         collator.setNumericMode(true);

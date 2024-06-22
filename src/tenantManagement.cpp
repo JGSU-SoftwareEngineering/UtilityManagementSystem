@@ -37,6 +37,7 @@ void tenantManagement::setEdit(bool isEdit)
     ui->editOfAge->setEnabled(isEdit);
     ui->editOfGender->setEnabled(isEdit);
     ui->editOfTelephone->setEnabled(isEdit);
+    ui->editOfDormitory->setEnabled(isEdit);
 }
 
 void tenantManagement::initalWidget()

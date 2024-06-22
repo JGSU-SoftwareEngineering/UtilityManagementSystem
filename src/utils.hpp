@@ -82,7 +82,8 @@ inline bool isDecimal(const QString& str)
     QRegularExpressionValidator v(reg,0);
 
     int pos=0;
-    QValidator::State result=v.validate(QString(str),pos);
+    QString tmp(str);
+    QValidator::State result=v.validate(tmp,pos);
 
     if(result==QValidator::State::Acceptable)
     {
@@ -117,7 +118,12 @@ inline QList<QString> getSelectRowsByTable(const QTableWidget& record,int column
         selected.push_back(record.item(list[i]->row(),column)->text());
     }
 
-    selected=selected.toSet().toList();
+    #if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+        selected=selected.toSet().toList();
+    #elif (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+        QSet<QString> set(selected.begin(),selected.end());
+        selected=QList::QList<QString>(set.begin(),set.end());
+    #endif
 
     return selected;
 }
